@@ -1,0 +1,329 @@
+{
+	"info": {
+		"_postman_id": "e3b46fb2-3adf-4b16-98f1-51e57c92903f",
+		"name": "Graph",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10200246"
+	},
+	"item": [
+		{
+			"name": "Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Parse the response",
+							"var jsonData = pm.response.json();",
+							"",
+							"// Save to GLOBALS (works even if no environment is selected)",
+							"pm.globals.set(\"my_access_token\", jsonData.access_token);",
+							"",
+							"// Print to console for debugging",
+							"console.log(\"Token captured:\", jsonData.access_token);"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "33e31bad-7711-405b-a26b-b53e762540ca",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "OHc8Q~aFMMpTZpJZpwh9ZXbKjv5gwymJUjJBqcA6",
+							"type": "text"
+						},
+						{
+							"key": "scope",
+							"value": "https://graph.microsoft.com/.default",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://login.microsoftonline.com/5c2fa874-73ad-47ce-83e4-d80fe19d9cfa/oauth2/v2.0/token",
+					"protocol": "https",
+					"host": [
+						"login",
+						"microsoftonline",
+						"com"
+					],
+					"path": [
+						"5c2fa874-73ad-47ce-83e4-d80fe19d9cfa",
+						"oauth2",
+						"v2.0",
+						"token"
+					],
+					"query": [
+						{
+							"key": "grant_type",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "directoryRoles",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{my_access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://graph.microsoft.com/v1.0/directoryRoles",
+					"protocol": "https",
+					"host": [
+						"graph",
+						"microsoft",
+						"com"
+					],
+					"path": [
+						"v1.0",
+						"directoryRoles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UserRegistration",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{my_access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://graph.microsoft.com/v1.0/reports/authenticationMethods/userRegistrationDetails",
+					"protocol": "https",
+					"host": [
+						"graph",
+						"microsoft",
+						"com"
+					],
+					"path": [
+						"v1.0",
+						"reports",
+						"authenticationMethods",
+						"userRegistrationDetails"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Group",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{my_access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://graph.microsoft.com/v1.0/groups",
+					"protocol": "https",
+					"host": [
+						"graph",
+						"microsoft",
+						"com"
+					],
+					"path": [
+						"v1.0",
+						"groups"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Group Member",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{my_access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://graph.microsoft.com/v1.0/groups/036fd3ca-c2b2-4518-bac5-d14284a11f22/members",
+					"protocol": "https",
+					"host": [
+						"graph",
+						"microsoft",
+						"com"
+					],
+					"path": [
+						"v1.0",
+						"groups",
+						"036fd3ca-c2b2-4518-bac5-d14284a11f22",
+						"members"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "assignmentPolicies",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{my_access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://graph.microsoft.com/v1.0/identityGovernance/entitlementManagement/assignmentPolicies",
+					"protocol": "https",
+					"host": [
+						"graph",
+						"microsoft",
+						"com"
+					],
+					"path": [
+						"v1.0",
+						"identityGovernance",
+						"entitlementManagement",
+						"assignmentPolicies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "accessPackages",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{my_access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://graph.microsoft.com/v1.0/identityGovernance/entitlementManagement/accessPackages",
+					"protocol": "https",
+					"host": [
+						"graph",
+						"microsoft",
+						"com"
+					],
+					"path": [
+						"v1.0",
+						"identityGovernance",
+						"entitlementManagement",
+						"accessPackages"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "catalogs",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{my_access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://graph.microsoft.com/v1.0/identityGovernance/entitlementManagement/catalogs",
+					"protocol": "https",
+					"host": [
+						"graph",
+						"microsoft",
+						"com"
+					],
+					"path": [
+						"v1.0",
+						"identityGovernance",
+						"entitlementManagement",
+						"catalogs"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
