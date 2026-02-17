@@ -1,0 +1,372 @@
+<form version="1.1" theme="dark">
+  <label>User Registration Details</label>
+  <fieldset submitButton="false">
+    <input type="time" token="time">
+      <label>Time</label>
+      <default>
+        <earliest>-24h@h</earliest>
+        <latest>now</latest>
+      </default>
+    </input>
+    <input type="link" token="tkn_link">
+      <label></label>
+      <choice value="*">All</choice>
+      <choice value="a_*">Admin</choice>
+      <choice value="d_*">Developer</choice>
+      <choice value="t_*">Test</choice>
+      <default>*</default>
+      <initialValue>*</initialValue>
+      <!--<change>-->
+      <!--  <condition value="developer">| search userPrincipalName="d_*"</condition>-->
+      <!--  <condition value="admin">| search userPrincipalName="a_*"</condition>-->
+      <!--  <condition value="test">| search userPrincipalName="t_*"</condition>-->
+      <!--  <condition value="*">| search userPrincipalName="*"</condition>-->
+      <!--</change>-->
+    </input>
+    <html>
+      <style>
+        #input2{
+          width: 500px;
+        }
+        button[role="radio"][aria-checked="true"] {
+          background-color: #28a745 !important;   /* Primary green */
+          color: #ffffff !important;              /* White text */
+          border-color: #28a745 !important;
+        }
+
+        /* Optional: hover state for selected button */
+        button[role="radio"][aria-checked="true"]:hover {
+          background-color: #218838 !important;   /* Slightly darker green */
+          border-color: #1e7e34 !important;
+        }
+        div[data-test="radio-bar"] button[aria-checked="true"] {
+          background-color: #28a745 !important;
+          color: #fff !important;
+        }
+      </style>
+    </html>
+  </fieldset>
+  <row>
+    <panel>
+      <title>User Type</title>
+      <chart>
+        <search>
+          <query>index::* sourcetype="microsoft:userRegistrationDetails" userPrincipalName="$tkn_link$"
+| dedup userPrincipalName 
+| stats count as Count by userType</query>
+          <earliest>$time.earliest$</earliest>
+          <latest>$time.latest$</latest>
+        </search>
+        <option name="charting.chart">pie</option>
+        <option name="charting.drilldown">all</option>
+        <option name="refresh.display">progressbar</option>
+        <drilldown>
+          <set token="form.tkn_userType">$click.value$</set>
+        </drilldown>
+        <option name="charting.fieldColors">{"member":"#118832","guest":"#E53935"}</option>
+      </chart>
+    </panel>
+    <panel>
+      <title>is SSPR Registered</title>
+      <chart>
+        <search>
+          <query>index::* sourcetype="microsoft:userRegistrationDetails" userPrincipalName="$tkn_link$"
+| dedup userPrincipalName 
+| stats count as Count by isSsprRegistered</query>
+          <earliest>$time.earliest$</earliest>
+          <latest>$time.latest$</latest>
+        </search>
+        <option name="charting.chart">pie</option>
+        <option name="charting.drilldown">all</option>
+        <option name="refresh.display">progressbar</option>
+        <drilldown>
+          <set token="form.tkn_isSsprRegistered">$click.value$</set>
+        </drilldown>
+        <option name="charting.fieldColors">{"true":"#118832","false":"#E53935"}</option>
+      </chart>
+    </panel>
+    <panel>
+      <title>is SSPR Capable</title>
+      <chart>
+        <search>
+          <query>index::* sourcetype="microsoft:userRegistrationDetails" userPrincipalName="$tkn_link$"
+| dedup userPrincipalName 
+| stats count as Count by isSsprCapable</query>
+          <earliest>$time.earliest$</earliest>
+          <latest>$time.latest$</latest>
+        </search>
+        <option name="charting.chart">pie</option>
+        <option name="charting.drilldown">all</option>
+        <option name="refresh.display">progressbar</option>
+        <drilldown>
+          <set token="form.tkn_isSsprCapable">$click.value$</set>
+        </drilldown>
+        <option name="charting.fieldColors">{"true":"#118832","false":"#E53935"}</option>
+      </chart>
+    </panel>
+    <panel>
+      <title>is MFA Registered</title>
+      <chart>
+        <search>
+          <query>index::* sourcetype="microsoft:userRegistrationDetails" userPrincipalName="$tkn_link$"
+| dedup userPrincipalName 
+| stats count as Count by isMfaRegistered</query>
+          <earliest>$time.earliest$</earliest>
+          <latest>$time.latest$</latest>
+        </search>
+        <option name="charting.chart">pie</option>
+        <option name="charting.drilldown">all</option>
+        <option name="refresh.display">progressbar</option>
+        <drilldown>
+          <set token="form.tkn_isMfaRegistered">$click.value$</set>
+        </drilldown>
+        <option name="charting.fieldColors">{"true":"#118832","false":"#E53935"}</option>
+      </chart>
+    </panel>
+    <panel>
+      <title>is Passwordless Capable</title>
+      <chart>
+        <search>
+          <query>index::* sourcetype="microsoft:userRegistrationDetails" userPrincipalName="$tkn_link$"
+| dedup userPrincipalName 
+| stats count as Count by isPasswordlessCapable</query>
+          <earliest>$time.earliest$</earliest>
+          <latest>$time.latest$</latest>
+        </search>
+        <option name="charting.chart">pie</option>
+        <option name="charting.drilldown">all</option>
+        <option name="refresh.display">progressbar</option>
+        <drilldown>
+          <set token="form.tkn_isPasswordlessCapable">$click.value$</set>
+        </drilldown>
+        <option name="charting.fieldColors">{"true":"#118832","false":"#E53935"}</option>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Methods Registered</title>
+      <chart>
+        <search>
+          <query>index=* sourcetype="microsoft:userRegistrationDetails" userPrincipalName="$tkn_link$"
+| dedup userPrincipalName
+| mvexpand methodsRegistered{}
+| eval Series='methodsRegistered{}'
+| chart count over methodsRegistered{} by Series
+| fields - VALUE
+| search methodsRegistered{}!=""</query>
+          <earliest>$time.earliest$</earliest>
+          <latest>$time.latest$</latest>
+        </search>
+        <option name="charting.chart">bar</option>
+        <option name="charting.chart.stackMode">stacked</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.fieldColors">{"microsoftAuthenticatorPush": "#2563EB","softwareOneTimePasscode": "#7C3AED","mobilePhone": "#F59E0B","microsoftAuthenticatorPasswordless": "#16A34A","passKeyDeviceBoundAuthenticator": "#16A34A","passKeyDeviceBound": "#4ADE80","windowsHelloForBusiness": "#06B6D4","email": "#FBBF24"}</option>
+        <option name="refresh.display">progressbar</option>
+        <drilldown>
+          <set token="form.tkn_MethodsRegistered">$click.value$</set>
+        </drilldown>
+      </chart>
+    </panel>
+    <panel>
+      <title>Preferred Authentication Methods</title>
+      <chart>
+        <search>
+          <query>index::* sourcetype="microsoft:userRegistrationDetails" userPrincipalName="$tkn_link$"
+| dedup userPrincipalName 
+| mvexpand systemPreferredAuthenticationMethods{}
+| eval Series='systemPreferredAuthenticationMethods{}'
+| chart count over systemPreferredAuthenticationMethods{} by Series
+| fields - VALUE
+| search systemPreferredAuthenticationMethods{}!=""</query>
+          <earliest>$time.earliest$</earliest>
+          <latest>$time.latest$</latest>
+        </search>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">-45</option>
+        <option name="charting.axisTitleY.text">User Count</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.chart">column</option>
+        <option name="charting.chart.showDataLabels">none</option>
+        <option name="charting.chart.stackMode">stacked</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.fieldColors">{"PhoneAppNotification": "#2563EB","Fido2": "#16A34A","SoftwareOTP": "#7C3AED","Phone": "#F59E0B","Email": "#FBBF24","none": "#E53935"}</option>
+        <option name="charting.legend.placement">none</option>
+        <option name="refresh.display">progressbar</option>
+        <drilldown>
+          <set token="form.tkn_systemPreferredAuthenticationMethods">$click.value$</set>
+        </drilldown>
+      </chart>
+    </panel>
+    <panel>
+      <title>Preferred Secondary Method Authentication</title>
+      <chart>
+        <search>
+          <query>index::* sourcetype="microsoft:userRegistrationDetails" userPrincipalName="$tkn_link$"
+| dedup userPrincipalName 
+| eval Series=userPreferredMethodForSecondaryAuthentication
+| chart count over userPreferredMethodForSecondaryAuthentication by Series
+| fields - VALUE
+| search userPreferredMethodForSecondaryAuthentication!=""</query>
+          <earliest>$time.earliest$</earliest>
+          <latest>$time.latest$</latest>
+        </search>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">-45</option>
+        <option name="charting.axisTitleY.text">User Count</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.chart">column</option>
+        <option name="charting.chart.showDataLabels">none</option>
+        <option name="charting.chart.stackMode">stacked</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.fieldColors">{"none": "#E53935","push": "#2563EB","oath": "#7C3AED","phone": "#F59E0B","email": "#FBBF24","fido2": "#16A34A"}</option>
+        <option name="charting.legend.placement">none</option>
+        <option name="refresh.display">progressbar</option>
+        <drilldown>
+          <set token="form.tkn_userPreferredMethodForSecondaryAuthentication">$click.value$</set>
+        </drilldown>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Detail View</title>
+      <input type="text" token="tkn_userPrincipanName">
+        <label>UPN</label>
+        <default>*</default>
+        <suffix>*</suffix>
+      </input>
+      <input type="text" token="tkn_userDisplayName">
+        <label>userDisplayName</label>
+        <default>*</default>
+        <prefix>*</prefix>
+        <suffix>*</suffix>
+      </input>
+      <input type="dropdown" token="tkn_userType">
+        <label>User Type</label>
+        <choice value="*">All</choice>
+        <default>*</default>
+        <initialValue>*</initialValue>
+        <fieldForLabel>userType</fieldForLabel>
+        <fieldForValue>userType</fieldForValue>
+        <search>
+          <query>index=* sourcetype="microsoft:userRegistrationDetails"
+| table DateTime, _time, userPrincipalName, userDisplayName, userType, isSsprRegistered, isSsprCapable, isMfaRegistered, isPasswordlessCapable, MethodsRegistered, systemPreferredAuthenticationMethods{}, userPreferredMethodForSecondaryAuthentication
+| stats count by userType</query>
+          <earliest>$time.earliest$</earliest>
+          <latest>$time.latest$</latest>
+        </search>
+      </input>
+      <input type="dropdown" token="tkn_isSsprRegistered">
+        <label>is SSPR Registered</label>
+        <choice value="*">All</choice>
+        <choice value="true">true</choice>
+        <choice value="false">false</choice>
+        <default>*</default>
+        <initialValue>*</initialValue>
+      </input>
+      <input type="dropdown" token="tkn_isSsprCapable">
+        <label>is SSPR Capable</label>
+        <choice value="*">All</choice>
+        <choice value="true">true</choice>
+        <choice value="false">false</choice>
+        <default>*</default>
+        <initialValue>*</initialValue>
+      </input>
+      <input type="dropdown" token="tkn_isMfaRegistered">
+        <label>is MFA Registered</label>
+        <choice value="*">All</choice>
+        <choice value="true">true</choice>
+        <choice value="false">false</choice>
+        <default>*</default>
+        <initialValue>*</initialValue>
+      </input>
+      <input type="dropdown" token="tkn_isPasswordlessCapable">
+        <label>is Passwordless Capable</label>
+        <choice value="*">All</choice>
+        <choice value="true">true</choice>
+        <choice value="false">false</choice>
+        <default>*</default>
+        <initialValue>*</initialValue>
+      </input>
+      <input type="dropdown" token="tkn_MethodsRegistered">
+        <label>Methods Registered</label>
+        <choice value="*">All</choice>
+        <default>*</default>
+        <initialValue>*</initialValue>
+        <fieldForLabel>methodsRegistered{}</fieldForLabel>
+        <fieldForValue>methodsRegistered{}</fieldForValue>
+        <search>
+          <query>index=* sourcetype="microsoft:userRegistrationDetails"
+| table DateTime, _time, userPrincipalName, userDisplayName, userType, isSsprRegistered, isSsprCapable, isMfaRegistered, isPasswordlessCapable, methodsRegistered{}, systemPreferredAuthenticationMethods{}, userPreferredMethodForSecondaryAuthentication
+| fillnull value="-"
+| mvexpand methodsRegistered{}
+| table methodsRegistered{}
+| dedup methodsRegistered{}</query>
+          <earliest>$time.earliest$</earliest>
+          <latest>$time.latest$</latest>
+        </search>
+      </input>
+      <input type="dropdown" token="tkn_systemPreferredAuthenticationMethods">
+        <label>Preferred Authentication Methods</label>
+        <choice value="*">All</choice>
+        <default>*</default>
+        <initialValue>*</initialValue>
+        <fieldForLabel>systemPreferredAuthenticationMethods{}</fieldForLabel>
+        <fieldForValue>systemPreferredAuthenticationMethods{}</fieldForValue>
+        <search>
+          <query>index=* sourcetype="microsoft:userRegistrationDetails"
+| table DateTime, _time, userPrincipalName, userDisplayName, userType, isSsprRegistered, isSsprCapable, isMfaRegistered, isPasswordlessCapable, MethodsRegistered, systemPreferredAuthenticationMethods{}, userPreferredMethodForSecondaryAuthentication
+| fillnull value="-"
+| table systemPreferredAuthenticationMethods{}
+| dedup systemPreferredAuthenticationMethods{}</query>
+          <earliest>$time.earliest$</earliest>
+          <latest>$time.latest$</latest>
+        </search>
+      </input>
+      <input type="dropdown" token="tkn_userPreferredMethodForSecondaryAuthentication">
+        <label>Preferred Secondary Method Authentication</label>
+        <choice value="*">All</choice>
+        <default>*</default>
+        <initialValue>*</initialValue>
+        <fieldForLabel>userPreferredMethodForSecondaryAuthentication</fieldForLabel>
+        <fieldForValue>userPreferredMethodForSecondaryAuthentication</fieldForValue>
+        <search>
+          <query>index=* sourcetype="microsoft:userRegistrationDetails"
+| table DateTime, _time, userPrincipalName, userDisplayName, userType, isSsprRegistered, isSsprCapable, isMfaRegistered, isPasswordlessCapable, MethodsRegistered, systemPreferredAuthenticationMethods{}, userPreferredMethodForSecondaryAuthentication
+| fillnull value="-"
+| table userPreferredMethodForSecondaryAuthentication
+| dedup userPreferredMethodForSecondaryAuthentication</query>
+          <earliest>$time.earliest$</earliest>
+          <latest>$time.latest$</latest>
+        </search>
+      </input>
+      <html>
+         <h1>Total Accounts: $tkn_result_count$</h1>
+        </html>
+      <table>
+        <search>
+          <done>
+            <set token="tkn_result_count">$job.resultCount$</set>
+          </done>
+          <query>index::* sourcetype="microsoft:userRegistrationDetails" userPrincipalName="$tkn_userPrincipanName$" userDisplayName="$tkn_userDisplayName$" userType="$tkn_userType$" isSsprRegistered="$tkn_isSsprRegistered$" isSsprCapable="$tkn_isSsprCapable$" isMfaRegistered="$tkn_isMfaRegistered$" isPasswordlessCapable="$tkn_isPasswordlessCapable$" 
+| fillnull value="-" 
+| search systemPreferredAuthenticationMethods{}="$tkn_systemPreferredAuthenticationMethods$" userPreferredMethodForSecondaryAuthentication="$tkn_userPreferredMethodForSecondaryAuthentication$" methodsRegistered{}="$tkn_MethodsRegistered$" 
+| eval MethodsRegistered=mvjoin('methodsRegistered{}', ",") 
+| eval LastUpdatedDateTime = strftime(strptime(replace(lastUpdatedDateTime, "(\.\d{6})\dZ$$", "\1Z"),"%Y-%m-%dT%H:%M:%S.%fZ"),"%Y-%m-%d %H:%M:%S") 
+| table LastUpdatedDateTime, userPrincipalName, userDisplayName, userType, isSsprRegistered, isSsprCapable, isMfaRegistered, isPasswordlessCapable, systemPreferredAuthenticationMethods{}, userPreferredMethodForSecondaryAuthentication,MethodsRegistered 
+| dedup userPrincipalName 
+| rename userPrincipalName as "UPN", userDisplayName as "UserName", userType as "UserType", isSsprRegistered as "SSPRRegiseterd", isSsprCapable as "SSPRCapable", isMfaRegistered as "MFARegsitered", isPasswordlessCapable as "PasswordlessCapable", MethodsRegistered as "AllMethodsRegistered", "systemPreferredAuthenticationMethods{}" as "PreferredAuthenticationMethods", userPreferredMethodForSecondaryAuthentication as "PreferredMethodSecondaryAuthentication"</query>
+          <earliest>$time.earliest$</earliest>
+          <latest>$time.latest$</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">10</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">false</option>
+      </table>
+    </panel>
+  </row>
+</form>
