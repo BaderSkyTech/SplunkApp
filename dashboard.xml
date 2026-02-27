@@ -57,7 +57,7 @@
       <title>Passkey (Device‑Bound)</title>
       <single>
         <search>
-          <query>index::* sourcetype="microsoft:userRegistrationDetails"
+          <query>index::ms_entra_id sourcetype="microsoft:userRegistrationDetails"
 | dedup userPrincipalName 
 | search methodsRegistered{}="passKeyDeviceBound" 
 | stats count</query>
@@ -75,7 +75,7 @@
       <title>Methods Registered</title>
       <chart>
         <search>
-          <query>index=* sourcetype="microsoft:userRegistrationDetails" userPrincipalName="$tkn_link$" 
+          <query>index::ms_entra_id sourcetype="microsoft:userRegistrationDetails" userPrincipalName="$tkn_link$" 
 | dedup userPrincipalName 
 | mvexpand methodsRegistered{} 
 | rename methodsRegistered{} as methodsRegistered 
@@ -114,7 +114,7 @@
       <title>User Type</title>
       <chart>
         <search>
-          <query>index::* sourcetype="microsoft:userRegistrationDetails" userPrincipalName="$tkn_link$"
+          <query>index::ms_entra_id sourcetype="microsoft:userRegistrationDetails" userPrincipalName="$tkn_link$"
 | dedup userPrincipalName 
 | stats count as Count by userType</query>
           <earliest>$time.earliest$</earliest>
@@ -133,7 +133,7 @@
       <title>is MFA Registered</title>
       <chart>
         <search>
-          <query>index::* sourcetype="microsoft:userRegistrationDetails" userPrincipalName="$tkn_link$"
+          <query>index::ms_entra_id sourcetype="microsoft:userRegistrationDetails" userPrincipalName="$tkn_link$"
 | dedup userPrincipalName 
 | stats count as Count by isMfaRegistered</query>
           <earliest>$time.earliest$</earliest>
@@ -152,7 +152,7 @@
       <title>is Passwordless Capable</title>
       <chart>
         <search>
-          <query>index::* sourcetype="microsoft:userRegistrationDetails" userPrincipalName="$tkn_link$"
+          <query>index::ms_entra_id sourcetype="microsoft:userRegistrationDetails" userPrincipalName="$tkn_link$"
 | dedup userPrincipalName 
 | stats count as Count by isPasswordlessCapable</query>
           <earliest>$time.earliest$</earliest>
@@ -173,7 +173,7 @@
       <title>Preferred Authentication Methods</title>
       <chart>
         <search>
-          <query>index::* sourcetype="microsoft:userRegistrationDetails" userPrincipalName="$tkn_link$"
+          <query>index::ms_entra_id sourcetype="microsoft:userRegistrationDetails" userPrincipalName="$tkn_link$"
 | dedup userPrincipalName 
 | mvexpand systemPreferredAuthenticationMethods{}
 | search systemPreferredAuthenticationMethods{}!=""
@@ -205,7 +205,7 @@
       <title>Preferred Secondary Method Authentication</title>
       <chart>
         <search>
-          <query>index::* sourcetype="microsoft:userRegistrationDetails" userPrincipalName="$tkn_link$"
+          <query>index::ms_entra_id sourcetype="microsoft:userRegistrationDetails" userPrincipalName="$tkn_link$"
 | dedup userPrincipalName 
 | search userPreferredMethodForSecondaryAuthentication!=""
 | stats count as "User Count" by userPreferredMethodForSecondaryAuthentication
@@ -254,7 +254,7 @@
         <fieldForLabel>userType</fieldForLabel>
         <fieldForValue>userType</fieldForValue>
         <search>
-          <query>index=* sourcetype="microsoft:userRegistrationDetails"
+          <query>index::ms_entra_id sourcetype="microsoft:userRegistrationDetails"
 | table DateTime, _time, userPrincipalName, userDisplayName, userType, isSsprRegistered, isSsprCapable, isMfaRegistered, isPasswordlessCapable, MethodsRegistered, systemPreferredAuthenticationMethods{}, userPreferredMethodForSecondaryAuthentication
 | stats count by userType</query>
           <earliest>$time.earliest$</earliest>
@@ -301,7 +301,7 @@
         <fieldForLabel>methodsRegistered{}</fieldForLabel>
         <fieldForValue>methodsRegistered{}</fieldForValue>
         <search>
-          <query>index=* sourcetype="microsoft:userRegistrationDetails"
+          <query>index::ms_entra_id sourcetype="microsoft:userRegistrationDetails"
 | table DateTime, _time, userPrincipalName, userDisplayName, userType, isSsprRegistered, isSsprCapable, isMfaRegistered, isPasswordlessCapable, methodsRegistered{}, systemPreferredAuthenticationMethods{}, userPreferredMethodForSecondaryAuthentication
 | fillnull value="-"
 | mvexpand methodsRegistered{}
@@ -319,7 +319,7 @@
         <fieldForLabel>systemPreferredAuthenticationMethods{}</fieldForLabel>
         <fieldForValue>systemPreferredAuthenticationMethods{}</fieldForValue>
         <search>
-          <query>index=* sourcetype="microsoft:userRegistrationDetails"
+          <query>index::ms_entra_id sourcetype="microsoft:userRegistrationDetails"
 | table DateTime, _time, userPrincipalName, userDisplayName, userType, isSsprRegistered, isSsprCapable, isMfaRegistered, isPasswordlessCapable, MethodsRegistered, systemPreferredAuthenticationMethods{}, userPreferredMethodForSecondaryAuthentication
 | fillnull value="-"
 | table systemPreferredAuthenticationMethods{}
@@ -336,7 +336,7 @@
         <fieldForLabel>userPreferredMethodForSecondaryAuthentication</fieldForLabel>
         <fieldForValue>userPreferredMethodForSecondaryAuthentication</fieldForValue>
         <search>
-          <query>index=* sourcetype="microsoft:userRegistrationDetails"
+          <query>index::ms_entra_id sourcetype="microsoft:userRegistrationDetails"
 | table DateTime, _time, userPrincipalName, userDisplayName, userType, isSsprRegistered, isSsprCapable, isMfaRegistered, isPasswordlessCapable, MethodsRegistered, systemPreferredAuthenticationMethods{}, userPreferredMethodForSecondaryAuthentication
 | fillnull value="-"
 | table userPreferredMethodForSecondaryAuthentication
@@ -353,7 +353,7 @@
           <done>
             <set token="tkn_result_count">$job.resultCount$</set>
           </done>
-          <query>index::* sourcetype="microsoft:userRegistrationDetails" userPrincipalName="$tkn_userPrincipanName$" userDisplayName="$tkn_userDisplayName$" userType="$tkn_userType$" isSsprRegistered="$tkn_isSsprRegistered$" isSsprCapable="$tkn_isSsprCapable$" isMfaRegistered="$tkn_isMfaRegistered$" isPasswordlessCapable="$tkn_isPasswordlessCapable$" 
+          <query>index::ms_entra_id sourcetype="microsoft:userRegistrationDetails" userPrincipalName="$tkn_userPrincipanName$" userDisplayName="$tkn_userDisplayName$" userType="$tkn_userType$" isSsprRegistered="$tkn_isSsprRegistered$" isSsprCapable="$tkn_isSsprCapable$" isMfaRegistered="$tkn_isMfaRegistered$" isPasswordlessCapable="$tkn_isPasswordlessCapable$" 
 | fillnull value="-" 
 | search systemPreferredAuthenticationMethods{}="$tkn_systemPreferredAuthenticationMethods$" userPreferredMethodForSecondaryAuthentication="$tkn_userPreferredMethodForSecondaryAuthentication$" 
 | rename methodsRegistered{} as methodsRegistered 
