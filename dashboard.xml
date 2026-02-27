@@ -1,4 +1,4 @@
-<form version="1.1" theme="dark">
+<form version="1.1" theme="light">
   <label>User Registration Details</label>
   <fieldset submitButton="false">
     <input type="time" token="time">
@@ -28,6 +28,12 @@
         #input2{
           width: 500px;
         }
+        #panel1{
+          width: 25% !important;
+        }
+        #panel2{
+          width: 75% !important;
+        }
         button[role="radio"][aria-checked="true"] {
           background-color: #28a745 !important;   /* Primary green */
           color: #ffffff !important;              /* White text */
@@ -48,10 +54,64 @@
   </fieldset>
   <row>
     <panel>
+      <title>passKeyDeviceBound</title>
+      <single>
+        <search>
+          <query>index::* sourcetype="microsoft:userRegistrationDetails"
+| dedup userPrincipalName 
+| search methodsRegistered{}="passKeyDeviceBound" 
+| stats count</query>
+          <earliest>$time.earliest$</earliest>
+          <latest>$time.latest$</latest>
+        </search>
+        <option name="drilldown">none</option>
+        <option name="refresh.display">progressbar</option>
+      </single>
+    </panel>
+    <panel>
+      <title>Methods Registered</title>
+      <chart>
+        <search>
+          <query>index=* sourcetype="microsoft:userRegistrationDetails" userPrincipalName="$tkn_link$" 
+| dedup userPrincipalName 
+| mvexpand methodsRegistered{} 
+| rename methodsRegistered{} as methodsRegistered 
+| eval "methodsRegistered" = case(methodsRegistered="microsoftAuthenticatorPush", "Authenticator – Push", methodsRegistered="email", "Email Verification",methodsRegistered="macOsSecureEnclaveKey", "macOS Secure Enclave",methodsRegistered="microsoftAuthenticatorPasswordless", "Authenticator – Push",methodsRegistered="alternateMobilePhone", "Alternate Mobile"
+    ,methodsRegistered="mobilePhone", "Mobile Phone (SMS/Call)",methodsRegistered="officePhone", "Office Phone",methodsRegistered="passKeyDeviceBound", "Passkey (Device‑Bound)",methodsRegistered="passKeyDeviceBoundAuthenticator", "Passkey Authenticator",methodsRegistered="softwareOneTimePasscode", "Software OTP (TOTP App)",methodsRegistered="windowsHelloForBusiness", "Windows Hello for Business",1=1, methodsRegistered) 
+| search methodsRegistered!="" 
+| stats count as "User Count" by methodsRegistered 
+| transpose 0 header_field=methodsRegistered 
+| rename column as "Method Registered"
+| eval "Method Registered" = ""
+    ```| eval Series='methodsRegistered{}'
+          | chart count over methodsRegistered{} by Series
+          | fields - VALUE
+          | search methodsRegistered{}!=""
+                  | rename methodsRegistered{} as "Methods Registered"```</query>
+          <earliest>$time.earliest$</earliest>
+          <latest>$time.latest$</latest>
+        </search>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">collapsed</option>
+        <option name="charting.axisY.scale">log</option>
+        <option name="charting.chart">bar</option>
+        <option name="charting.chart.stackMode">default</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.fieldColors">{"Authenticator – Push": "#20B2AA","Alternate Mobile": "#6A5ACD","Email Verification": "#1E90FF","macOS Secure Enclave": "#228B22","Authenticator – Passwordless": "#00CED1","Mobile Phone (SMS/Call)": "#FF8C00","Office Phone": "#B8860B","Passkey (Device‑Bound)": "#8A2BE2", "Passkey Authenticator": "#9932CC", "Software OTP (TOTP App)": "#DC143C", "Windows Hello for Business": "#2F4F4F"}</option>
+        <option name="charting.legend.placement">right</option>
+        <option name="refresh.display">progressbar</option>
+        <drilldown>
+          <eval token="form.tkn_MethodsRegistered">case($click.name2$="Authenticator – Push", "microsoftAuthenticatorPush",$click.name2$="Email Verification", "email",$click.name2$="macOS Secure Enclave", "macOsSecureEnclaveKey",$click.name2$="Alternate Mobile", "alternateMobilePhone",$click.name2$="Mobile Phone (SMS/Call)", "mobilePhone",$click.name2$="Office Phone", "officePhone",$click.name2$="Passkey (Device-Bound)", "passKeyDeviceBound",$click.name2$="Passkey Authenticator", "passKeyDeviceBoundAuthenticator",$click.name2$="Software OTP (TOTP App)", "softwareOneTimePasscode",$click.name2$="Windows Hello for Business", "windowsHelloForBusiness",1=1, $click.name2$)</eval>
+        </drilldown>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
       <title>User Type</title>
       <chart>
         <search>
-          <query>index::ms_entra_id sourcetype="microsoft:userRegistrationDetails" userPrincipalName="$tkn_link$"
+          <query>index::* sourcetype="microsoft:userRegistrationDetails" userPrincipalName="$tkn_link$"
 | dedup userPrincipalName 
 | stats count as Count by userType</query>
           <earliest>$time.earliest$</earliest>
@@ -67,48 +127,10 @@
       </chart>
     </panel>
     <panel>
-      <title>is SSPR Registered</title>
-      <chart>
-        <search>
-          <query>index::ms_entra_id sourcetype="microsoft:userRegistrationDetails" userPrincipalName="$tkn_link$"
-| dedup userPrincipalName 
-| stats count as Count by isSsprRegistered</query>
-          <earliest>$time.earliest$</earliest>
-          <latest>$time.latest$</latest>
-        </search>
-        <option name="charting.chart">pie</option>
-        <option name="charting.drilldown">all</option>
-        <option name="refresh.display">progressbar</option>
-        <drilldown>
-          <set token="form.tkn_isSsprRegistered">$click.value$</set>
-        </drilldown>
-        <option name="charting.fieldColors">{"true":"#118832","false":"#E53935"}</option>
-      </chart>
-    </panel>
-    <panel>
-      <title>is SSPR Capable</title>
-      <chart>
-        <search>
-          <query>index::ms_entra_id sourcetype="microsoft:userRegistrationDetails" userPrincipalName="$tkn_link$"
-| dedup userPrincipalName 
-| stats count as Count by isSsprCapable</query>
-          <earliest>$time.earliest$</earliest>
-          <latest>$time.latest$</latest>
-        </search>
-        <option name="charting.chart">pie</option>
-        <option name="charting.drilldown">all</option>
-        <option name="refresh.display">progressbar</option>
-        <drilldown>
-          <set token="form.tkn_isSsprCapable">$click.value$</set>
-        </drilldown>
-        <option name="charting.fieldColors">{"true":"#118832","false":"#E53935"}</option>
-      </chart>
-    </panel>
-    <panel>
       <title>is MFA Registered</title>
       <chart>
         <search>
-          <query>index::ms_entra_id sourcetype="microsoft:userRegistrationDetails" userPrincipalName="$tkn_link$"
+          <query>index::* sourcetype="microsoft:userRegistrationDetails" userPrincipalName="$tkn_link$"
 | dedup userPrincipalName 
 | stats count as Count by isMfaRegistered</query>
           <earliest>$time.earliest$</earliest>
@@ -127,7 +149,7 @@
       <title>is Passwordless Capable</title>
       <chart>
         <search>
-          <query>index::ms_entra_id sourcetype="microsoft:userRegistrationDetails" userPrincipalName="$tkn_link$"
+          <query>index::* sourcetype="microsoft:userRegistrationDetails" userPrincipalName="$tkn_link$"
 | dedup userPrincipalName 
 | stats count as Count by isPasswordlessCapable</query>
           <earliest>$time.earliest$</earliest>
@@ -145,55 +167,34 @@
   </row>
   <row>
     <panel>
-      <title>Methods Registered</title>
-      <chart>
-        <search>
-          <query>index::ms_entra_id sourcetype="microsoft:userRegistrationDetails" userPrincipalName="$tkn_link$"
-| dedup userPrincipalName
-| mvexpand methodsRegistered{}
-| eval Series='methodsRegistered{}'
-| chart count over methodsRegistered{} by Series
-| fields - VALUE
-| search methodsRegistered{}!=""</query>
-          <earliest>$time.earliest$</earliest>
-          <latest>$time.latest$</latest>
-        </search>
-        <option name="charting.chart">bar</option>
-        <option name="charting.chart.stackMode">stacked</option>
-        <option name="charting.drilldown">all</option>
-        <option name="charting.fieldColors">{"microsoftAuthenticatorPush": "#2563EB","softwareOneTimePasscode": "#7C3AED","mobilePhone": "#F59E0B","microsoftAuthenticatorPasswordless": "#16A34A","passKeyDeviceBoundAuthenticator": "#16A34A","passKeyDeviceBound": "#4ADE80","windowsHelloForBusiness": "#06B6D4","email": "#FBBF24"}</option>
-        <option name="refresh.display">progressbar</option>
-        <drilldown>
-          <set token="form.tkn_MethodsRegistered">$click.value$</set>
-        </drilldown>
-      </chart>
-    </panel>
-    <panel>
       <title>Preferred Authentication Methods</title>
       <chart>
         <search>
-          <query>index::ms_entra_id sourcetype="microsoft:userRegistrationDetails" userPrincipalName="$tkn_link$"
+          <query>index::* sourcetype="microsoft:userRegistrationDetails" userPrincipalName="$tkn_link$"
 | dedup userPrincipalName 
 | mvexpand systemPreferredAuthenticationMethods{}
-| eval Series='systemPreferredAuthenticationMethods{}'
-| chart count over systemPreferredAuthenticationMethods{} by Series
-| fields - VALUE
-| search systemPreferredAuthenticationMethods{}!=""</query>
+| search systemPreferredAuthenticationMethods{}!=""
+| stats count as "User Count" by systemPreferredAuthenticationMethods{} 
+| transpose 0 header_field=systemPreferredAuthenticationMethods{} 
+| rename column as "Preferred Authentication Methods"
+| eval "Preferred Authentication Methods"=""</query>
           <earliest>$time.earliest$</earliest>
           <latest>$time.latest$</latest>
         </search>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
         <option name="charting.axisLabelsX.majorLabelStyle.rotation">-45</option>
         <option name="charting.axisTitleY.text">User Count</option>
         <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisY.scale">log</option>
         <option name="charting.chart">column</option>
         <option name="charting.chart.showDataLabels">none</option>
-        <option name="charting.chart.stackMode">stacked</option>
+        <option name="charting.chart.stackMode">default</option>
         <option name="charting.drilldown">all</option>
         <option name="charting.fieldColors">{"PhoneAppNotification": "#2563EB","Fido2": "#16A34A","SoftwareOTP": "#7C3AED","Phone": "#F59E0B","Email": "#FBBF24","none": "#E53935"}</option>
-        <option name="charting.legend.placement">none</option>
+        <option name="charting.legend.placement">bottom</option>
         <option name="refresh.display">progressbar</option>
         <drilldown>
-          <set token="form.tkn_systemPreferredAuthenticationMethods">$click.value$</set>
+          <set token="form.tkn_systemPreferredAuthenticationMethods">$click.name2$</set>
         </drilldown>
       </chart>
     </panel>
@@ -201,27 +202,29 @@
       <title>Preferred Secondary Method Authentication</title>
       <chart>
         <search>
-          <query>index::ms_entra_id sourcetype="microsoft:userRegistrationDetails" userPrincipalName="$tkn_link$"
+          <query>index::* sourcetype="microsoft:userRegistrationDetails" userPrincipalName="$tkn_link$"
 | dedup userPrincipalName 
-| eval Series=userPreferredMethodForSecondaryAuthentication
-| chart count over userPreferredMethodForSecondaryAuthentication by Series
-| fields - VALUE
-| search userPreferredMethodForSecondaryAuthentication!=""</query>
+| search userPreferredMethodForSecondaryAuthentication!=""
+| stats count as "User Count" by userPreferredMethodForSecondaryAuthentication
+| transpose 0 header_field=userPreferredMethodForSecondaryAuthentication
+| rename column as "Preferred Secondary Method Authentication"
+| eval "Preferred Secondary Method Authentication"=""</query>
           <earliest>$time.earliest$</earliest>
           <latest>$time.latest$</latest>
         </search>
         <option name="charting.axisLabelsX.majorLabelStyle.rotation">-45</option>
         <option name="charting.axisTitleY.text">User Count</option>
         <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisY.scale">log</option>
         <option name="charting.chart">column</option>
         <option name="charting.chart.showDataLabels">none</option>
-        <option name="charting.chart.stackMode">stacked</option>
+        <option name="charting.chart.stackMode">default</option>
         <option name="charting.drilldown">all</option>
         <option name="charting.fieldColors">{"none": "#E53935","push": "#2563EB","oath": "#7C3AED","phone": "#F59E0B","email": "#FBBF24","fido2": "#16A34A"}</option>
-        <option name="charting.legend.placement">none</option>
+        <option name="charting.legend.placement">bottom</option>
         <option name="refresh.display">progressbar</option>
         <drilldown>
-          <set token="form.tkn_userPreferredMethodForSecondaryAuthentication">$click.value$</set>
+          <set token="form.tkn_userPreferredMethodForSecondaryAuthentication">$click.name2$</set>
         </drilldown>
       </chart>
     </panel>
@@ -248,7 +251,7 @@
         <fieldForLabel>userType</fieldForLabel>
         <fieldForValue>userType</fieldForValue>
         <search>
-          <query>index::ms_entra_id sourcetype="microsoft:userRegistrationDetails"
+          <query>index=* sourcetype="microsoft:userRegistrationDetails"
 | table DateTime, _time, userPrincipalName, userDisplayName, userType, isSsprRegistered, isSsprCapable, isMfaRegistered, isPasswordlessCapable, MethodsRegistered, systemPreferredAuthenticationMethods{}, userPreferredMethodForSecondaryAuthentication
 | stats count by userType</query>
           <earliest>$time.earliest$</earliest>
@@ -295,7 +298,7 @@
         <fieldForLabel>methodsRegistered{}</fieldForLabel>
         <fieldForValue>methodsRegistered{}</fieldForValue>
         <search>
-          <query>index::ms_entra_id sourcetype="microsoft:userRegistrationDetails"
+          <query>index=* sourcetype="microsoft:userRegistrationDetails"
 | table DateTime, _time, userPrincipalName, userDisplayName, userType, isSsprRegistered, isSsprCapable, isMfaRegistered, isPasswordlessCapable, methodsRegistered{}, systemPreferredAuthenticationMethods{}, userPreferredMethodForSecondaryAuthentication
 | fillnull value="-"
 | mvexpand methodsRegistered{}
@@ -313,7 +316,7 @@
         <fieldForLabel>systemPreferredAuthenticationMethods{}</fieldForLabel>
         <fieldForValue>systemPreferredAuthenticationMethods{}</fieldForValue>
         <search>
-          <query>index::ms_entra_id sourcetype="microsoft:userRegistrationDetails"
+          <query>index=* sourcetype="microsoft:userRegistrationDetails"
 | table DateTime, _time, userPrincipalName, userDisplayName, userType, isSsprRegistered, isSsprCapable, isMfaRegistered, isPasswordlessCapable, MethodsRegistered, systemPreferredAuthenticationMethods{}, userPreferredMethodForSecondaryAuthentication
 | fillnull value="-"
 | table systemPreferredAuthenticationMethods{}
@@ -330,7 +333,7 @@
         <fieldForLabel>userPreferredMethodForSecondaryAuthentication</fieldForLabel>
         <fieldForValue>userPreferredMethodForSecondaryAuthentication</fieldForValue>
         <search>
-          <query>index::ms_entra_id sourcetype="microsoft:userRegistrationDetails"
+          <query>index=* sourcetype="microsoft:userRegistrationDetails"
 | table DateTime, _time, userPrincipalName, userDisplayName, userType, isSsprRegistered, isSsprCapable, isMfaRegistered, isPasswordlessCapable, MethodsRegistered, systemPreferredAuthenticationMethods{}, userPreferredMethodForSecondaryAuthentication
 | fillnull value="-"
 | table userPreferredMethodForSecondaryAuthentication
@@ -347,14 +350,18 @@
           <done>
             <set token="tkn_result_count">$job.resultCount$</set>
           </done>
-          <query>index::ms_entra_id sourcetype="microsoft:userRegistrationDetails" userPrincipalName="$tkn_userPrincipanName$" userDisplayName="$tkn_userDisplayName$" userType="$tkn_userType$" isSsprRegistered="$tkn_isSsprRegistered$" isSsprCapable="$tkn_isSsprCapable$" isMfaRegistered="$tkn_isMfaRegistered$" isPasswordlessCapable="$tkn_isPasswordlessCapable$" 
+          <query>index::* sourcetype="microsoft:userRegistrationDetails" userPrincipalName="$tkn_userPrincipanName$" userDisplayName="$tkn_userDisplayName$" userType="$tkn_userType$" isSsprRegistered="$tkn_isSsprRegistered$" isSsprCapable="$tkn_isSsprCapable$" isMfaRegistered="$tkn_isMfaRegistered$" isPasswordlessCapable="$tkn_isPasswordlessCapable$" 
 | fillnull value="-" 
-| search systemPreferredAuthenticationMethods{}="$tkn_systemPreferredAuthenticationMethods$" userPreferredMethodForSecondaryAuthentication="$tkn_userPreferredMethodForSecondaryAuthentication$" methodsRegistered{}="$tkn_MethodsRegistered$" 
-| eval MethodsRegistered=mvjoin('methodsRegistered{}', ",") 
+| search systemPreferredAuthenticationMethods{}="$tkn_systemPreferredAuthenticationMethods$" userPreferredMethodForSecondaryAuthentication="$tkn_userPreferredMethodForSecondaryAuthentication$" 
+| rename methodsRegistered{} as methodsRegistered 
+```| eval "methodsRegistered" = case(methodsRegistered="microsoftAuthenticatorPush", "Authenticator – Push", methodsRegistered="email", "Email Verification",methodsRegistered="macOsSecureEnclaveKey", "macOS Secure Enclave",methodsRegistered="microsoftAuthenticatorPasswordless", "Authenticator – Push",methodsRegistered="alternateMobilePhone", "Alternate Mobile"
+    ,methodsRegistered="mobilePhone", "Mobile Phone (SMS/Call)",methodsRegistered="officePhone", "Office Phone",methodsRegistered="passKeyDeviceBound", "Passkey (Device‑Bound)",methodsRegistered="passKeyDeviceBoundAuthenticator", "Passkey Authenticator",methodsRegistered="softwareOneTimePasscode", "Software OTP (TOTP App)",methodsRegistered="windowsHelloForBusiness", "Windows Hello for Business",1=1, methodsRegistered) ```
+| search methodsRegistered="$tkn_MethodsRegistered$" 
+| eval AllMethodsRegistered=mvjoin('methodsRegistered', ",") 
 | eval LastUpdatedDateTime = strftime(strptime(replace(lastUpdatedDateTime, "(\.\d{6})\dZ$$", "\1Z"),"%Y-%m-%dT%H:%M:%S.%fZ"),"%Y-%m-%d %H:%M:%S") 
-| table LastUpdatedDateTime, userPrincipalName, userDisplayName, userType, isSsprRegistered, isSsprCapable, isMfaRegistered, isPasswordlessCapable, systemPreferredAuthenticationMethods{}, userPreferredMethodForSecondaryAuthentication,MethodsRegistered 
+| table LastUpdatedDateTime, userPrincipalName, userDisplayName, userType, isSsprRegistered, isSsprCapable, isMfaRegistered, isPasswordlessCapable, systemPreferredAuthenticationMethods{}, userPreferredMethodForSecondaryAuthentication,AllMethodsRegistered 
 | dedup userPrincipalName 
-| rename userPrincipalName as "UPN", userDisplayName as "UserName", userType as "UserType", isSsprRegistered as "SSPRRegiseterd", isSsprCapable as "SSPRCapable", isMfaRegistered as "MFARegsitered", isPasswordlessCapable as "PasswordlessCapable", MethodsRegistered as "AllMethodsRegistered", "systemPreferredAuthenticationMethods{}" as "PreferredAuthenticationMethods", userPreferredMethodForSecondaryAuthentication as "PreferredMethodSecondaryAuthentication"</query>
+| rename userPrincipalName as "UPN", userDisplayName as "UserName", userType as "UserType", isSsprRegistered as "SSPRRegiseterd", isSsprCapable as "SSPRCapable", isMfaRegistered as "MFARegsitered", isPasswordlessCapable as "PasswordlessCapable", AllMethodsRegistered as "AllMethodsRegistered", "systemPreferredAuthenticationMethods{}" as "PreferredAuthenticationMethods", userPreferredMethodForSecondaryAuthentication as "PreferredMethodSecondaryAuthentication"</query>
           <earliest>$time.earliest$</earliest>
           <latest>$time.latest$</latest>
           <sampleRatio>1</sampleRatio>
@@ -363,6 +370,7 @@
         <option name="dataOverlayMode">none</option>
         <option name="drilldown">none</option>
         <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
         <option name="rowNumbers">false</option>
         <option name="totalsRow">false</option>
         <option name="wrap">false</option>
