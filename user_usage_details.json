@@ -1,0 +1,745 @@
+{
+    "title": "User Usage Details",
+    "description": "",
+    "inputs": {
+        "input_global_trp": {
+            "options": {
+                "defaultValue": "-24h@h,now",
+                "token": "global_time"
+            },
+            "title": "Global Time Range",
+            "type": "input.timerange"
+        }
+    },
+    "defaults": {
+        "dataSources": {
+            "ds.search": {
+                "options": {
+                    "queryParameters": {
+                        "earliest": "$global_time.earliest$",
+                        "latest": "$global_time.latest$"
+                    }
+                }
+            },
+            "ds.spl2": {
+                "options": {
+                    "queryParameters": {
+                        "earliest": "$global_time.earliest$",
+                        "latest": "$global_time.latest$"
+                    }
+                }
+            }
+        },
+        "visualizations": {
+            "global": {
+                "showProgressBar": true
+            }
+        }
+    },
+    "visualizations": {
+        "viz_0UasM8Fy": {
+            "containerOptions": {},
+            "dataSources": {
+                "primary": "ds_XMzKT66Z"
+            },
+            "options": {
+                "additionalTooltipFields": [],
+                "yAxisScale": "log"
+            },
+            "showLastUpdated": false,
+            "showProgressBar": true,
+            "title": "Methods Registered",
+            "type": "splunk.bar"
+        },
+        "viz_1An3m6pG": {
+            "containerOptions": {},
+            "dataSources": {
+                "primary": "ds_Ex1m1Dby"
+            },
+            "showLastUpdated": false,
+            "showProgressBar": true,
+            "title": "Preferred Authentication Methods",
+            "type": "splunk.column"
+        },
+        "viz_2MdLcb4C": {
+            "containerOptions": {},
+            "dataSources": {
+                "primary": "ds_JOv2SXxA"
+            },
+            "options": {
+                "additionalTooltipFields": [],
+                "yAxisScale": "log"
+            },
+            "showLastUpdated": false,
+            "showProgressBar": true,
+            "title": "Methods Registered",
+            "type": "splunk.bar"
+        },
+        "viz_547DgzK8": {
+            "dataSources": {
+                "primary": "ds_vfDcjweA"
+            },
+            "title": "is Passwordless Capable",
+            "type": "splunk.pie"
+        },
+        "viz_63irQB3f": {
+            "dataSources": {
+                "primary": "ds_mLMW4zos"
+            },
+            "title": "Is MFA Registered",
+            "type": "splunk.pie"
+        },
+        "viz_BR4aOytn": {
+            "dataSources": {
+                "primary": "ds_FLMVyuAe"
+            },
+            "title": "User Type",
+            "type": "splunk.pie"
+        },
+        "viz_C8gJaggJ": {
+            "containerOptions": {},
+            "context": {},
+            "dataSources": {
+                "primary": "ds_Ul8unHyd"
+            },
+            "options": {},
+            "showLastUpdated": false,
+            "showProgressBar": true,
+            "title": "Preferred Secondary Method Authentication",
+            "type": "splunk.column"
+        },
+        "viz_F2umjOs9": {
+            "dataSources": {
+                "primary": "ds_eIfUhIb4"
+            },
+            "title": "is Passwordless Capable",
+            "type": "splunk.pie"
+        },
+        "viz_Ft8mn5qj": {
+            "dataSources": {
+                "primary": "ds_B1zyfQOU"
+            },
+            "title": "Is MFA Registered",
+            "type": "splunk.pie"
+        },
+        "viz_GdQQxdoz": {
+            "dataSources": {
+                "primary": "ds_2gvaUcp3"
+            },
+            "title": "User Type",
+            "type": "splunk.pie"
+        },
+        "viz_MRWUwFJf": {
+            "dataSources": {
+                "primary": "ds_NDlIWKcD"
+            },
+            "title": "is Passwordless Capable",
+            "type": "splunk.pie"
+        },
+        "viz_WjKwvsdS": {
+            "dataSources": {
+                "primary": "ds_ZrKCmXAc"
+            },
+            "title": "Is MFA Registered",
+            "type": "splunk.pie"
+        },
+        "viz_XIjlCnYv": {
+            "dataSources": {
+                "primary": "ds_vY7N0Sed"
+            },
+            "title": "is Passwordless Capable",
+            "type": "splunk.pie"
+        },
+        "viz_XMXIUKkv": {
+            "dataSources": {
+                "primary": "ds_N2xheAVK"
+            },
+            "title": "User Type",
+            "type": "splunk.pie"
+        },
+        "viz_Y1hSx9I9": {
+            "containerOptions": {},
+            "dataSources": {
+                "primary": "ds_5mSZ67FP"
+            },
+            "options": {
+                "additionalTooltipFields": [],
+                "yAxisScale": "log"
+            },
+            "showLastUpdated": false,
+            "showProgressBar": true,
+            "title": "Methods Registered",
+            "type": "splunk.bar"
+        },
+        "viz_Y44wdfN0": {
+            "containerOptions": {},
+            "context": {},
+            "dataSources": {
+                "primary": "ds_cJlWGqmc"
+            },
+            "options": {},
+            "showLastUpdated": false,
+            "showProgressBar": true,
+            "title": "Preferred Secondary Method Authentication",
+            "type": "splunk.column"
+        },
+        "viz_Z4CV9N39": {
+            "containerOptions": {},
+            "dataSources": {
+                "primary": "ds_HxLCYVvw"
+            },
+            "options": {
+                "additionalTooltipFields": [],
+                "yAxisScale": "log"
+            },
+            "showLastUpdated": false,
+            "showProgressBar": true,
+            "title": "Methods Registered",
+            "type": "splunk.bar"
+        },
+        "viz_ZDtD6ssF": {
+            "containerOptions": {},
+            "context": {},
+            "dataSources": {
+                "primary": "ds_RNZMpxSm"
+            },
+            "options": {},
+            "showLastUpdated": false,
+            "showProgressBar": true,
+            "title": "Preferred Secondary Method Authentication",
+            "type": "splunk.column"
+        },
+        "viz_fw2ZQIZu": {
+            "dataSources": {
+                "primary": "ds_bfx8xxzq"
+            },
+            "title": "Is MFA Registered",
+            "type": "splunk.pie"
+        },
+        "viz_sGdjGgCn": {
+            "containerOptions": {},
+            "dataSources": {
+                "primary": "ds_wuSPC0gs"
+            },
+            "showLastUpdated": false,
+            "showProgressBar": true,
+            "title": "Preferred Authentication Methods",
+            "type": "splunk.column"
+        },
+        "viz_w7MCVCPF": {
+            "containerOptions": {},
+            "dataSources": {
+                "primary": "ds_BwR2NJj6"
+            },
+            "showLastUpdated": false,
+            "showProgressBar": true,
+            "title": "Preferred Authentication Methods",
+            "type": "splunk.column"
+        },
+        "viz_waRgndeU": {
+            "containerOptions": {},
+            "context": {},
+            "dataSources": {
+                "primary": "ds_nTodOT1e"
+            },
+            "options": {},
+            "showLastUpdated": false,
+            "showProgressBar": true,
+            "title": "Preferred Secondary Method Authentication",
+            "type": "splunk.column"
+        },
+        "viz_wycGPmW3": {
+            "dataSources": {
+                "primary": "ds_FFWzPqy2"
+            },
+            "title": "User Type",
+            "type": "splunk.pie"
+        },
+        "viz_xdVZaRRs": {
+            "containerOptions": {},
+            "dataSources": {
+                "primary": "ds_2PGs5uxs"
+            },
+            "showLastUpdated": false,
+            "showProgressBar": true,
+            "title": "Preferred Authentication Methods",
+            "type": "splunk.column"
+        }
+    },
+    "dataSources": {
+        "ds_2PGs5uxs": {
+            "name": "Preferred Authentication Methods Admin",
+            "options": {
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"a_*\"\n| dedup userPrincipalName \n| mvexpand systemPreferredAuthenticationMethods{}\n| search systemPreferredAuthenticationMethods{}!=\"\"\n| stats count as \"User Count\" by systemPreferredAuthenticationMethods{} \n| transpose 0 header_field=systemPreferredAuthenticationMethods{} \n| rename column as \"Preferred Authentication Methods\"\n| eval \"Preferred Authentication Methods\"=\"\""
+            },
+            "type": "ds.search"
+        },
+        "ds_2gvaUcp3": {
+            "name": "User Type All",
+            "options": {
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"*\"\n| dedup userPrincipalName \n| stats count as Count by userType"
+            },
+            "type": "ds.search"
+        },
+        "ds_5mSZ67FP": {
+            "name": "Methods Registered All",
+            "options": {
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"*\" \n| dedup userPrincipalName \n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered \n| eval \"methodsRegistered\" = case(methodsRegistered=\"microsoftAuthenticatorPush\", \"Authenticator – Push\", methodsRegistered=\"email\", \"Email Verification\",methodsRegistered=\"macOsSecureEnclaveKey\", \"macOS Secure Enclave\",methodsRegistered=\"microsoftAuthenticatorPasswordless\", \"Authenticator – Push\",methodsRegistered=\"alternateMobilePhone\", \"Alternate Mobile\"\n    ,methodsRegistered=\"mobilePhone\", \"Mobile Phone (SMS/Call)\",methodsRegistered=\"officePhone\", \"Office Phone\",methodsRegistered=\"passKeyDeviceBound\", \"Passkey (Device‑Bound)\",methodsRegistered=\"passKeyDeviceBoundAuthenticator\", \"Passkey Authenticator\",methodsRegistered=\"softwareOneTimePasscode\", \"Software OTP (TOTP App)\",methodsRegistered=\"windowsHelloForBusiness\", \"Windows Hello for Business\",1=1, methodsRegistered) \n| search methodsRegistered!=\"\" \n| stats count as \"User Count\" by methodsRegistered \n| transpose 0 header_field=methodsRegistered \n| rename column as \"Method Registered\"\n| eval \"Method Registered\" = \"\""
+            },
+            "type": "ds.search"
+        },
+        "ds_B1zyfQOU": {
+            "name": "is MFA Registered Admin",
+            "options": {
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"a_*\"\n| dedup userPrincipalName \n| stats count as Count by isMfaRegistered"
+            },
+            "type": "ds.search"
+        },
+        "ds_BwR2NJj6": {
+            "name": "Preferred Authentication Methods Developer",
+            "options": {
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"d_*\"\n| dedup userPrincipalName \n| mvexpand systemPreferredAuthenticationMethods{}\n| search systemPreferredAuthenticationMethods{}!=\"\"\n| stats count as \"User Count\" by systemPreferredAuthenticationMethods{} \n| transpose 0 header_field=systemPreferredAuthenticationMethods{} \n| rename column as \"Preferred Authentication Methods\"\n| eval \"Preferred Authentication Methods\"=\"\""
+            },
+            "type": "ds.search"
+        },
+        "ds_Ex1m1Dby": {
+            "name": "Preferred Authentication Methods",
+            "options": {
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"*\"\n| dedup userPrincipalName \n| mvexpand systemPreferredAuthenticationMethods{}\n| search systemPreferredAuthenticationMethods{}!=\"\"\n| stats count as \"User Count\" by systemPreferredAuthenticationMethods{} \n| transpose 0 header_field=systemPreferredAuthenticationMethods{} \n| rename column as \"Preferred Authentication Methods\"\n| eval \"Preferred Authentication Methods\"=\"\""
+            },
+            "type": "ds.search"
+        },
+        "ds_FFWzPqy2": {
+            "name": "User Type Admin",
+            "options": {
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"a_*\"\n| dedup userPrincipalName \n| stats count as Count by userType"
+            },
+            "type": "ds.search"
+        },
+        "ds_FLMVyuAe": {
+            "name": "User Type All Test",
+            "options": {
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"t_*\"\n| dedup userPrincipalName \n| stats count as Count by userType"
+            },
+            "type": "ds.search"
+        },
+        "ds_HxLCYVvw": {
+            "name": "Methods Registered Admin",
+            "options": {
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"a_*\" \n| dedup userPrincipalName \n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered \n| eval \"methodsRegistered\" = case(methodsRegistered=\"microsoftAuthenticatorPush\", \"Authenticator – Push\", methodsRegistered=\"email\", \"Email Verification\",methodsRegistered=\"macOsSecureEnclaveKey\", \"macOS Secure Enclave\",methodsRegistered=\"microsoftAuthenticatorPasswordless\", \"Authenticator – Push\",methodsRegistered=\"alternateMobilePhone\", \"Alternate Mobile\"\n    ,methodsRegistered=\"mobilePhone\", \"Mobile Phone (SMS/Call)\",methodsRegistered=\"officePhone\", \"Office Phone\",methodsRegistered=\"passKeyDeviceBound\", \"Passkey (Device‑Bound)\",methodsRegistered=\"passKeyDeviceBoundAuthenticator\", \"Passkey Authenticator\",methodsRegistered=\"softwareOneTimePasscode\", \"Software OTP (TOTP App)\",methodsRegistered=\"windowsHelloForBusiness\", \"Windows Hello for Business\",1=1, methodsRegistered) \n| search methodsRegistered!=\"\" \n| stats count as \"User Count\" by methodsRegistered \n| transpose 0 header_field=methodsRegistered \n| rename column as \"Method Registered\"\n| eval \"Method Registered\" = \"\""
+            },
+            "type": "ds.search"
+        },
+        "ds_JOv2SXxA": {
+            "name": "Methods Registered Test",
+            "options": {
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"t_*\" \n| dedup userPrincipalName \n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered \n| eval \"methodsRegistered\" = case(methodsRegistered=\"microsoftAuthenticatorPush\", \"Authenticator – Push\", methodsRegistered=\"email\", \"Email Verification\",methodsRegistered=\"macOsSecureEnclaveKey\", \"macOS Secure Enclave\",methodsRegistered=\"microsoftAuthenticatorPasswordless\", \"Authenticator – Push\",methodsRegistered=\"alternateMobilePhone\", \"Alternate Mobile\"\n    ,methodsRegistered=\"mobilePhone\", \"Mobile Phone (SMS/Call)\",methodsRegistered=\"officePhone\", \"Office Phone\",methodsRegistered=\"passKeyDeviceBound\", \"Passkey (Device‑Bound)\",methodsRegistered=\"passKeyDeviceBoundAuthenticator\", \"Passkey Authenticator\",methodsRegistered=\"softwareOneTimePasscode\", \"Software OTP (TOTP App)\",methodsRegistered=\"windowsHelloForBusiness\", \"Windows Hello for Business\",1=1, methodsRegistered) \n| search methodsRegistered!=\"\" \n| stats count as \"User Count\" by methodsRegistered \n| transpose 0 header_field=methodsRegistered \n| rename column as \"Method Registered\"\n| eval \"Method Registered\" = \"\""
+            },
+            "type": "ds.search"
+        },
+        "ds_N2xheAVK": {
+            "name": "User Type All Developer",
+            "options": {
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"d_*\"\n| dedup userPrincipalName \n| stats count as Count by userType"
+            },
+            "type": "ds.search"
+        },
+        "ds_NDlIWKcD": {
+            "name": "is Passwordless Capable",
+            "options": {
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"*\"\n| dedup userPrincipalName \n| stats count as Count by isPasswordlessCapable"
+            },
+            "type": "ds.search"
+        },
+        "ds_RNZMpxSm": {
+            "name": "Preferred Secondary Method Authentication Developer",
+            "options": {
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"d_*\"\n| dedup userPrincipalName \n| search userPreferredMethodForSecondaryAuthentication!=\"\"\n| stats count as \"User Count\" by userPreferredMethodForSecondaryAuthentication\n| transpose 0 header_field=userPreferredMethodForSecondaryAuthentication\n| rename column as \"Preferred Secondary Method Authentication\"\n| eval \"Preferred Secondary Method Authentication\"=\"\""
+            },
+            "type": "ds.search"
+        },
+        "ds_Ul8unHyd": {
+            "name": "Preferred Secondary Method Authentication",
+            "options": {
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"*\"\n| dedup userPrincipalName \n| search userPreferredMethodForSecondaryAuthentication!=\"\"\n| stats count as \"User Count\" by userPreferredMethodForSecondaryAuthentication\n| transpose 0 header_field=userPreferredMethodForSecondaryAuthentication\n| rename column as \"Preferred Secondary Method Authentication\"\n| eval \"Preferred Secondary Method Authentication\"=\"\""
+            },
+            "type": "ds.search"
+        },
+        "ds_XMzKT66Z": {
+            "name": "Methods Registered Developer",
+            "options": {
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"d_*\" \n| dedup userPrincipalName \n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered \n| eval \"methodsRegistered\" = case(methodsRegistered=\"microsoftAuthenticatorPush\", \"Authenticator – Push\", methodsRegistered=\"email\", \"Email Verification\",methodsRegistered=\"macOsSecureEnclaveKey\", \"macOS Secure Enclave\",methodsRegistered=\"microsoftAuthenticatorPasswordless\", \"Authenticator – Push\",methodsRegistered=\"alternateMobilePhone\", \"Alternate Mobile\"\n    ,methodsRegistered=\"mobilePhone\", \"Mobile Phone (SMS/Call)\",methodsRegistered=\"officePhone\", \"Office Phone\",methodsRegistered=\"passKeyDeviceBound\", \"Passkey (Device‑Bound)\",methodsRegistered=\"passKeyDeviceBoundAuthenticator\", \"Passkey Authenticator\",methodsRegistered=\"softwareOneTimePasscode\", \"Software OTP (TOTP App)\",methodsRegistered=\"windowsHelloForBusiness\", \"Windows Hello for Business\",1=1, methodsRegistered) \n| search methodsRegistered!=\"\" \n| stats count as \"User Count\" by methodsRegistered \n| transpose 0 header_field=methodsRegistered \n| rename column as \"Method Registered\"\n| eval \"Method Registered\" = \"\""
+            },
+            "type": "ds.search"
+        },
+        "ds_ZrKCmXAc": {
+            "name": "is MFA Registered Developer",
+            "options": {
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"d_*\"\n| dedup userPrincipalName \n| stats count as Count by isMfaRegistered"
+            },
+            "type": "ds.search"
+        },
+        "ds_bfx8xxzq": {
+            "name": "is MFA Registered Test",
+            "options": {
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"t_*\"\n| dedup userPrincipalName \n| stats count as Count by isMfaRegistered"
+            },
+            "type": "ds.search"
+        },
+        "ds_cJlWGqmc": {
+            "name": "Preferred Secondary Method Authentication Admin",
+            "options": {
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"a_*\"\n| dedup userPrincipalName \n| search userPreferredMethodForSecondaryAuthentication!=\"\"\n| stats count as \"User Count\" by userPreferredMethodForSecondaryAuthentication\n| transpose 0 header_field=userPreferredMethodForSecondaryAuthentication\n| rename column as \"Preferred Secondary Method Authentication\"\n| eval \"Preferred Secondary Method Authentication\"=\"\""
+            },
+            "type": "ds.search"
+        },
+        "ds_eIfUhIb4": {
+            "name": "is Passwordless Capable Admin",
+            "options": {
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"a_*\"\n| dedup userPrincipalName \n| stats count as Count by isPasswordlessCapable"
+            },
+            "type": "ds.search"
+        },
+        "ds_mLMW4zos": {
+            "name": "is MFA Registered",
+            "options": {
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"*\"\n| dedup userPrincipalName \n| stats count as Count by isMfaRegistered"
+            },
+            "type": "ds.search"
+        },
+        "ds_nTodOT1e": {
+            "name": "Preferred Secondary Method Authentication Test",
+            "options": {
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"t_*\"\n| dedup userPrincipalName \n| search userPreferredMethodForSecondaryAuthentication!=\"\"\n| stats count as \"User Count\" by userPreferredMethodForSecondaryAuthentication\n| transpose 0 header_field=userPreferredMethodForSecondaryAuthentication\n| rename column as \"Preferred Secondary Method Authentication\"\n| eval \"Preferred Secondary Method Authentication\"=\"\""
+            },
+            "type": "ds.search"
+        },
+        "ds_vY7N0Sed": {
+            "name": "is Passwordless Capable Developer",
+            "options": {
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"d_*\"\n| dedup userPrincipalName \n| stats count as Count by isPasswordlessCapable"
+            },
+            "type": "ds.search"
+        },
+        "ds_vfDcjweA": {
+            "name": "is Passwordless Capable Test",
+            "options": {
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"t_*\"\n| dedup userPrincipalName \n| stats count as Count by isPasswordlessCapable"
+            },
+            "type": "ds.search"
+        },
+        "ds_wuSPC0gs": {
+            "name": "Preferred Authentication Methods Test",
+            "options": {
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"t_*\"\n| dedup userPrincipalName \n| mvexpand systemPreferredAuthenticationMethods{}\n| search systemPreferredAuthenticationMethods{}!=\"\"\n| stats count as \"User Count\" by systemPreferredAuthenticationMethods{} \n| transpose 0 header_field=systemPreferredAuthenticationMethods{} \n| rename column as \"Preferred Authentication Methods\"\n| eval \"Preferred Authentication Methods\"=\"\""
+            },
+            "type": "ds.search"
+        }
+    },
+    "layout": {
+        "globalInputs": [
+            "input_global_trp"
+        ],
+        "layoutDefinitions": {
+            "layout_1": {
+                "options": {
+                    "backgroundColor": "transparent",
+                    "display": "auto",
+                    "height": 960,
+                    "width": 1440
+                },
+                "structure": [
+                    {
+                        "item": "viz_Y1hSx9I9",
+                        "position": {
+                            "h": 400,
+                            "w": 900,
+                            "x": 0,
+                            "y": 0
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_GdQQxdoz",
+                        "position": {
+                            "h": 300,
+                            "w": 300,
+                            "x": 0,
+                            "y": 400
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_63irQB3f",
+                        "position": {
+                            "h": 300,
+                            "w": 300,
+                            "x": 300,
+                            "y": 400
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_MRWUwFJf",
+                        "position": {
+                            "h": 300,
+                            "w": 300,
+                            "x": 600,
+                            "y": 400
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_1An3m6pG",
+                        "position": {
+                            "h": 350,
+                            "w": 540,
+                            "x": 900,
+                            "y": 0
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_C8gJaggJ",
+                        "position": {
+                            "h": 350,
+                            "w": 540,
+                            "x": 900,
+                            "y": 350
+                        },
+                        "type": "block"
+                    }
+                ],
+                "type": "absolute"
+            },
+            "layout_8LbohoNs": {
+                "options": {
+                    "width": 1440
+                },
+                "structure": [
+                    {
+                        "item": "viz_Z4CV9N39",
+                        "position": {
+                            "h": 400,
+                            "w": 900,
+                            "x": 0,
+                            "y": 0
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_wycGPmW3",
+                        "position": {
+                            "h": 300,
+                            "w": 300,
+                            "x": 0,
+                            "y": 400
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_Ft8mn5qj",
+                        "position": {
+                            "h": 300,
+                            "w": 300,
+                            "x": 300,
+                            "y": 400
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_F2umjOs9",
+                        "position": {
+                            "h": 300,
+                            "w": 300,
+                            "x": 600,
+                            "y": 400
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_xdVZaRRs",
+                        "position": {
+                            "h": 350,
+                            "w": 540,
+                            "x": 900,
+                            "y": 0
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_Y44wdfN0",
+                        "position": {
+                            "h": 350,
+                            "w": 540,
+                            "x": 900,
+                            "y": 350
+                        },
+                        "type": "block"
+                    }
+                ],
+                "type": "absolute"
+            },
+            "layout_Kats4okz": {
+                "options": {
+                    "width": 1440
+                },
+                "structure": [
+                    {
+                        "item": "viz_2MdLcb4C",
+                        "position": {
+                            "h": 400,
+                            "w": 900,
+                            "x": 0,
+                            "y": 0
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_BR4aOytn",
+                        "position": {
+                            "h": 300,
+                            "w": 300,
+                            "x": 0,
+                            "y": 400
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_fw2ZQIZu",
+                        "position": {
+                            "h": 300,
+                            "w": 300,
+                            "x": 300,
+                            "y": 400
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_547DgzK8",
+                        "position": {
+                            "h": 300,
+                            "w": 300,
+                            "x": 600,
+                            "y": 400
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_sGdjGgCn",
+                        "position": {
+                            "h": 350,
+                            "w": 540,
+                            "x": 900,
+                            "y": 0
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_waRgndeU",
+                        "position": {
+                            "h": 350,
+                            "w": 540,
+                            "x": 900,
+                            "y": 350
+                        },
+                        "type": "block"
+                    }
+                ],
+                "type": "absolute"
+            },
+            "layout_P3i97J12": {
+                "options": {
+                    "width": 1440
+                },
+                "structure": [
+                    {
+                        "item": "viz_0UasM8Fy",
+                        "position": {
+                            "h": 400,
+                            "w": 900,
+                            "x": 0,
+                            "y": 0
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_XMXIUKkv",
+                        "position": {
+                            "h": 300,
+                            "w": 300,
+                            "x": 0,
+                            "y": 400
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_WjKwvsdS",
+                        "position": {
+                            "h": 300,
+                            "w": 300,
+                            "x": 300,
+                            "y": 400
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_XIjlCnYv",
+                        "position": {
+                            "h": 300,
+                            "w": 300,
+                            "x": 600,
+                            "y": 400
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_w7MCVCPF",
+                        "position": {
+                            "h": 350,
+                            "w": 540,
+                            "x": 900,
+                            "y": 0
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_ZDtD6ssF",
+                        "position": {
+                            "h": 350,
+                            "w": 540,
+                            "x": 900,
+                            "y": 350
+                        },
+                        "type": "block"
+                    }
+                ],
+                "type": "absolute"
+            }
+        },
+        "options": {},
+        "tabs": {
+            "items": [
+                {
+                    "label": "All",
+                    "layoutId": "layout_1"
+                },
+                {
+                    "label": "Admin",
+                    "layoutId": "layout_8LbohoNs"
+                },
+                {
+                    "label": "Developer",
+                    "layoutId": "layout_P3i97J12"
+                },
+                {
+                    "label": "Test",
+                    "layoutId": "layout_Kats4okz"
+                }
+            ]
+        }
+    },
+    "applicationProperties": {
+        "collapseNavigation": false
+    }
+}
