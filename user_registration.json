@@ -1,0 +1,896 @@
+{
+    "title": "User Registration Details",
+    "description": "",
+    "inputs": {
+        "input_C0JD3GeP": {
+            "dataSources": {},
+            "options": {
+                "defaultValue": "*",
+                "items": [
+                    {
+                        "label": "All",
+                        "value": "*"
+                    },
+                    {
+                        "label": "true",
+                        "value": "true"
+                    },
+                    {
+                        "label": "false",
+                        "value": "false"
+                    }
+                ],
+                "token": "tkn_isPasswordlessCapable"
+            },
+            "title": "is Passwordless Capable",
+            "type": "input.dropdown"
+        },
+        "input_HRZbsjhI": {
+            "dataSources": {
+                "primary": "ds_owMeh1Cf"
+            },
+            "options": {
+                "defaultValue": "*",
+                "items": [
+                    {
+                        "label": "All",
+                        "value": "*"
+                    }
+                ],
+                "token": "tkn_userPreferredMethodForSecondaryAuthentication"
+            },
+            "title": "Preferred Secondary Method Authentication",
+            "type": "input.dropdown"
+        },
+        "input_I790y77c": {
+            "dataSources": {},
+            "options": {
+                "defaultValue": "*",
+                "items": [
+                    {
+                        "label": "All",
+                        "value": "*"
+                    },
+                    {
+                        "label": "true",
+                        "value": "true"
+                    },
+                    {
+                        "label": "false",
+                        "value": "false"
+                    }
+                ],
+                "token": "tkn_isSsprCapable"
+            },
+            "title": "Is SSPR Capable",
+            "type": "input.dropdown"
+        },
+        "input_KLK9g89r": {
+            "dataSources": {
+                "primary": "ds_cHsm5NoM"
+            },
+            "options": {
+                "defaultValue": "*",
+                "items": [
+                    {
+                        "label": "All",
+                        "value": "*"
+                    }
+                ],
+                "token": "tkn_MethodsRegistered"
+            },
+            "title": "Methods Registered",
+            "type": "input.dropdown"
+        },
+        "input_MVREqCpo": {
+            "dataSources": {
+                "primary": "ds_E9nn1kUN"
+            },
+            "options": {
+                "defaultValue": "*",
+                "items": [
+                    {
+                        "label": "All",
+                        "value": "*"
+                    }
+                ],
+                "token": "tkn_userType"
+            },
+            "title": "User Type",
+            "type": "input.dropdown"
+        },
+        "input_QwzZOY5x": {
+            "dataSources": {},
+            "options": {
+                "defaultValue": "*",
+                "items": [
+                    {
+                        "label": "All",
+                        "value": "*"
+                    },
+                    {
+                        "label": "true",
+                        "value": "true"
+                    },
+                    {
+                        "label": "false",
+                        "value": "false"
+                    }
+                ],
+                "token": "tkn_isMfaRegistered"
+            },
+            "title": "Is MFA Registered",
+            "type": "input.dropdown"
+        },
+        "input_S1ORxzIN": {
+            "options": {
+                "defaultValue": "*",
+                "token": "tkn_userDisplayName"
+            },
+            "title": "userDisplayName",
+            "type": "input.text"
+        },
+        "input_global_trp": {
+            "options": {
+                "defaultValue": "-24h@h,now",
+                "token": "global_time"
+            },
+            "title": "Global Time Range",
+            "type": "input.timerange"
+        },
+        "input_hpNhkxje": {
+            "dataSources": {},
+            "options": {
+                "defaultValue": "*",
+                "items": [
+                    {
+                        "label": "All",
+                        "value": "*"
+                    },
+                    {
+                        "label": "true",
+                        "value": "true"
+                    },
+                    {
+                        "label": "false",
+                        "value": "false"
+                    }
+                ],
+                "token": "tkn_isSsprRegistered"
+            },
+            "title": "Is SSPR Registered",
+            "type": "input.dropdown"
+        },
+        "input_ofvdXZ0x": {
+            "options": {
+                "defaultValue": "*",
+                "token": "tkn_userPrincipanName"
+            },
+            "title": "UPN",
+            "type": "input.text"
+        },
+        "input_uvyUTmBs": {
+            "dataSources": {
+                "primary": "ds_8UNeX7aV"
+            },
+            "options": {
+                "defaultValue": "*",
+                "items": [
+                    {
+                        "label": "All",
+                        "value": "*"
+                    }
+                ],
+                "token": "tkn_systemPreferredAuthenticationMethods"
+            },
+            "title": "Preferred Authentication Methods",
+            "type": "input.dropdown"
+        }
+    },
+    "defaults": {
+        "dataSources": {
+            "ds.search": {
+                "options": {
+                    "queryParameters": {
+                        "earliest": "$global_time.earliest$",
+                        "latest": "$global_time.latest$"
+                    }
+                }
+            },
+            "ds.spl2": {
+                "options": {
+                    "queryParameters": {
+                        "earliest": "$global_time.earliest$",
+                        "latest": "$global_time.latest$"
+                    }
+                }
+            }
+        },
+        "visualizations": {
+            "global": {
+                "showProgressBar": true
+            }
+        }
+    },
+    "visualizations": {
+        "viz_1nBL8aTm": {
+            "context": {
+                "backgroundColorEditorConfig": [
+                    {
+                        "to": 20,
+                        "value": "#cba700"
+                    },
+                    {
+                        "from": 20,
+                        "value": "#cba700"
+                    }
+                ]
+            },
+            "dataSources": {
+                "primary": "ds_8suvpn1w"
+            },
+            "options": {
+                "backgroundColor": "> majorValue | rangeValue(backgroundColorEditorConfig)",
+                "trendColor": "#dc4e41",
+                "trendDisplay": "percent"
+            },
+            "title": "ML2 Not Compliant",
+            "type": "splunk.singlevalue"
+        },
+        "viz_8aPMx2Mi": {
+            "context": {
+                "backgroundColorEditorConfig": [
+                    {
+                        "to": 80,
+                        "value": "#118832"
+                    },
+                    {
+                        "from": 80,
+                        "value": "#118832"
+                    }
+                ]
+            },
+            "dataSources": {
+                "primary": "ds_0laEghDi"
+            },
+            "options": {
+                "backgroundColor": "> majorValue | rangeValue(backgroundColorEditorConfig)",
+                "trendDisplay": "percent"
+            },
+            "title": "Passkey in MS Auth Registered",
+            "type": "splunk.singlevalue"
+        },
+        "viz_Kjs9ePM5": {
+            "context": {
+                "backgroundColorEditorConfig": [
+                    {
+                        "to": 20,
+                        "value": "#cba700"
+                    },
+                    {
+                        "from": 20,
+                        "value": "#cba700"
+                    }
+                ]
+            },
+            "dataSources": {
+                "primary": "ds_LfOk6fLw"
+            },
+            "options": {
+                "backgroundColor": "> majorValue | rangeValue(backgroundColorEditorConfig)",
+                "trendColor": "#dc4e41",
+                "trendDisplay": "percent"
+            },
+            "title": "Windows Hello Not Registered",
+            "type": "splunk.singlevalue"
+        },
+        "viz_NmGr4sE4": {
+            "containerOptions": {},
+            "context": {
+                "backgroundColorEditorConfig": [
+                    {
+                        "to": 20,
+                        "value": "#cba700"
+                    },
+                    {
+                        "from": 20,
+                        "value": "#cba700"
+                    }
+                ]
+            },
+            "dataSources": {
+                "primary": "ds_sJfXaIUQ"
+            },
+            "options": {},
+            "showLastUpdated": false,
+            "showProgressBar": true,
+            "title": "Security Key Not Registered",
+            "type": "splunk.line"
+        },
+        "viz_NtbjBhDq": {
+            "context": {
+                "backgroundColorEditorConfig": [
+                    {
+                        "to": 80,
+                        "value": "#118832"
+                    },
+                    {
+                        "from": 80,
+                        "value": "#118832"
+                    }
+                ]
+            },
+            "dataSources": {
+                "primary": "ds_wJG87Vwg"
+            },
+            "options": {
+                "backgroundColor": "> majorValue | rangeValue(backgroundColorEditorConfig)",
+                "trendColor": "#dc4e41",
+                "trendDisplay": "percent"
+            },
+            "title": "ML2 Compliant",
+            "type": "splunk.singlevalue"
+        },
+        "viz_WR6xdV9I": {
+            "context": {
+                "backgroundColorEditorConfig": [
+                    {
+                        "to": 80,
+                        "value": "#118832"
+                    },
+                    {
+                        "from": 80,
+                        "value": "#118832"
+                    }
+                ]
+            },
+            "dataSources": {
+                "primary": "ds_IMAcbAVf"
+            },
+            "eventHandlers": [],
+            "options": {
+                "backgroundColor": "> majorValue | rangeValue(backgroundColorEditorConfig)",
+                "majorColor": "#000000",
+                "shouldAbbreviateTrendValue": true,
+                "trendColor": "#dc4e41",
+                "trendDisplay": "percent"
+            },
+            "title": "Security Key Registered",
+            "type": "splunk.singlevalue"
+        },
+        "viz_ctVP7SW6": {
+            "dataSources": {
+                "primary": "ds_a7kpXEfs"
+            },
+            "options": {},
+            "type": "splunk.table"
+        },
+        "viz_fctyRcaB": {
+            "context": {
+                "backgroundColorEditorConfig": [
+                    {
+                        "to": 20,
+                        "value": "#cba700"
+                    },
+                    {
+                        "from": 20,
+                        "value": "#cba700"
+                    }
+                ]
+            },
+            "dataSources": {
+                "primary": "ds_qVv8zFlM"
+            },
+            "options": {
+                "backgroundColor": "> majorValue | rangeValue(backgroundColorEditorConfig)",
+                "trendColor": "#dc4e41",
+                "trendDisplay": "percent"
+            },
+            "title": "Passkey in MS Auth Not Registered",
+            "type": "splunk.singlevalue"
+        },
+        "viz_nnwf7giF": {
+            "context": {
+                "backgroundColorEditorConfig": [
+                    {
+                        "to": 80,
+                        "value": "#118832"
+                    },
+                    {
+                        "from": 80,
+                        "value": "#118832"
+                    }
+                ]
+            },
+            "dataSources": {
+                "primary": "ds_t0uTjQek"
+            },
+            "options": {
+                "backgroundColor": "> majorValue | rangeValue(backgroundColorEditorConfig)",
+                "trendColor": "#dc4e41",
+                "trendDisplay": "percent"
+            },
+            "title": "Windows Hello Registered",
+            "type": "splunk.singlevalue"
+        },
+        "viz_ssrlsTK8": {
+            "context": {
+                "backgroundColorEditorConfig": [
+                    {
+                        "to": 20,
+                        "value": "#cba700"
+                    },
+                    {
+                        "from": 20,
+                        "value": "#cba700"
+                    }
+                ]
+            },
+            "dataSources": {
+                "primary": "ds_cfOcC6SD"
+            },
+            "eventHandlers": [],
+            "options": {
+                "backgroundColor": "> majorValue | rangeValue(backgroundColorEditorConfig)",
+                "trendColor": "#dc4e41",
+                "trendDisplay": "percent"
+            },
+            "title": "Security Key Not Registered",
+            "type": "splunk.singlevalue"
+        },
+        "viz_zVJza7r7": {
+            "containerOptions": {},
+            "context": {
+                "backgroundColorEditorConfig": [
+                    {
+                        "to": 80,
+                        "value": "#118832"
+                    },
+                    {
+                        "from": 80,
+                        "value": "#118832"
+                    }
+                ]
+            },
+            "dataSources": {
+                "primary": "ds_2w8nRFj0"
+            },
+            "options": {},
+            "showLastUpdated": false,
+            "showProgressBar": true,
+            "title": "Security Key Registered",
+            "type": "splunk.line"
+        }
+    },
+    "dataSources": {
+        "ds_0laEghDi": {
+            "name": "passKeyDeviceBoundAuthenticator",
+            "options": {
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| search methodsRegistered=\"passKeyDeviceBoundAuthenticator\"\n| timechart span=1d dc(userPrincipalName) as User",
+                "queryParameters": {
+                    "earliest": "$global_time.earliest$",
+                    "latest": "$global_time.latest$"
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_2w8nRFj0": {
+            "name": "passKeyDeviceBound copy 1",
+            "options": {
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| search methodsRegistered=\"passKeyDeviceBound\"\n| timechart span=1d dc(userPrincipalName) as User",
+                "queryParameters": {
+                    "earliest": "$global_time.earliest$",
+                    "latest": "$global_time.latest$"
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_8UNeX7aV": {
+            "name": "PreferredAuthenticationMethods",
+            "options": {
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\"\n| table DateTime, _time, userPrincipalName, userDisplayName, userType, isSsprRegistered, isSsprCapable, isMfaRegistered, isPasswordlessCapable, MethodsRegistered, systemPreferredAuthenticationMethods{}, userPreferredMethodForSecondaryAuthentication\n| fillnull value=\"-\"\n| table systemPreferredAuthenticationMethods{}\n| dedup systemPreferredAuthenticationMethods{}",
+                "queryParameters": {
+                    "earliest": "$global_time.earliest$",
+                    "latest": "$global_time.latest$"
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_8suvpn1w": {
+            "name": "ML2CompliantNo",
+            "options": {
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| search methodsRegistered=\"passKeyDeviceBound\" OR methodsRegistered!=\"passKeyDeviceBoundAuthenticator\"\n| timechart span=1d dc(userPrincipalName) as User",
+                "queryParameters": {
+                    "earliest": "$global_time.earliest$",
+                    "latest": "$global_time.latest$"
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_E9nn1kUN": {
+            "name": "UserType",
+            "options": {
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\"\n| table DateTime, _time, userPrincipalName, userDisplayName, userType, isSsprRegistered, isSsprCapable, isMfaRegistered, isPasswordlessCapable, MethodsRegistered, systemPreferredAuthenticationMethods{}, userPreferredMethodForSecondaryAuthentication\n| stats count by userType",
+                "queryParameters": {
+                    "earliest": "$global_time.earliest$",
+                    "latest": "$global_time.latest$"
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_IMAcbAVf": {
+            "name": "passKeyDeviceBound",
+            "options": {
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| search methodsRegistered=\"passKeyDeviceBound\"\n| timechart span=1d dc(userPrincipalName) as User",
+                "queryParameters": {
+                    "earliest": "$global_time.earliest$",
+                    "latest": "$global_time.latest$"
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_LfOk6fLw": {
+            "name": "windowsHelloForBusinessNo",
+            "options": {
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| search methodsRegistered!=\"windowsHelloForBusiness\"\n| timechart span=1d dc(userPrincipalName) as User",
+                "queryParameters": {
+                    "earliest": "$global_time.earliest$",
+                    "latest": "$global_time.latest$"
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_a7kpXEfs": {
+            "name": "DetailView",
+            "options": {
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"*$tkn_userPrincipanName$*\" userDisplayName=\"*$tkn_userDisplayName$*\" userType=\"$tkn_userType$\" isSsprRegistered=\"$tkn_isSsprRegistered$\" isSsprCapable=\"$tkn_isSsprCapable$\" isMfaRegistered=\"$tkn_isMfaRegistered$\" isPasswordlessCapable=\"$tkn_isPasswordlessCapable$\" \n| fillnull value=\"-\" \n| search systemPreferredAuthenticationMethods{}=\"$tkn_systemPreferredAuthenticationMethods$\" userPreferredMethodForSecondaryAuthentication=\"$tkn_userPreferredMethodForSecondaryAuthentication$\" \n| rename methodsRegistered{} as methodsRegistered \n```| eval \"methodsRegistered\" = case(methodsRegistered=\"microsoftAuthenticatorPush\", \"Authenticator – Push\", methodsRegistered=\"email\", \"Email Verification\",methodsRegistered=\"macOsSecureEnclaveKey\", \"macOS Secure Enclave\",methodsRegistered=\"microsoftAuthenticatorPasswordless\", \"Authenticator – Push\",methodsRegistered=\"alternateMobilePhone\", \"Alternate Mobile\"\n    ,methodsRegistered=\"mobilePhone\", \"Mobile Phone (SMS/Call)\",methodsRegistered=\"officePhone\", \"Office Phone\",methodsRegistered=\"passKeyDeviceBound\", \"Passkey (Device‑Bound)\",methodsRegistered=\"passKeyDeviceBoundAuthenticator\", \"Passkey Authenticator\",methodsRegistered=\"softwareOneTimePasscode\", \"Software OTP (TOTP App)\",methodsRegistered=\"windowsHelloForBusiness\", \"Windows Hello for Business\",1=1, methodsRegistered) ```\n| search methodsRegistered=\"$tkn_MethodsRegistered$\" \n| eval AllMethodsRegistered=mvjoin('methodsRegistered', \",\") \n| eval LastUpdatedDateTime = strftime(strptime(replace(lastUpdatedDateTime, \"(\\.\\d{6})\\dZ$$\", \"\\1Z\"),\"%Y-%m-%dT%H:%M:%S.%fZ\"),\"%Y-%m-%d %H:%M:%S\") \n| table LastUpdatedDateTime, userPrincipalName, userDisplayName, userType, isSsprRegistered, isSsprCapable, isMfaRegistered, isPasswordlessCapable, systemPreferredAuthenticationMethods{}, userPreferredMethodForSecondaryAuthentication,AllMethodsRegistered \n| dedup userPrincipalName \n| rename userPrincipalName as \"UPN\", userDisplayName as \"UserName\", userType as \"UserType\", isSsprRegistered as \"SSPRRegiseterd\", isSsprCapable as \"SSPRCapable\", isMfaRegistered as \"MFARegsitered\", isPasswordlessCapable as \"PasswordlessCapable\", AllMethodsRegistered as \"AllMethodsRegistered\", \"systemPreferredAuthenticationMethods{}\" as \"PreferredAuthenticationMethods\", userPreferredMethodForSecondaryAuthentication as \"PreferredMethodSecondaryAuthentication\"",
+                "queryParameters": {
+                    "earliest": "$global_time.earliest$",
+                    "latest": "$global_time.latest$"
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_cHsm5NoM": {
+            "name": "MethodsRegistered",
+            "options": {
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\"\n| table DateTime, _time, userPrincipalName, userDisplayName, userType, isSsprRegistered, isSsprCapable, isMfaRegistered, isPasswordlessCapable, methodsRegistered{}, systemPreferredAuthenticationMethods{}, userPreferredMethodForSecondaryAuthentication\n| fillnull value=\"-\"\n| mvexpand methodsRegistered{}\n| table methodsRegistered{}\n| dedup methodsRegistered{}",
+                "queryParameters": {
+                    "earliest": "$global_time.earliest$",
+                    "latest": "$global_time.latest$"
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_cfOcC6SD": {
+            "name": "passKeyDeviceBoundNo",
+            "options": {
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| search methodsRegistered!=\"passKeyDeviceBound\"\n| timechart span=1d dc(userPrincipalName) as User",
+                "queryParameters": {
+                    "earliest": "$global_time.earliest$",
+                    "latest": "$global_time.latest$"
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_owMeh1Cf": {
+            "name": "PreferredSecondaryMethodAuthentication",
+            "options": {
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\"\n| table DateTime, _time, userPrincipalName, userDisplayName, userType, isSsprRegistered, isSsprCapable, isMfaRegistered, isPasswordlessCapable, MethodsRegistered, systemPreferredAuthenticationMethods{}, userPreferredMethodForSecondaryAuthentication\n| fillnull value=\"-\"\n| table userPreferredMethodForSecondaryAuthentication\n| dedup userPreferredMethodForSecondaryAuthentication",
+                "queryParameters": {
+                    "earliest": "$global_time.earliest$",
+                    "latest": "$global_time.latest$"
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_qVv8zFlM": {
+            "name": "passKeyDeviceBoundAuthenticatorNo",
+            "options": {
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| search methodsRegistered!=\"passKeyDeviceBoundAuthenticator\"\n| timechart span=1d dc(userPrincipalName) as User",
+                "queryParameters": {
+                    "earliest": "$global_time.earliest$",
+                    "latest": "$global_time.latest$"
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_sJfXaIUQ": {
+            "name": "passKeyDeviceBoundNo copy 2",
+            "options": {
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| search methodsRegistered!=\"passKeyDeviceBound\"\n| timechart span=1d dc(userPrincipalName) as User",
+                "queryParameters": {
+                    "earliest": "$global_time.earliest$",
+                    "latest": "$global_time.latest$"
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_t0uTjQek": {
+            "name": "windowsHelloForBusiness",
+            "options": {
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| search methodsRegistered=\"windowsHelloForBusiness\"\n| timechart span=1d dc(userPrincipalName) as User",
+                "queryParameters": {
+                    "earliest": "$global_time.earliest$",
+                    "latest": "$global_time.latest$"
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_wJG87Vwg": {
+            "name": "ML2Compliant",
+            "options": {
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| search methodsRegistered=\"passKeyDeviceBound\" OR methodsRegistered=\"passKeyDeviceBoundAuthenticator\"\n| timechart span=1d dc(userPrincipalName) as User",
+                "queryParameters": {
+                    "earliest": "$global_time.earliest$",
+                    "latest": "$global_time.latest$"
+                }
+            },
+            "type": "ds.search"
+        }
+    },
+    "layout": {
+        "globalInputs": [
+            "input_global_trp"
+        ],
+        "layoutDefinitions": {
+            "layout_1": {
+                "options": {
+                    "backgroundColor": "transparent",
+                    "display": "auto",
+                    "height": 1100,
+                    "width": 1440
+                },
+                "structure": [
+                    {
+                        "item": "viz_WR6xdV9I",
+                        "position": {
+                            "h": 250,
+                            "w": 250,
+                            "x": 0,
+                            "y": 0
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_ssrlsTK8",
+                        "position": {
+                            "h": 250,
+                            "w": 250,
+                            "x": 0,
+                            "y": 250
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_8aPMx2Mi",
+                        "position": {
+                            "h": 250,
+                            "w": 250,
+                            "x": 250,
+                            "y": 0
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_fctyRcaB",
+                        "position": {
+                            "h": 250,
+                            "w": 250,
+                            "x": 250,
+                            "y": 250
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_nnwf7giF",
+                        "position": {
+                            "h": 250,
+                            "w": 250,
+                            "x": 500,
+                            "y": 0
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_Kjs9ePM5",
+                        "position": {
+                            "h": 250,
+                            "w": 250,
+                            "x": 500,
+                            "y": 250
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_NtbjBhDq",
+                        "position": {
+                            "h": 250,
+                            "w": 250,
+                            "x": 750,
+                            "y": 0
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_1nBL8aTm",
+                        "position": {
+                            "h": 250,
+                            "w": 250,
+                            "x": 750,
+                            "y": 250
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "input_ofvdXZ0x",
+                        "position": {
+                            "h": 82,
+                            "w": 200,
+                            "x": 0,
+                            "y": 500
+                        },
+                        "type": "input"
+                    },
+                    {
+                        "item": "input_S1ORxzIN",
+                        "position": {
+                            "h": 82,
+                            "w": 200,
+                            "x": 200,
+                            "y": 500
+                        },
+                        "type": "input"
+                    },
+                    {
+                        "item": "input_MVREqCpo",
+                        "position": {
+                            "h": 82,
+                            "w": 200,
+                            "x": 400,
+                            "y": 500
+                        },
+                        "type": "input"
+                    },
+                    {
+                        "item": "input_hpNhkxje",
+                        "position": {
+                            "h": 82,
+                            "w": 200,
+                            "x": 600,
+                            "y": 500
+                        },
+                        "type": "input"
+                    },
+                    {
+                        "item": "input_I790y77c",
+                        "position": {
+                            "h": 82,
+                            "w": 200,
+                            "x": 800,
+                            "y": 500
+                        },
+                        "type": "input"
+                    },
+                    {
+                        "item": "input_QwzZOY5x",
+                        "position": {
+                            "h": 82,
+                            "w": 200,
+                            "x": 1000,
+                            "y": 500
+                        },
+                        "type": "input"
+                    },
+                    {
+                        "item": "input_C0JD3GeP",
+                        "position": {
+                            "h": 82,
+                            "w": 200,
+                            "x": 1200,
+                            "y": 500
+                        },
+                        "type": "input"
+                    },
+                    {
+                        "item": "input_KLK9g89r",
+                        "position": {
+                            "h": 82,
+                            "w": 200,
+                            "x": 0,
+                            "y": 582
+                        },
+                        "type": "input"
+                    },
+                    {
+                        "item": "input_uvyUTmBs",
+                        "position": {
+                            "h": 82,
+                            "w": 200,
+                            "x": 200,
+                            "y": 582
+                        },
+                        "type": "input"
+                    },
+                    {
+                        "item": "input_HRZbsjhI",
+                        "position": {
+                            "h": 82,
+                            "w": 200,
+                            "x": 400,
+                            "y": 582
+                        },
+                        "type": "input"
+                    },
+                    {
+                        "item": "viz_ctVP7SW6",
+                        "position": {
+                            "h": 440,
+                            "w": 1440,
+                            "x": 0,
+                            "y": 660
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_zVJza7r7",
+                        "position": {
+                            "h": 250,
+                            "w": 440,
+                            "x": 1000,
+                            "y": 0
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_NmGr4sE4",
+                        "position": {
+                            "h": 250,
+                            "w": 440,
+                            "x": 1000,
+                            "y": 250
+                        },
+                        "type": "block"
+                    }
+                ],
+                "type": "absolute"
+            },
+            "layout_8LbohoNs": {
+                "structure": [],
+                "type": "absolute"
+            },
+            "layout_Kats4okz": {
+                "structure": [],
+                "type": "absolute"
+            },
+            "layout_P3i97J12": {
+                "structure": [],
+                "type": "absolute"
+            }
+        },
+        "options": {},
+        "tabs": {
+            "items": [
+                {
+                    "label": "All",
+                    "layoutId": "layout_1"
+                },
+                {
+                    "label": "Admin",
+                    "layoutId": "layout_8LbohoNs"
+                },
+                {
+                    "label": "Developer",
+                    "layoutId": "layout_P3i97J12"
+                },
+                {
+                    "label": "Test",
+                    "layoutId": "layout_Kats4okz"
+                }
+            ]
+        }
+    },
+    "applicationProperties": {
+        "collapseNavigation": false
+    }
+}
