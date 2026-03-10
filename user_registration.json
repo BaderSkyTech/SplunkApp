@@ -138,6 +138,14 @@
             "title": "userDisplayName",
             "type": "input.text"
         },
+        "input_eAUB5pGR": {
+            "options": {
+                "defaultValue": "-24h@h,now",
+                "token": "global_time5"
+            },
+            "title": "Global Time Range",
+            "type": "input.timerange"
+        },
         "input_global_trp": {
             "options": {
                 "defaultValue": "-24h@h,now",
@@ -577,8 +585,8 @@
             "options": {
                 "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"*$tkn_userPrincipanName$*\" userDisplayName=\"*$tkn_userDisplayName$*\" userType=\"$tkn_userType$\" isSsprRegistered=\"$tkn_isSsprRegistered$\" isSsprCapable=\"$tkn_isSsprCapable$\" isMfaRegistered=\"$tkn_isMfaRegistered$\" isPasswordlessCapable=\"$tkn_isPasswordlessCapable$\" \n| fillnull value=\"-\" \n| search systemPreferredAuthenticationMethods{}=\"$tkn_systemPreferredAuthenticationMethods$\" userPreferredMethodForSecondaryAuthentication=\"$tkn_userPreferredMethodForSecondaryAuthentication$\" \n| rename methodsRegistered{} as methodsRegistered \n```| eval \"methodsRegistered\" = case(methodsRegistered=\"microsoftAuthenticatorPush\", \"Authenticator – Push\", methodsRegistered=\"email\", \"Email Verification\",methodsRegistered=\"macOsSecureEnclaveKey\", \"macOS Secure Enclave\",methodsRegistered=\"microsoftAuthenticatorPasswordless\", \"Authenticator – Push\",methodsRegistered=\"alternateMobilePhone\", \"Alternate Mobile\"\n    ,methodsRegistered=\"mobilePhone\", \"Mobile Phone (SMS/Call)\",methodsRegistered=\"officePhone\", \"Office Phone\",methodsRegistered=\"passKeyDeviceBound\", \"Passkey (Device‑Bound)\",methodsRegistered=\"passKeyDeviceBoundAuthenticator\", \"Passkey Authenticator\",methodsRegistered=\"softwareOneTimePasscode\", \"Software OTP (TOTP App)\",methodsRegistered=\"windowsHelloForBusiness\", \"Windows Hello for Business\",1=1, methodsRegistered) ```\n| search methodsRegistered=\"$tkn_MethodsRegistered$\" \n| eval AllMethodsRegistered=mvjoin('methodsRegistered', \",\") \n| eval LastUpdatedDateTime = strftime(strptime(replace(lastUpdatedDateTime, \"(\\.\\d{6})\\dZ$$\", \"\\1Z\"),\"%Y-%m-%dT%H:%M:%S.%fZ\"),\"%Y-%m-%d %H:%M:%S\") \n| table LastUpdatedDateTime, userPrincipalName, userDisplayName, userType, isSsprRegistered, isSsprCapable, isMfaRegistered, isPasswordlessCapable, systemPreferredAuthenticationMethods{}, userPreferredMethodForSecondaryAuthentication,AllMethodsRegistered \n| dedup userPrincipalName \n| rename userPrincipalName as \"UPN\", userDisplayName as \"UserName\", userType as \"UserType\", isSsprRegistered as \"SSPRRegiseterd\", isSsprCapable as \"SSPRCapable\", isMfaRegistered as \"MFARegsitered\", isPasswordlessCapable as \"PasswordlessCapable\", AllMethodsRegistered as \"AllMethodsRegistered\", \"systemPreferredAuthenticationMethods{}\" as \"PreferredAuthenticationMethods\", userPreferredMethodForSecondaryAuthentication as \"PreferredMethodSecondaryAuthentication\"",
                 "queryParameters": {
-                    "earliest": "$global_time.earliest$",
-                    "latest": "$global_time.latest$"
+                    "earliest": "$global_time5.earliest$",
+                    "latest": "$global_time5.latest$"
                 }
             },
             "type": "ds.search"
@@ -929,6 +937,16 @@
                             "w": 440,
                             "x": 1000,
                             "y": 0
+                        },
+                        "type": "input"
+                    },
+                    {
+                        "item": "input_eAUB5pGR",
+                        "position": {
+                            "h": 80,
+                            "w": 380,
+                            "x": 610,
+                            "y": 580
                         },
                         "type": "input"
                     }
