@@ -2,6 +2,14 @@
     "title": "User Registration Details",
     "description": "",
     "inputs": {
+        "input_4T2s3YoN": {
+            "options": {
+                "defaultValue": "-24h@h,now",
+                "token": "global_time1"
+            },
+            "title": "Global Time Range",
+            "type": "input.timerange"
+        },
         "input_C0JD3GeP": {
             "dataSources": {},
             "options": {
@@ -161,6 +169,14 @@
             "title": "Is SSPR Registered",
             "type": "input.dropdown"
         },
+        "input_mIJHHd09": {
+            "options": {
+                "defaultValue": "-24h@h,now",
+                "token": "global_time4"
+            },
+            "title": "Global Time Range",
+            "type": "input.timerange"
+        },
         "input_ofvdXZ0x": {
             "options": {
                 "defaultValue": "*",
@@ -168,6 +184,14 @@
             },
             "title": "UPN",
             "type": "input.text"
+        },
+        "input_ua1GiINz": {
+            "options": {
+                "defaultValue": "-24h@h,now",
+                "token": "global_time3"
+            },
+            "title": "Global Time Range",
+            "type": "input.timerange"
         },
         "input_uvyUTmBs": {
             "dataSources": {
@@ -185,6 +209,14 @@
             },
             "title": "Preferred Authentication Methods",
             "type": "input.dropdown"
+        },
+        "input_yj3EJd5D": {
+            "options": {
+                "defaultValue": "-24h@h,now",
+                "token": "global_time2"
+            },
+            "title": "Global Time Range",
+            "type": "input.timerange"
         }
     },
     "defaults": {
@@ -468,19 +500,19 @@
             "options": {
                 "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| search methodsRegistered=\"passKeyDeviceBoundAuthenticator\"\n| timechart span=1d dc(userPrincipalName) as User",
                 "queryParameters": {
-                    "earliest": "$global_time.earliest$",
-                    "latest": "$global_time.latest$"
+                    "earliest": "$global_time1.earliest$",
+                    "latest": "$global_time1.latest$"
                 }
             },
             "type": "ds.search"
         },
         "ds_2w8nRFj0": {
-            "name": "passKeyDeviceBound copy 1",
+            "name": "passKeyDeviceBoundLine",
             "options": {
                 "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| search methodsRegistered=\"passKeyDeviceBound\"\n| timechart span=1d dc(userPrincipalName) as User",
                 "queryParameters": {
-                    "earliest": "$global_time.earliest$",
-                    "latest": "$global_time.latest$"
+                    "earliest": "$global_time4.earliest$",
+                    "latest": "$global_time4.latest$"
                 }
             },
             "type": "ds.search"
@@ -501,8 +533,8 @@
             "options": {
                 "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| search methodsRegistered=\"passKeyDeviceBound\" OR methodsRegistered!=\"passKeyDeviceBoundAuthenticator\"\n| timechart span=1d dc(userPrincipalName) as User",
                 "queryParameters": {
-                    "earliest": "$global_time.earliest$",
-                    "latest": "$global_time.latest$"
+                    "earliest": "$global_time3.earliest$",
+                    "latest": "$global_time3.latest$"
                 }
             },
             "type": "ds.search"
@@ -534,8 +566,8 @@
             "options": {
                 "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| search methodsRegistered!=\"windowsHelloForBusiness\"\n| timechart span=1d dc(userPrincipalName) as User",
                 "queryParameters": {
-                    "earliest": "$global_time.earliest$",
-                    "latest": "$global_time.latest$"
+                    "earliest": "$global_time2.earliest$",
+                    "latest": "$global_time2.latest$"
                 }
             },
             "type": "ds.search"
@@ -589,19 +621,19 @@
             "options": {
                 "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| search methodsRegistered!=\"passKeyDeviceBoundAuthenticator\"\n| timechart span=1d dc(userPrincipalName) as User",
                 "queryParameters": {
-                    "earliest": "$global_time.earliest$",
-                    "latest": "$global_time.latest$"
+                    "earliest": "$global_time1.earliest$",
+                    "latest": "$global_time1.latest$"
                 }
             },
             "type": "ds.search"
         },
         "ds_sJfXaIUQ": {
-            "name": "passKeyDeviceBoundNo copy 2",
+            "name": "passKeyDeviceBoundNoLine",
             "options": {
                 "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| search methodsRegistered!=\"passKeyDeviceBound\"\n| timechart span=1d dc(userPrincipalName) as User",
                 "queryParameters": {
-                    "earliest": "$global_time.earliest$",
-                    "latest": "$global_time.latest$"
+                    "earliest": "$global_time4.earliest$",
+                    "latest": "$global_time4.latest$"
                 }
             },
             "type": "ds.search"
@@ -611,8 +643,8 @@
             "options": {
                 "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| search methodsRegistered=\"windowsHelloForBusiness\"\n| timechart span=1d dc(userPrincipalName) as User",
                 "queryParameters": {
-                    "earliest": "$global_time.earliest$",
-                    "latest": "$global_time.latest$"
+                    "earliest": "$global_time2.earliest$",
+                    "latest": "$global_time2.latest$"
                 }
             },
             "type": "ds.search"
@@ -622,17 +654,15 @@
             "options": {
                 "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| search methodsRegistered=\"passKeyDeviceBound\" OR methodsRegistered=\"passKeyDeviceBoundAuthenticator\"\n| timechart span=1d dc(userPrincipalName) as User",
                 "queryParameters": {
-                    "earliest": "$global_time.earliest$",
-                    "latest": "$global_time.latest$"
+                    "earliest": "$global_time3.earliest$",
+                    "latest": "$global_time3.latest$"
                 }
             },
             "type": "ds.search"
         }
     },
     "layout": {
-        "globalInputs": [
-            "input_global_trp"
-        ],
+        "globalInputs": [],
         "layoutDefinitions": {
             "layout_1": {
                 "options": {
@@ -645,80 +675,80 @@
                     {
                         "item": "viz_WR6xdV9I",
                         "position": {
-                            "h": 250,
+                            "h": 210,
                             "w": 250,
                             "x": 0,
-                            "y": 0
+                            "y": 80
                         },
                         "type": "block"
                     },
                     {
                         "item": "viz_ssrlsTK8",
                         "position": {
-                            "h": 250,
+                            "h": 210,
                             "w": 250,
                             "x": 0,
-                            "y": 250
+                            "y": 290
                         },
                         "type": "block"
                     },
                     {
                         "item": "viz_8aPMx2Mi",
                         "position": {
-                            "h": 250,
+                            "h": 210,
                             "w": 250,
                             "x": 250,
-                            "y": 0
+                            "y": 80
                         },
                         "type": "block"
                     },
                     {
                         "item": "viz_fctyRcaB",
                         "position": {
-                            "h": 250,
+                            "h": 210,
                             "w": 250,
                             "x": 250,
-                            "y": 250
+                            "y": 290
                         },
                         "type": "block"
                     },
                     {
                         "item": "viz_nnwf7giF",
                         "position": {
-                            "h": 250,
+                            "h": 210,
                             "w": 250,
                             "x": 500,
-                            "y": 0
+                            "y": 80
                         },
                         "type": "block"
                     },
                     {
                         "item": "viz_Kjs9ePM5",
                         "position": {
-                            "h": 250,
+                            "h": 210,
                             "w": 250,
                             "x": 500,
-                            "y": 250
+                            "y": 290
                         },
                         "type": "block"
                     },
                     {
                         "item": "viz_NtbjBhDq",
                         "position": {
-                            "h": 250,
+                            "h": 210,
                             "w": 250,
                             "x": 750,
-                            "y": 0
+                            "y": 80
                         },
                         "type": "block"
                     },
                     {
                         "item": "viz_1nBL8aTm",
                         "position": {
-                            "h": 250,
+                            "h": 210,
                             "w": 250,
                             "x": 750,
-                            "y": 250
+                            "y": 290
                         },
                         "type": "block"
                     },
@@ -835,22 +865,72 @@
                     {
                         "item": "viz_zVJza7r7",
                         "position": {
-                            "h": 250,
+                            "h": 210,
                             "w": 440,
                             "x": 1000,
-                            "y": 0
+                            "y": 80
                         },
                         "type": "block"
                     },
                     {
                         "item": "viz_NmGr4sE4",
                         "position": {
-                            "h": 250,
+                            "h": 210,
                             "w": 440,
                             "x": 1000,
-                            "y": 250
+                            "y": 290
                         },
                         "type": "block"
+                    },
+                    {
+                        "item": "input_global_trp",
+                        "position": {
+                            "h": 80,
+                            "w": 250,
+                            "x": 0,
+                            "y": 0
+                        },
+                        "type": "input"
+                    },
+                    {
+                        "item": "input_4T2s3YoN",
+                        "position": {
+                            "h": 80,
+                            "w": 250,
+                            "x": 250,
+                            "y": 0
+                        },
+                        "type": "input"
+                    },
+                    {
+                        "item": "input_yj3EJd5D",
+                        "position": {
+                            "h": 80,
+                            "w": 250,
+                            "x": 500,
+                            "y": 0
+                        },
+                        "type": "input"
+                    },
+                    {
+                        "item": "input_ua1GiINz",
+                        "position": {
+                            "h": 80,
+                            "w": 250,
+                            "x": 750,
+                            "y": 0
+                        },
+                        "type": "input"
+                    },
+                    {
+                        "item": "input_mIJHHd09",
+                        "position": {
+                            "h": 80,
+                            "w": 440,
+                            "x": 1000,
+                            "y": 0
+                        },
+                        "type": "input"
                     }
                 ],
                 "type": "absolute"
