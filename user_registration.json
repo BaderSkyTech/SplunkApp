@@ -1,14 +1,40 @@
 {
-    "title": "User Registration Details",
+    "title": "User Registration Details New",
     "description": "",
     "inputs": {
         "input_4T2s3YoN": {
             "options": {
-                "defaultValue": "-24h@h,now",
+                "defaultValue": "-7d@h,now",
                 "token": "global_time1"
             },
             "title": "Global Time Range",
             "type": "input.timerange"
+        },
+        "input_6HYsiVuL": {
+            "options": {
+                "defaultValue": "*",
+                "items": [
+                    {
+                        "label": "All",
+                        "value": "*"
+                    },
+                    {
+                        "label": "Admin",
+                        "value": "a_*"
+                    },
+                    {
+                        "label": "Dev",
+                        "value": "d_*"
+                    },
+                    {
+                        "label": "Test",
+                        "value": "t_*"
+                    }
+                ],
+                "token": "tkn_role"
+            },
+            "title": "Role",
+            "type": "input.dropdown"
         },
         "input_C0JD3GeP": {
             "dataSources": {},
@@ -140,7 +166,7 @@
         },
         "input_eAUB5pGR": {
             "options": {
-                "defaultValue": "-24h@h,now",
+                "defaultValue": "-7d@h,now",
                 "token": "global_time5"
             },
             "title": "Global Time Range",
@@ -148,7 +174,7 @@
         },
         "input_global_trp": {
             "options": {
-                "defaultValue": "-24h@h,now",
+                "defaultValue": "-7d@h,now",
                 "token": "global_time"
             },
             "title": "Global Time Range",
@@ -179,7 +205,7 @@
         },
         "input_mIJHHd09": {
             "options": {
-                "defaultValue": "-24h@h,now",
+                "defaultValue": "-7d@h,now",
                 "token": "global_time4"
             },
             "title": "Global Time Range",
@@ -195,7 +221,7 @@
         },
         "input_ua1GiINz": {
             "options": {
-                "defaultValue": "-24h@h,now",
+                "defaultValue": "-7d@h,now",
                 "token": "global_time3"
             },
             "title": "Global Time Range",
@@ -220,7 +246,7 @@
         },
         "input_yj3EJd5D": {
             "options": {
-                "defaultValue": "-24h@h,now",
+                "defaultValue": "-7d@h,now",
                 "token": "global_time2"
             },
             "title": "Global Time Range",
@@ -506,7 +532,7 @@
         "ds_0laEghDi": {
             "name": "passKeyDeviceBoundAuthenticator",
             "options": {
-                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| search methodsRegistered=\"passKeyDeviceBoundAuthenticator\"\n| timechart span=1d dc(userPrincipalName) as User",
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"*$tkn_role$*\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| search methodsRegistered=\"passKeyDeviceBoundAuthenticator\"\n| timechart span=1d dc(userPrincipalName) as User",
                 "queryParameters": {
                     "earliest": "$global_time1.earliest$",
                     "latest": "$global_time1.latest$"
@@ -517,7 +543,7 @@
         "ds_2w8nRFj0": {
             "name": "passKeyDeviceBoundLine",
             "options": {
-                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| search methodsRegistered=\"passKeyDeviceBound\"\n| timechart span=1d dc(userPrincipalName) as User",
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"*$tkn_role$*\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| search methodsRegistered=\"passKeyDeviceBound\" OR methodsRegistered=\"passKeyDeviceBoundAuthenticator\"\n| timechart span=1d dc(userPrincipalName) as User",
                 "queryParameters": {
                     "earliest": "$global_time4.earliest$",
                     "latest": "$global_time4.latest$"
@@ -539,7 +565,7 @@
         "ds_8suvpn1w": {
             "name": "ML2CompliantNo",
             "options": {
-                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| search methodsRegistered=\"passKeyDeviceBound\" OR methodsRegistered!=\"passKeyDeviceBoundAuthenticator\"\n| timechart span=1d dc(userPrincipalName) as User",
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"*$tkn_role$*\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| search methodsRegistered=\"passKeyDeviceBound\" OR methodsRegistered!=\"passKeyDeviceBoundAuthenticator\"\n| timechart span=1d dc(userPrincipalName) as User",
                 "queryParameters": {
                     "earliest": "$global_time3.earliest$",
                     "latest": "$global_time3.latest$"
@@ -561,7 +587,7 @@
         "ds_IMAcbAVf": {
             "name": "passKeyDeviceBound",
             "options": {
-                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| search methodsRegistered=\"passKeyDeviceBound\"\n| timechart span=1d dc(userPrincipalName) as User",
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"*$tkn_role$*\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| search methodsRegistered=\"passKeyDeviceBound\"\n| timechart span=1d dc(userPrincipalName) as User",
                 "queryParameters": {
                     "earliest": "$global_time.earliest$",
                     "latest": "$global_time.latest$"
@@ -572,7 +598,7 @@
         "ds_LfOk6fLw": {
             "name": "windowsHelloForBusinessNo",
             "options": {
-                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| search methodsRegistered!=\"windowsHelloForBusiness\"\n| timechart span=1d dc(userPrincipalName) as User",
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"*$tkn_role$*\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| search methodsRegistered!=\"windowsHelloForBusiness\"\n| timechart span=1d dc(userPrincipalName) as User",
                 "queryParameters": {
                     "earliest": "$global_time2.earliest$",
                     "latest": "$global_time2.latest$"
@@ -583,7 +609,7 @@
         "ds_a7kpXEfs": {
             "name": "DetailView",
             "options": {
-                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"*$tkn_userPrincipanName$*\" userDisplayName=\"*$tkn_userDisplayName$*\" userType=\"$tkn_userType$\" isSsprRegistered=\"$tkn_isSsprRegistered$\" isSsprCapable=\"$tkn_isSsprCapable$\" isMfaRegistered=\"$tkn_isMfaRegistered$\" isPasswordlessCapable=\"$tkn_isPasswordlessCapable$\" \n| fillnull value=\"-\" \n| search systemPreferredAuthenticationMethods{}=\"$tkn_systemPreferredAuthenticationMethods$\" userPreferredMethodForSecondaryAuthentication=\"$tkn_userPreferredMethodForSecondaryAuthentication$\" \n| rename methodsRegistered{} as methodsRegistered \n```| eval \"methodsRegistered\" = case(methodsRegistered=\"microsoftAuthenticatorPush\", \"Authenticator – Push\", methodsRegistered=\"email\", \"Email Verification\",methodsRegistered=\"macOsSecureEnclaveKey\", \"macOS Secure Enclave\",methodsRegistered=\"microsoftAuthenticatorPasswordless\", \"Authenticator – Push\",methodsRegistered=\"alternateMobilePhone\", \"Alternate Mobile\"\n    ,methodsRegistered=\"mobilePhone\", \"Mobile Phone (SMS/Call)\",methodsRegistered=\"officePhone\", \"Office Phone\",methodsRegistered=\"passKeyDeviceBound\", \"Passkey (Device‑Bound)\",methodsRegistered=\"passKeyDeviceBoundAuthenticator\", \"Passkey Authenticator\",methodsRegistered=\"softwareOneTimePasscode\", \"Software OTP (TOTP App)\",methodsRegistered=\"windowsHelloForBusiness\", \"Windows Hello for Business\",1=1, methodsRegistered) ```\n| search methodsRegistered=\"$tkn_MethodsRegistered$\" \n| eval AllMethodsRegistered=mvjoin('methodsRegistered', \",\") \n| eval LastUpdatedDateTime = strftime(strptime(replace(lastUpdatedDateTime, \"(\\.\\d{6})\\dZ$$\", \"\\1Z\"),\"%Y-%m-%dT%H:%M:%S.%fZ\"),\"%Y-%m-%d %H:%M:%S\") \n| table LastUpdatedDateTime, userPrincipalName, userDisplayName, userType, isSsprRegistered, isSsprCapable, isMfaRegistered, isPasswordlessCapable, systemPreferredAuthenticationMethods{}, userPreferredMethodForSecondaryAuthentication,AllMethodsRegistered \n| dedup userPrincipalName \n| rename userPrincipalName as \"UPN\", userDisplayName as \"UserName\", userType as \"UserType\", isSsprRegistered as \"SSPRRegiseterd\", isSsprCapable as \"SSPRCapable\", isMfaRegistered as \"MFARegsitered\", isPasswordlessCapable as \"PasswordlessCapable\", AllMethodsRegistered as \"AllMethodsRegistered\", \"systemPreferredAuthenticationMethods{}\" as \"PreferredAuthenticationMethods\", userPreferredMethodForSecondaryAuthentication as \"PreferredMethodSecondaryAuthentication\"",
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"*$tkn_userPrincipanName$*\" userDisplayName=\"*$tkn_userDisplayName$*\" userType=\"$tkn_userType$\" isSsprRegistered=\"$tkn_isSsprRegistered$\" isSsprCapable=\"$tkn_isSsprCapable$\" isMfaRegistered=\"$tkn_isMfaRegistered$\" isPasswordlessCapable=\"$tkn_isPasswordlessCapable$\" userPrincipalName=\"*$tkn_role$*\"\n| fillnull value=\"-\" \n| search systemPreferredAuthenticationMethods{}=\"$tkn_systemPreferredAuthenticationMethods$\" userPreferredMethodForSecondaryAuthentication=\"$tkn_userPreferredMethodForSecondaryAuthentication$\" \n| rename methodsRegistered{} as methodsRegistered \n```| eval \"methodsRegistered\" = case(methodsRegistered=\"microsoftAuthenticatorPush\", \"Authenticator – Push\", methodsRegistered=\"email\", \"Email Verification\",methodsRegistered=\"macOsSecureEnclaveKey\", \"macOS Secure Enclave\",methodsRegistered=\"microsoftAuthenticatorPasswordless\", \"Authenticator – Push\",methodsRegistered=\"alternateMobilePhone\", \"Alternate Mobile\"\n    ,methodsRegistered=\"mobilePhone\", \"Mobile Phone (SMS/Call)\",methodsRegistered=\"officePhone\", \"Office Phone\",methodsRegistered=\"passKeyDeviceBound\", \"Passkey (Device‑Bound)\",methodsRegistered=\"passKeyDeviceBoundAuthenticator\", \"Passkey Authenticator\",methodsRegistered=\"softwareOneTimePasscode\", \"Software OTP (TOTP App)\",methodsRegistered=\"windowsHelloForBusiness\", \"Windows Hello for Business\",1=1, methodsRegistered) ```\n| search methodsRegistered=\"$tkn_MethodsRegistered$\" \n| eval AllMethodsRegistered=mvjoin('methodsRegistered', \",\") \n| eval LastUpdatedDateTime = strftime(strptime(replace(lastUpdatedDateTime, \"(\\.\\d{6})\\dZ$$\", \"\\1Z\"),\"%Y-%m-%dT%H:%M:%S.%fZ\"),\"%Y-%m-%d %H:%M:%S\") \n| table LastUpdatedDateTime, userPrincipalName, userDisplayName, userType, isSsprRegistered, isSsprCapable, isMfaRegistered, isPasswordlessCapable, systemPreferredAuthenticationMethods{}, userPreferredMethodForSecondaryAuthentication,AllMethodsRegistered \n| dedup userPrincipalName \n| rename userPrincipalName as \"UPN\", userDisplayName as \"UserName\", userType as \"UserType\", isSsprRegistered as \"SSPRRegiseterd\", isSsprCapable as \"SSPRCapable\", isMfaRegistered as \"MFARegsitered\", isPasswordlessCapable as \"PasswordlessCapable\", AllMethodsRegistered as \"AllMethodsRegistered\", \"systemPreferredAuthenticationMethods{}\" as \"PreferredAuthenticationMethods\", userPreferredMethodForSecondaryAuthentication as \"PreferredMethodSecondaryAuthentication\"",
                 "queryParameters": {
                     "earliest": "$global_time5.earliest$",
                     "latest": "$global_time5.latest$"
@@ -605,7 +631,7 @@
         "ds_cfOcC6SD": {
             "name": "passKeyDeviceBoundNo",
             "options": {
-                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| search methodsRegistered!=\"passKeyDeviceBound\"\n| timechart span=1d dc(userPrincipalName) as User",
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"*$tkn_role$*\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| search methodsRegistered!=\"passKeyDeviceBound\"\n| timechart span=1d dc(userPrincipalName) as User",
                 "queryParameters": {
                     "earliest": "$global_time.earliest$",
                     "latest": "$global_time.latest$"
@@ -627,7 +653,7 @@
         "ds_qVv8zFlM": {
             "name": "passKeyDeviceBoundAuthenticatorNo",
             "options": {
-                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| search methodsRegistered!=\"passKeyDeviceBoundAuthenticator\"\n| timechart span=1d dc(userPrincipalName) as User",
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"*$tkn_role$*\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| search methodsRegistered!=\"passKeyDeviceBoundAuthenticator\"\n| timechart span=1d dc(userPrincipalName) as User",
                 "queryParameters": {
                     "earliest": "$global_time1.earliest$",
                     "latest": "$global_time1.latest$"
@@ -638,7 +664,7 @@
         "ds_sJfXaIUQ": {
             "name": "passKeyDeviceBoundNoLine",
             "options": {
-                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| search methodsRegistered!=\"passKeyDeviceBound\"\n| timechart span=1d dc(userPrincipalName) as User",
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"*$tkn_role$*\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| search methodsRegistered!=\"passKeyDeviceBound\" AND methodsRegistered!=\"passKeyDeviceBoundAuthenticator\"\n| timechart span=1d dc(userPrincipalName) as User",
                 "queryParameters": {
                     "earliest": "$global_time4.earliest$",
                     "latest": "$global_time4.latest$"
@@ -649,7 +675,7 @@
         "ds_t0uTjQek": {
             "name": "windowsHelloForBusiness",
             "options": {
-                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| search methodsRegistered=\"windowsHelloForBusiness\"\n| timechart span=1d dc(userPrincipalName) as User",
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"*$tkn_role$*\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| search methodsRegistered=\"windowsHelloForBusiness\"\n| timechart span=1d dc(userPrincipalName) as User",
                 "queryParameters": {
                     "earliest": "$global_time2.earliest$",
                     "latest": "$global_time2.latest$"
@@ -660,7 +686,7 @@
         "ds_wJG87Vwg": {
             "name": "ML2Compliant",
             "options": {
-                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| search methodsRegistered=\"passKeyDeviceBound\" OR methodsRegistered=\"passKeyDeviceBoundAuthenticator\"\n| timechart span=1d dc(userPrincipalName) as User",
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"*$tkn_role$*\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| search methodsRegistered=\"passKeyDeviceBound\" OR methodsRegistered=\"passKeyDeviceBoundAuthenticator\"\n| timechart span=1d dc(userPrincipalName) as User",
                 "queryParameters": {
                     "earliest": "$global_time3.earliest$",
                     "latest": "$global_time3.latest$"
@@ -670,7 +696,9 @@
         }
     },
     "layout": {
-        "globalInputs": [],
+        "globalInputs": [
+            "input_6HYsiVuL"
+        ],
         "layoutDefinitions": {
             "layout_1": {
                 "options": {
@@ -952,18 +980,6 @@
                     }
                 ],
                 "type": "absolute"
-            },
-            "layout_8LbohoNs": {
-                "structure": [],
-                "type": "absolute"
-            },
-            "layout_Kats4okz": {
-                "structure": [],
-                "type": "absolute"
-            },
-            "layout_P3i97J12": {
-                "structure": [],
-                "type": "absolute"
             }
         },
         "options": {},
@@ -972,18 +988,6 @@
                 {
                     "label": "All",
                     "layoutId": "layout_1"
-                },
-                {
-                    "label": "Admin",
-                    "layoutId": "layout_8LbohoNs"
-                },
-                {
-                    "label": "Developer",
-                    "layoutId": "layout_P3i97J12"
-                },
-                {
-                    "label": "Test",
-                    "layoutId": "layout_Kats4okz"
                 }
             ]
         }
