@@ -1,15 +1,7 @@
 {
-    "title": "User Registration Details New",
+    "title": "User Registration Details",
     "description": "",
     "inputs": {
-        "input_4T2s3YoN": {
-            "options": {
-                "defaultValue": "-7d@h,now",
-                "token": "global_time1"
-            },
-            "title": "Global Time Range",
-            "type": "input.timerange"
-        },
         "input_6HYsiVuL": {
             "options": {
                 "defaultValue": "*",
@@ -33,7 +25,7 @@
                 ],
                 "token": "tkn_role"
             },
-            "title": "Role",
+            "title": "Scope",
             "type": "input.dropdown"
         },
         "input_C0JD3GeP": {
@@ -59,9 +51,18 @@
             "title": "is Passwordless Capable",
             "type": "input.dropdown"
         },
+        "input_H38WvLyS": {
+            "options": {
+                "backgroundColor": "#302c2c",
+                "defaultValue": "-7d@h,now",
+                "token": "global_time2"
+            },
+            "title": "Date Range",
+            "type": "input.timerange"
+        },
         "input_HRZbsjhI": {
             "dataSources": {
-                "primary": "ds_owMeh1Cf"
+                "primary": "ds_NqN8drSA"
             },
             "options": {
                 "defaultValue": "*",
@@ -99,9 +100,18 @@
             "title": "Is SSPR Capable",
             "type": "input.dropdown"
         },
+        "input_JrdTjdM4": {
+            "options": {
+                "backgroundColor": "#302c2c",
+                "defaultValue": "-7d@h,now",
+                "token": "global_time1"
+            },
+            "title": "Date Range",
+            "type": "input.timerange"
+        },
         "input_KLK9g89r": {
             "dataSources": {
-                "primary": "ds_cHsm5NoM"
+                "primary": "ds_RRZJACzW"
             },
             "options": {
                 "defaultValue": "*",
@@ -118,7 +128,7 @@
         },
         "input_MVREqCpo": {
             "dataSources": {
-                "primary": "ds_E9nn1kUN"
+                "primary": "ds_RlCrIvJr"
             },
             "options": {
                 "defaultValue": "*",
@@ -161,7 +171,7 @@
                 "defaultValue": "*",
                 "token": "tkn_userDisplayName"
             },
-            "title": "userDisplayName",
+            "title": "User Display Name",
             "type": "input.text"
         },
         "input_eAUB5pGR": {
@@ -169,15 +179,34 @@
                 "defaultValue": "-7d@h,now",
                 "token": "global_time5"
             },
-            "title": "Global Time Range",
+            "title": "Date Range",
+            "type": "input.timerange"
+        },
+        "input_fLwI4YSu": {
+            "options": {
+                "backgroundColor": "#302c2c",
+                "defaultValue": "-7d@h,now",
+                "token": "token_dCJ5gUsp"
+            },
+            "title": "Date Range",
             "type": "input.timerange"
         },
         "input_global_trp": {
             "options": {
+                "backgroundColor": "#302c2c",
                 "defaultValue": "-7d@h,now",
                 "token": "global_time"
             },
-            "title": "Global Time Range",
+            "title": "Date Range",
+            "type": "input.timerange"
+        },
+        "input_hf1kkyxZ": {
+            "options": {
+                "backgroundColor": "#302c2c",
+                "defaultValue": "-7d@h,now",
+                "token": "global_time3"
+            },
+            "title": "Date Range",
             "type": "input.timerange"
         },
         "input_hpNhkxje": {
@@ -203,14 +232,6 @@
             "title": "Is SSPR Registered",
             "type": "input.dropdown"
         },
-        "input_mIJHHd09": {
-            "options": {
-                "defaultValue": "-7d@h,now",
-                "token": "global_time4"
-            },
-            "title": "Global Time Range",
-            "type": "input.timerange"
-        },
         "input_ofvdXZ0x": {
             "options": {
                 "defaultValue": "*",
@@ -219,17 +240,9 @@
             "title": "UPN",
             "type": "input.text"
         },
-        "input_ua1GiINz": {
-            "options": {
-                "defaultValue": "-7d@h,now",
-                "token": "global_time3"
-            },
-            "title": "Global Time Range",
-            "type": "input.timerange"
-        },
         "input_uvyUTmBs": {
             "dataSources": {
-                "primary": "ds_8UNeX7aV"
+                "primary": "ds_LDJ40FtQ"
             },
             "options": {
                 "defaultValue": "*",
@@ -243,14 +256,6 @@
             },
             "title": "Preferred Authentication Methods",
             "type": "input.dropdown"
-        },
-        "input_yj3EJd5D": {
-            "options": {
-                "defaultValue": "-7d@h,now",
-                "token": "global_time2"
-            },
-            "title": "Global Time Range",
-            "type": "input.timerange"
         }
     },
     "defaults": {
@@ -279,31 +284,49 @@
         }
     },
     "visualizations": {
-        "viz_1nBL8aTm": {
+        "viz_09AeIQxz": {
+            "containerOptions": {
+                "description": {
+                    "color": "#ffffff"
+                },
+                "title": {
+                    "color": "#ffffff"
+                }
+            },
             "context": {
                 "backgroundColorEditorConfig": [
                     {
                         "to": 20,
-                        "value": "#cba700"
+                        "value": "#d94e17"
                     },
                     {
                         "from": 20,
-                        "value": "#cba700"
+                        "value": "#d94e17"
                     }
                 ]
             },
             "dataSources": {
-                "primary": "ds_8suvpn1w"
+                "primary": "ds_FOtF78l8"
             },
+            "eventHandlers": [],
             "options": {
                 "backgroundColor": "> majorValue | rangeValue(backgroundColorEditorConfig)",
-                "trendColor": "#dc4e41",
-                "trendDisplay": "percent"
+                "shouldAbbreviateMajorValue": true,
+                "sparklineDisplay": "off",
+                "trendDisplay": "off"
             },
-            "title": "ML2 Not Compliant",
+            "title": "Total",
             "type": "splunk.singlevalue"
         },
-        "viz_8aPMx2Mi": {
+        "viz_1PmcEWg7": {
+            "containerOptions": {
+                "description": {
+                    "color": "#ffffff"
+                },
+                "title": {
+                    "color": "#ffffff"
+                }
+            },
             "context": {
                 "backgroundColorEditorConfig": [
                     {
@@ -317,87 +340,237 @@
                 ]
             },
             "dataSources": {
-                "primary": "ds_0laEghDi"
+                "primary": "ds_3VoM7nGy"
             },
+            "eventHandlers": [],
             "options": {
                 "backgroundColor": "> majorValue | rangeValue(backgroundColorEditorConfig)",
-                "trendDisplay": "percent"
+                "shouldAbbreviateMajorValue": true,
+                "sparklineDisplay": "off",
+                "trendDisplay": "off"
             },
-            "title": "Passkey in MS Auth Registered",
+            "title": "Registered",
             "type": "splunk.singlevalue"
         },
-        "viz_Kjs9ePM5": {
+        "viz_3Z3FVPHx": {
+            "containerOptions": {
+                "description": {
+                    "color": "#ffffff"
+                },
+                "title": {
+                    "color": "#ffffff"
+                }
+            },
             "context": {
                 "backgroundColorEditorConfig": [
                     {
-                        "to": 20,
-                        "value": "#cba700"
+                        "to": 80,
+                        "value": "#D41F1F"
                     },
                     {
-                        "from": 20,
-                        "value": "#cba700"
+                        "from": 80,
+                        "value": "#d41f1f"
                     }
                 ]
             },
             "dataSources": {
-                "primary": "ds_LfOk6fLw"
+                "primary": "ds_cHUym5ok"
             },
+            "eventHandlers": [],
             "options": {
                 "backgroundColor": "> majorValue | rangeValue(backgroundColorEditorConfig)",
-                "trendColor": "#dc4e41",
-                "trendDisplay": "percent"
+                "shouldAbbreviateMajorValue": true,
+                "sparklineDisplay": "off",
+                "trendDisplay": "off"
             },
-            "title": "Windows Hello Not Registered",
+            "title": "No",
             "type": "splunk.singlevalue"
         },
-        "viz_NmGr4sE4": {
-            "containerOptions": {},
-            "context": {
-                "backgroundColorEditorConfig": [
-                    {
-                        "to": 20,
-                        "value": "#cba700"
-                    },
-                    {
-                        "from": 20,
-                        "value": "#cba700"
-                    }
-                ]
+        "viz_3sLD5v2Q": {
+            "containerOptions": {
+                "description": {
+                    "color": "#ffffff"
+                },
+                "title": {
+                    "color": "#ffffff"
+                }
             },
             "dataSources": {
-                "primary": "ds_sJfXaIUQ"
+                "primary": "ds_GJnIx9oj"
             },
-            "options": {},
+            "options": {
+                "backgroundColor": "#302c2c",
+                "legendDisplay": "bottom"
+            },
             "showLastUpdated": false,
             "showProgressBar": true,
-            "title": "Security Key Not Registered",
-            "type": "splunk.line"
+            "title": "ML2 Compliant",
+            "type": "splunk.area"
         },
-        "viz_NtbjBhDq": {
+        "viz_5r65PA4l": {
+            "dataSources": {
+                "primary": "ds_QLo79XFA"
+            },
+            "options": {
+                "align": "left",
+                "backgroundColor": "#302c2c",
+                "shouldAbbreviateMajorValue": true
+            },
+            "type": "splunk.singlevalue"
+        },
+        "viz_AlCY9C2n": {
+            "containerOptions": {
+                "description": {
+                    "color": "#ffffff"
+                },
+                "title": {
+                    "color": "#ffffff"
+                }
+            },
+            "dataSources": {
+                "primary": "ds_2w8nRFj0"
+            },
+            "options": {
+                "backgroundColor": "#302c2c",
+                "legendDisplay": "bottom"
+            },
+            "showLastUpdated": false,
+            "showProgressBar": true,
+            "title": "Security Key",
+            "type": "splunk.area"
+        },
+        "viz_AmzgItG5": {
+            "dataSources": {
+                "primary": "ds_6obPtKes"
+            },
+            "options": {
+                "backgroundColor": "#302c2c",
+                "legendDisplay": "bottom"
+            },
+            "title": "Method Registered",
+            "type": "splunk.bar"
+        },
+        "viz_KuWd5vPQ": {
+            "options": {
+                "backgroundColor": "#302c2c",
+                "fontColor": "#ffffff",
+                "markdown": ""
+            },
+            "type": "splunk.markdown"
+        },
+        "viz_MM1BJkCP": {
+            "containerOptions": {
+                "description": {
+                    "color": "#ffffff"
+                },
+                "title": {
+                    "color": "#ffffff"
+                }
+            },
             "context": {
                 "backgroundColorEditorConfig": [
                     {
-                        "to": 80,
-                        "value": "#118832"
+                        "to": 20,
+                        "value": "#D41F1F"
                     },
                     {
-                        "from": 80,
-                        "value": "#118832"
+                        "from": 20,
+                        "value": "#d41f1f"
                     }
                 ]
             },
             "dataSources": {
-                "primary": "ds_wJG87Vwg"
+                "primary": "ds_TS04eyK0"
             },
+            "eventHandlers": [],
             "options": {
                 "backgroundColor": "> majorValue | rangeValue(backgroundColorEditorConfig)",
-                "trendColor": "#dc4e41",
-                "trendDisplay": "percent"
+                "shouldAbbreviateMajorValue": true,
+                "sparklineDisplay": "off",
+                "trendDisplay": "off"
             },
-            "title": "ML2 Compliant",
+            "title": "Not Registered",
             "type": "splunk.singlevalue"
         },
+        "viz_QlIQNnUq": {
+            "options": {
+                "fillColor": "#302c2c",
+                "strokeColor": "#302c2c"
+            },
+            "type": "splunk.rectangle"
+        },
+        "viz_TLN1YDOd": {
+            "containerOptions": {
+                "description": {
+                    "color": "#ffffff"
+                },
+                "title": {
+                    "color": "#ffffff"
+                }
+            },
+            "dataSources": {
+                "primary": "ds_YFfxedTH"
+            },
+            "options": {
+                "backgroundColor": "#302c2c",
+                "legendDisplay": "bottom"
+            },
+            "showLastUpdated": false,
+            "showProgressBar": true,
+            "title": "Passkey in MS Auth",
+            "type": "splunk.area"
+        },
+        "viz_UIBRugGT": {
+            "containerOptions": {
+                "description": {
+                    "color": "#ffffff"
+                },
+                "title": {
+                    "color": "#ffffff"
+                }
+            },
+            "context": {
+                "backgroundColorEditorConfig": [
+                    {
+                        "to": 20,
+                        "value": "#D41F1F"
+                    },
+                    {
+                        "from": 20,
+                        "value": "#d41f1f"
+                    }
+                ]
+            },
+            "dataSources": {
+                "primary": "ds_i4TMqwzR"
+            },
+            "eventHandlers": [],
+            "options": {
+                "backgroundColor": "> majorValue | rangeValue(backgroundColorEditorConfig)",
+                "shouldAbbreviateMajorValue": true,
+                "sparklineDisplay": "off",
+                "trendDisplay": "off"
+            },
+            "title": "Not Registered",
+            "type": "splunk.singlevalue"
+        },
+        "viz_V82ZgrfV": {
+            "options": {
+                "backgroundColor": "#302c2c",
+                "fontColor": "#ffffff",
+                "markdown": ""
+            },
+            "type": "splunk.markdown"
+        },
         "viz_WR6xdV9I": {
+            "containerOptions": {
+                "description": {
+                    "color": "#ffffff"
+                },
+                "title": {
+                    "color": "#ffffff"
+                }
+            },
             "context": {
                 "backgroundColorEditorConfig": [
                     {
@@ -416,46 +589,85 @@
             "eventHandlers": [],
             "options": {
                 "backgroundColor": "> majorValue | rangeValue(backgroundColorEditorConfig)",
-                "majorColor": "#000000",
-                "shouldAbbreviateTrendValue": true,
-                "trendColor": "#dc4e41",
-                "trendDisplay": "percent"
+                "shouldAbbreviateMajorValue": true,
+                "sparklineDisplay": "off",
+                "trendDisplay": "off"
             },
-            "title": "Security Key Registered",
+            "title": "Registered",
             "type": "splunk.singlevalue"
+        },
+        "viz_cFZw3uPl": {
+            "options": {
+                "fontColor": "#ffffff",
+                "markdown": ""
+            },
+            "type": "splunk.markdown"
         },
         "viz_ctVP7SW6": {
             "dataSources": {
                 "primary": "ds_a7kpXEfs"
             },
-            "options": {},
+            "options": {
+                "backgroundColor": "#302c2c",
+                "tableFormat": {
+                    "headerBackgroundColor": "> backgroundColor | setColorChannel(tableHeaderBackgroundColorConfig)",
+                    "headerColor": "> headerBackgroundColor | maxContrast(tableRowColorMaxContrast)",
+                    "rowBackgroundColors": "> table | seriesByIndex(0) | pick(tableAltRowBackgroundColorsByBackgroundColor)",
+                    "rowColors": "> rowBackgroundColors | maxContrast(tableRowColorMaxContrast)"
+                }
+            },
             "type": "splunk.table"
         },
-        "viz_fctyRcaB": {
+        "viz_cvyu8G0k": {
+            "options": {
+                "fontColor": "#ffffff",
+                "markdown": ""
+            },
+            "type": "splunk.markdown"
+        },
+        "viz_e5R7NRqi": {
+            "containerOptions": {
+                "description": {
+                    "color": "#ffffff"
+                },
+                "title": {
+                    "color": "#ffffff"
+                }
+            },
             "context": {
                 "backgroundColorEditorConfig": [
                     {
                         "to": 20,
-                        "value": "#cba700"
+                        "value": "#d94e17"
                     },
                     {
                         "from": 20,
-                        "value": "#cba700"
+                        "value": "#d94e17"
                     }
                 ]
             },
             "dataSources": {
-                "primary": "ds_qVv8zFlM"
+                "primary": "ds_mEQOhVzS"
             },
+            "eventHandlers": [],
             "options": {
                 "backgroundColor": "> majorValue | rangeValue(backgroundColorEditorConfig)",
-                "trendColor": "#dc4e41",
-                "trendDisplay": "percent"
+                "shouldAbbreviateMajorValue": true,
+                "sparklineDisplay": "off",
+                "trendDisplay": "off"
             },
-            "title": "Passkey in MS Auth Not Registered",
+            "title": "Total",
             "type": "splunk.singlevalue"
         },
-        "viz_nnwf7giF": {
+        "viz_hvdka4Hd": {
+            "containerOptions": {
+                "description": {
+                    "color": "#ffffff"
+                },
+                "title": {
+                    "color": "#ffffff"
+                }
+            },
             "context": {
                 "backgroundColorEditorConfig": [
                     {
@@ -469,26 +681,153 @@
                 ]
             },
             "dataSources": {
-                "primary": "ds_t0uTjQek"
+                "primary": "ds_WmelRauy"
             },
+            "eventHandlers": [],
             "options": {
                 "backgroundColor": "> majorValue | rangeValue(backgroundColorEditorConfig)",
-                "trendColor": "#dc4e41",
-                "trendDisplay": "percent"
+                "shouldAbbreviateMajorValue": true,
+                "sparklineDisplay": "off",
+                "trendDisplay": "off"
             },
-            "title": "Windows Hello Registered",
+            "title": "Yes",
             "type": "splunk.singlevalue"
         },
-        "viz_ssrlsTK8": {
+        "viz_j2SxMmx5": {
+            "options": {
+                "fillColor": "#302c2c",
+                "strokeColor": "#302c2c"
+            },
+            "type": "splunk.rectangle"
+        },
+        "viz_jvlTwTn7": {
+            "containerOptions": {
+                "description": {
+                    "color": "#ffffff"
+                },
+                "title": {
+                    "color": "#ffffff"
+                }
+            },
             "context": {
                 "backgroundColorEditorConfig": [
                     {
                         "to": 20,
-                        "value": "#cba700"
+                        "value": "#d94e17"
                     },
                     {
                         "from": 20,
-                        "value": "#cba700"
+                        "value": "#d94e17"
+                    }
+                ]
+            },
+            "dataSources": {
+                "primary": "ds_S9LMm9vq"
+            },
+            "eventHandlers": [],
+            "options": {
+                "backgroundColor": "> majorValue | rangeValue(backgroundColorEditorConfig)",
+                "shouldAbbreviateMajorValue": true,
+                "sparklineDisplay": "off",
+                "trendDisplay": "off"
+            },
+            "title": "Total",
+            "type": "splunk.singlevalue"
+        },
+        "viz_khS7TyXk": {
+            "containerOptions": {
+                "description": {
+                    "color": "#ffffff"
+                },
+                "title": {
+                    "color": "#ffffff"
+                }
+            },
+            "context": {
+                "backgroundColorEditorConfig": [
+                    {
+                        "to": 80,
+                        "value": "#118832"
+                    },
+                    {
+                        "from": 80,
+                        "value": "#118832"
+                    }
+                ]
+            },
+            "dataSources": {
+                "primary": "ds_l177FFZR"
+            },
+            "eventHandlers": [],
+            "options": {
+                "backgroundColor": "> majorValue | rangeValue(backgroundColorEditorConfig)",
+                "shouldAbbreviateMajorValue": true,
+                "sparklineDisplay": "off",
+                "trendDisplay": "off"
+            },
+            "title": "Registered",
+            "type": "splunk.singlevalue"
+        },
+        "viz_lnGt6Mk3": {
+            "containerOptions": {
+                "description": {
+                    "color": "#ffffff"
+                },
+                "title": {
+                    "color": "#ffffff"
+                }
+            },
+            "context": {
+                "backgroundColorEditorConfig": [
+                    {
+                        "to": 20,
+                        "value": "#d94e17"
+                    },
+                    {
+                        "from": 20,
+                        "value": "#d94e17"
+                    }
+                ]
+            },
+            "dataSources": {
+                "primary": "ds_RNhqa3sf"
+            },
+            "eventHandlers": [],
+            "options": {
+                "backgroundColor": "> majorValue | rangeValue(backgroundColorEditorConfig)",
+                "shouldAbbreviateMajorValue": true,
+                "sparklineDisplay": "off",
+                "trendDisplay": "off"
+            },
+            "title": "Total",
+            "type": "splunk.singlevalue"
+        },
+        "viz_pnBkUki0": {
+            "options": {
+                "backgroundColor": "#302c2c",
+                "fontColor": "#ffffff",
+                "markdown": ""
+            },
+            "type": "splunk.markdown"
+        },
+        "viz_ssrlsTK8": {
+            "containerOptions": {
+                "description": {
+                    "color": "#ffffff"
+                },
+                "title": {
+                    "color": "#ffffff"
+                }
+            },
+            "context": {
+                "backgroundColorEditorConfig": [
+                    {
+                        "to": 20,
+                        "value": "#D41F1F"
+                    },
+                    {
+                        "from": 20,
+                        "value": "#d41f1f"
                     }
                 ]
             },
@@ -498,41 +837,59 @@
             "eventHandlers": [],
             "options": {
                 "backgroundColor": "> majorValue | rangeValue(backgroundColorEditorConfig)",
-                "trendColor": "#dc4e41",
-                "trendDisplay": "percent"
+                "shouldAbbreviateMajorValue": true,
+                "sparklineDisplay": "off",
+                "trendDisplay": "off"
             },
-            "title": "Security Key Not Registered",
+            "title": "Not Registered",
             "type": "splunk.singlevalue"
         },
-        "viz_zVJza7r7": {
-            "containerOptions": {},
-            "context": {
-                "backgroundColorEditorConfig": [
-                    {
-                        "to": 80,
-                        "value": "#118832"
-                    },
-                    {
-                        "from": 80,
-                        "value": "#118832"
-                    }
-                ]
+        "viz_wlD2L0PN": {
+            "options": {
+                "backgroundColor": "#302c2c",
+                "fontColor": "#ffffff",
+                "markdown": ""
+            },
+            "type": "splunk.markdown"
+        },
+        "viz_wwxzu1MR": {
+            "containerOptions": {
+                "description": {
+                    "color": "#ffffff"
+                },
+                "title": {
+                    "color": "#ffffff"
+                }
             },
             "dataSources": {
-                "primary": "ds_2w8nRFj0"
+                "primary": "ds_fjxk5nuL"
             },
-            "options": {},
+            "options": {
+                "backgroundColor": "#302c2c",
+                "legendDisplay": "bottom"
+            },
             "showLastUpdated": false,
             "showProgressBar": true,
-            "title": "Security Key Registered",
-            "type": "splunk.line"
+            "title": "Windows Hello",
+            "type": "splunk.area"
         }
     },
     "dataSources": {
-        "ds_0laEghDi": {
+        "ds_2w8nRFj0": {
+            "name": "passKeyDeviceBoundLine",
+            "options": {
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"*$tkn_role$*\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| eval methodsRegisteredC = if(methodsRegistered=\"passKeyDeviceBound\", \"Registered\", \"Not Registered\")\n| timechart span=1d dc(userPrincipalName) as User by methodsRegisteredC",
+                "queryParameters": {
+                    "earliest": "$global_time.earliest$",
+                    "latest": "$global_time.latest$"
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_3VoM7nGy": {
             "name": "passKeyDeviceBoundAuthenticator",
             "options": {
-                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"*$tkn_role$*\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| search methodsRegistered=\"passKeyDeviceBoundAuthenticator\"\n| timechart span=1d dc(userPrincipalName) as User",
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"*$tkn_role$*\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| search methodsRegistered=\"passKeyDeviceBoundAuthenticator\"\n| stats dc(userPrincipalName) as User",
                 "queryParameters": {
                     "earliest": "$global_time1.earliest$",
                     "latest": "$global_time1.latest$"
@@ -540,19 +897,48 @@
             },
             "type": "ds.search"
         },
-        "ds_2w8nRFj0": {
-            "name": "passKeyDeviceBoundLine",
+        "ds_6obPtKes": {
+            "name": "Methods Registered All",
             "options": {
-                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"*$tkn_role$*\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| search methodsRegistered=\"passKeyDeviceBound\" OR methodsRegistered=\"passKeyDeviceBoundAuthenticator\"\n| timechart span=1d dc(userPrincipalName) as User",
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"*\" \n| dedup userPrincipalName \n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered \n| eval \"methodsRegistered\" = case(methodsRegistered=\"microsoftAuthenticatorPush\", \"Authenticator – Push\", methodsRegistered=\"email\", \"Email Verification\",methodsRegistered=\"macOsSecureEnclaveKey\", \"macOS Secure Enclave\",methodsRegistered=\"microsoftAuthenticatorPasswordless\", \"Authenticator – Push\",methodsRegistered=\"alternateMobilePhone\", \"Alternate Mobile\"\n    ,methodsRegistered=\"mobilePhone\", \"Mobile Phone (SMS/Call)\",methodsRegistered=\"officePhone\", \"Office Phone\",methodsRegistered=\"passKeyDeviceBound\", \"Passkey (Device‑Bound)\",methodsRegistered=\"passKeyDeviceBoundAuthenticator\", \"Passkey Authenticator\",methodsRegistered=\"softwareOneTimePasscode\", \"Software OTP (TOTP App)\",methodsRegistered=\"windowsHelloForBusiness\", \"Windows Hello for Business\",1=1, methodsRegistered) \n| search methodsRegistered!=\"\" \n| stats count as \"User Count\" by methodsRegistered \n| transpose 0 header_field=methodsRegistered \n| rename column as \"Method Registered\"\n| eval \"Method Registered\" = \"\""
+            },
+            "type": "ds.search"
+        },
+        "ds_FOtF78l8": {
+            "name": "windowsHelloForBusinessTotal",
+            "options": {
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"*$tkn_role$*\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| stats dc(userPrincipalName) as User",
                 "queryParameters": {
-                    "earliest": "$global_time4.earliest$",
-                    "latest": "$global_time4.latest$"
+                    "earliest": "$global_time2.earliest$",
+                    "latest": "$global_time2.latest$"
                 }
             },
             "type": "ds.search"
         },
-        "ds_8UNeX7aV": {
-            "name": "PreferredAuthenticationMethods",
+        "ds_GJnIx9oj": {
+            "name": "ML2CompliantLine",
+            "options": {
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"*$tkn_role$*\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| eval methodsRegisteredC = if(methodsRegistered=\"passKeyDeviceBound\" OR methodsRegistered=\"passKeyDeviceBoundAuthenticator\", \"Registered\", \"Not Registered\")\n| timechart span=1d dc(userPrincipalName) as User by methodsRegisteredC",
+                "queryParameters": {
+                    "earliest": "$global_time3.earliest$",
+                    "latest": "$global_time3.latest$"
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_IMAcbAVf": {
+            "name": "passKeyDeviceBound",
+            "options": {
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"*$tkn_role$*\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| search methodsRegistered=\"passKeyDeviceBound\"\n| stats dc(userPrincipalName) as User",
+                "queryParameters": {
+                    "earliest": "$global_time.earliest$",
+                    "latest": "$global_time.latest$"
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_LDJ40FtQ": {
+            "name": "PreferredAuthenticationMethods copy 3",
             "options": {
                 "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\"\n| table DateTime, _time, userPrincipalName, userDisplayName, userType, isSsprRegistered, isSsprCapable, isMfaRegistered, isPasswordlessCapable, MethodsRegistered, systemPreferredAuthenticationMethods{}, userPreferredMethodForSecondaryAuthentication\n| fillnull value=\"-\"\n| table systemPreferredAuthenticationMethods{}\n| dedup systemPreferredAuthenticationMethods{}",
                 "queryParameters": {
@@ -562,19 +948,49 @@
             },
             "type": "ds.search"
         },
-        "ds_8suvpn1w": {
-            "name": "ML2CompliantNo",
+        "ds_NqN8drSA": {
+            "name": "PreferredSecondaryMethodAuthentication copy 4",
             "options": {
-                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"*$tkn_role$*\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| search methodsRegistered=\"passKeyDeviceBound\" OR methodsRegistered!=\"passKeyDeviceBoundAuthenticator\"\n| timechart span=1d dc(userPrincipalName) as User",
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\"\n| table DateTime, _time, userPrincipalName, userDisplayName, userType, isSsprRegistered, isSsprCapable, isMfaRegistered, isPasswordlessCapable, MethodsRegistered, systemPreferredAuthenticationMethods{}, userPreferredMethodForSecondaryAuthentication\n| fillnull value=\"-\"\n| table userPreferredMethodForSecondaryAuthentication\n| dedup userPreferredMethodForSecondaryAuthentication",
                 "queryParameters": {
-                    "earliest": "$global_time3.earliest$",
-                    "latest": "$global_time3.latest$"
+                    "earliest": "$global_time5.earliest$",
+                    "latest": "$global_time5.latest$"
                 }
             },
             "type": "ds.search"
         },
-        "ds_E9nn1kUN": {
-            "name": "UserType",
+        "ds_QLo79XFA": {
+            "name": "DetailsViewCount",
+            "options": {
+                "extend": "ds_a7kpXEfs",
+                "query": "| stats count \n| eval count = \"Total Accounts: \".count"
+            },
+            "type": "ds.chain"
+        },
+        "ds_RNhqa3sf": {
+            "name": "passKeyDeviceBoundAuthenticatorLineTotal",
+            "options": {
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"*$tkn_role$*\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| stats dc(userPrincipalName) as User",
+                "queryParameters": {
+                    "earliest": "$global_time1.earliest$",
+                    "latest": "$global_time1.latest$"
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_RRZJACzW": {
+            "name": "MethodsRegistered copy 2",
+            "options": {
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\"\n| table DateTime, _time, userPrincipalName, userDisplayName, userType, isSsprRegistered, isSsprCapable, isMfaRegistered, isPasswordlessCapable, methodsRegistered{}, systemPreferredAuthenticationMethods{}, userPreferredMethodForSecondaryAuthentication\n| fillnull value=\"-\"\n| mvexpand methodsRegistered{}\n| table methodsRegistered{}\n| dedup methodsRegistered{}",
+                "queryParameters": {
+                    "earliest": "$global_time5.earliest$",
+                    "latest": "$global_time5.latest$"
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_RlCrIvJr": {
+            "name": "UserType copy 1",
             "options": {
                 "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\"\n| table DateTime, _time, userPrincipalName, userDisplayName, userType, isSsprRegistered, isSsprCapable, isMfaRegistered, isPasswordlessCapable, MethodsRegistered, systemPreferredAuthenticationMethods{}, userPreferredMethodForSecondaryAuthentication\n| stats count by userType",
                 "queryParameters": {
@@ -584,24 +1000,46 @@
             },
             "type": "ds.search"
         },
-        "ds_IMAcbAVf": {
-            "name": "passKeyDeviceBound",
+        "ds_S9LMm9vq": {
+            "name": "ML2CompliantTotal",
             "options": {
-                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"*$tkn_role$*\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| search methodsRegistered=\"passKeyDeviceBound\"\n| timechart span=1d dc(userPrincipalName) as User",
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"*$tkn_role$*\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| stats dc(userPrincipalName) as User",
                 "queryParameters": {
-                    "earliest": "$global_time.earliest$",
-                    "latest": "$global_time.latest$"
+                    "earliest": "$global_time3.earliest$",
+                    "latest": "$global_time3.latest$"
                 }
             },
             "type": "ds.search"
         },
-        "ds_LfOk6fLw": {
+        "ds_TS04eyK0": {
             "name": "windowsHelloForBusinessNo",
             "options": {
-                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"*$tkn_role$*\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| search methodsRegistered!=\"windowsHelloForBusiness\"\n| timechart span=1d dc(userPrincipalName) as User",
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"*$tkn_role$*\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| search methodsRegistered!=\"windowsHelloForBusiness\"\n| stats dc(userPrincipalName) as User",
                 "queryParameters": {
                     "earliest": "$global_time2.earliest$",
                     "latest": "$global_time2.latest$"
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_WmelRauy": {
+            "name": "ML2Compliant",
+            "options": {
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"*$tkn_role$*\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| search methodsRegistered=\"passKeyDeviceBoundAuthenticator\" OR methodsRegistered=\"passKeyDeviceBound\"\n| stats dc(userPrincipalName) as User",
+                "queryParameters": {
+                    "earliest": "$global_time3.earliest$",
+                    "latest": "$global_time3.latest$"
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_YFfxedTH": {
+            "name": "passKeyDeviceBoundAuthenticatorLine",
+            "options": {
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"*$tkn_role$*\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| eval methodsRegisteredC = if(methodsRegistered=\"passKeyDeviceBoundAuthenticator\", \"Registered\", \"Not Registered\")\n| timechart span=1d dc(userPrincipalName) as User by methodsRegisteredC",
+                "queryParameters": {
+                    "earliest": "$global_time1.earliest$",
+                    "latest": "$global_time1.latest$"
                 }
             },
             "type": "ds.search"
@@ -617,13 +1055,13 @@
             },
             "type": "ds.search"
         },
-        "ds_cHsm5NoM": {
-            "name": "MethodsRegistered",
+        "ds_cHUym5ok": {
+            "name": "ML2CompliantNo",
             "options": {
-                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\"\n| table DateTime, _time, userPrincipalName, userDisplayName, userType, isSsprRegistered, isSsprCapable, isMfaRegistered, isPasswordlessCapable, methodsRegistered{}, systemPreferredAuthenticationMethods{}, userPreferredMethodForSecondaryAuthentication\n| fillnull value=\"-\"\n| mvexpand methodsRegistered{}\n| table methodsRegistered{}\n| dedup methodsRegistered{}",
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"*$tkn_role$*\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| search methodsRegistered!=\"passKeyDeviceBound\" AND methodsRegistered!=\"passKeyDeviceBoundAuthenticator\"\n| stats dc(userPrincipalName) as User",
                 "queryParameters": {
-                    "earliest": "$global_time5.earliest$",
-                    "latest": "$global_time5.latest$"
+                    "earliest": "$global_time3.earliest$",
+                    "latest": "$global_time3.latest$"
                 }
             },
             "type": "ds.search"
@@ -631,7 +1069,7 @@
         "ds_cfOcC6SD": {
             "name": "passKeyDeviceBoundNo",
             "options": {
-                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"*$tkn_role$*\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| search methodsRegistered!=\"passKeyDeviceBound\"\n| timechart span=1d dc(userPrincipalName) as User",
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"*$tkn_role$*\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| search methodsRegistered!=\"passKeyDeviceBound\"\n| stats dc(userPrincipalName) as User",
                 "queryParameters": {
                     "earliest": "$global_time.earliest$",
                     "latest": "$global_time.latest$"
@@ -639,43 +1077,10 @@
             },
             "type": "ds.search"
         },
-        "ds_owMeh1Cf": {
-            "name": "PreferredSecondaryMethodAuthentication",
+        "ds_fjxk5nuL": {
+            "name": "windowsHelloForBusinessLine",
             "options": {
-                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\"\n| table DateTime, _time, userPrincipalName, userDisplayName, userType, isSsprRegistered, isSsprCapable, isMfaRegistered, isPasswordlessCapable, MethodsRegistered, systemPreferredAuthenticationMethods{}, userPreferredMethodForSecondaryAuthentication\n| fillnull value=\"-\"\n| table userPreferredMethodForSecondaryAuthentication\n| dedup userPreferredMethodForSecondaryAuthentication",
-                "queryParameters": {
-                    "earliest": "$global_time5.earliest$",
-                    "latest": "$global_time5.latest$"
-                }
-            },
-            "type": "ds.search"
-        },
-        "ds_qVv8zFlM": {
-            "name": "passKeyDeviceBoundAuthenticatorNo",
-            "options": {
-                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"*$tkn_role$*\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| search methodsRegistered!=\"passKeyDeviceBoundAuthenticator\"\n| timechart span=1d dc(userPrincipalName) as User",
-                "queryParameters": {
-                    "earliest": "$global_time1.earliest$",
-                    "latest": "$global_time1.latest$"
-                }
-            },
-            "type": "ds.search"
-        },
-        "ds_sJfXaIUQ": {
-            "name": "passKeyDeviceBoundNoLine",
-            "options": {
-                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"*$tkn_role$*\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| search methodsRegistered!=\"passKeyDeviceBound\" AND methodsRegistered!=\"passKeyDeviceBoundAuthenticator\"\n| timechart span=1d dc(userPrincipalName) as User",
-                "queryParameters": {
-                    "earliest": "$global_time4.earliest$",
-                    "latest": "$global_time4.latest$"
-                }
-            },
-            "type": "ds.search"
-        },
-        "ds_t0uTjQek": {
-            "name": "windowsHelloForBusiness",
-            "options": {
-                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"*$tkn_role$*\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| search methodsRegistered=\"windowsHelloForBusiness\"\n| timechart span=1d dc(userPrincipalName) as User",
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"*$tkn_role$*\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| eval methodsRegisteredC = if(methodsRegistered=\"windowsHelloForBusiness\", \"Registered\", \"Not Registered\")\n| timechart span=1d dc(userPrincipalName) as User by methodsRegisteredC",
                 "queryParameters": {
                     "earliest": "$global_time2.earliest$",
                     "latest": "$global_time2.latest$"
@@ -683,13 +1088,35 @@
             },
             "type": "ds.search"
         },
-        "ds_wJG87Vwg": {
-            "name": "ML2Compliant",
+        "ds_i4TMqwzR": {
+            "name": "passKeyDeviceBoundAuthenticatorNo",
             "options": {
-                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"*$tkn_role$*\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| search methodsRegistered=\"passKeyDeviceBound\" OR methodsRegistered=\"passKeyDeviceBoundAuthenticator\"\n| timechart span=1d dc(userPrincipalName) as User",
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"*$tkn_role$*\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| search methodsRegistered!=\"passKeyDeviceBoundAuthenticator\"\n| stats dc(userPrincipalName) as User",
                 "queryParameters": {
-                    "earliest": "$global_time3.earliest$",
-                    "latest": "$global_time3.latest$"
+                    "earliest": "$global_time1.earliest$",
+                    "latest": "$global_time1.latest$"
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_l177FFZR": {
+            "name": "windowsHelloForBusiness",
+            "options": {
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"*$tkn_role$*\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| search methodsRegistered=\"windowsHelloForBusiness\"\n| stats dc(userPrincipalName) as User",
+                "queryParameters": {
+                    "earliest": "$global_time2.earliest$",
+                    "latest": "$global_time2.latest$"
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_mEQOhVzS": {
+            "name": "passKeyDeviceBoundTotal",
+            "options": {
+                "query": "index::* sourcetype=\"microsoft:userRegistrationDetails\" userPrincipalName=\"*$tkn_role$*\"\n| mvexpand methodsRegistered{} \n| rename methodsRegistered{} as methodsRegistered\n| stats dc(userPrincipalName) as User",
+                "queryParameters": {
+                    "earliest": "$global_time.earliest$",
+                    "latest": "$global_time.latest$"
                 }
             },
             "type": "ds.search"
@@ -702,219 +1129,109 @@
         "layoutDefinitions": {
             "layout_1": {
                 "options": {
-                    "backgroundColor": "transparent",
-                    "display": "auto",
-                    "height": 1100,
-                    "width": 1440
+                    "backgroundColor": "#000000",
+                    "display": "fit-to-width",
+                    "height": 1800,
+                    "width": 1430
                 },
                 "structure": [
                     {
+                        "item": "viz_j2SxMmx5",
+                        "position": {
+                            "h": 600,
+                            "w": 1390,
+                            "x": 20,
+                            "y": 1170
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_QlIQNnUq",
+                        "position": {
+                            "h": 510,
+                            "w": 1390,
+                            "x": 20,
+                            "y": 650
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_KuWd5vPQ",
+                        "position": {
+                            "h": 620,
+                            "w": 340,
+                            "x": 1070,
+                            "y": 20
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_pnBkUki0",
+                        "position": {
+                            "h": 620,
+                            "w": 340,
+                            "x": 720,
+                            "y": 20
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_wlD2L0PN",
+                        "position": {
+                            "h": 620,
+                            "w": 340,
+                            "x": 370,
+                            "y": 20
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_V82ZgrfV",
+                        "position": {
+                            "h": 620,
+                            "w": 340,
+                            "x": 20,
+                            "y": 20
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_ctVP7SW6",
+                        "position": {
+                            "h": 400,
+                            "w": 1390,
+                            "x": 20,
+                            "y": 1370
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_e5R7NRqi",
+                        "position": {
+                            "h": 100,
+                            "w": 100,
+                            "x": 30,
+                            "y": 530
+                        },
+                        "type": "block"
+                    },
+                    {
                         "item": "viz_WR6xdV9I",
                         "position": {
-                            "h": 210,
-                            "w": 250,
-                            "x": 0,
-                            "y": 80
+                            "h": 100,
+                            "w": 100,
+                            "x": 140,
+                            "y": 530
                         },
                         "type": "block"
                     },
                     {
                         "item": "viz_ssrlsTK8",
                         "position": {
-                            "h": 210,
-                            "w": 250,
-                            "x": 0,
-                            "y": 290
-                        },
-                        "type": "block"
-                    },
-                    {
-                        "item": "viz_8aPMx2Mi",
-                        "position": {
-                            "h": 210,
-                            "w": 250,
+                            "h": 100,
+                            "w": 100,
                             "x": 250,
-                            "y": 80
-                        },
-                        "type": "block"
-                    },
-                    {
-                        "item": "viz_fctyRcaB",
-                        "position": {
-                            "h": 210,
-                            "w": 250,
-                            "x": 250,
-                            "y": 290
-                        },
-                        "type": "block"
-                    },
-                    {
-                        "item": "viz_nnwf7giF",
-                        "position": {
-                            "h": 210,
-                            "w": 250,
-                            "x": 500,
-                            "y": 80
-                        },
-                        "type": "block"
-                    },
-                    {
-                        "item": "viz_Kjs9ePM5",
-                        "position": {
-                            "h": 210,
-                            "w": 250,
-                            "x": 500,
-                            "y": 290
-                        },
-                        "type": "block"
-                    },
-                    {
-                        "item": "viz_NtbjBhDq",
-                        "position": {
-                            "h": 210,
-                            "w": 250,
-                            "x": 750,
-                            "y": 80
-                        },
-                        "type": "block"
-                    },
-                    {
-                        "item": "viz_1nBL8aTm",
-                        "position": {
-                            "h": 210,
-                            "w": 250,
-                            "x": 750,
-                            "y": 290
-                        },
-                        "type": "block"
-                    },
-                    {
-                        "item": "input_ofvdXZ0x",
-                        "position": {
-                            "h": 82,
-                            "w": 200,
-                            "x": 0,
-                            "y": 500
-                        },
-                        "type": "input"
-                    },
-                    {
-                        "item": "input_S1ORxzIN",
-                        "position": {
-                            "h": 82,
-                            "w": 200,
-                            "x": 200,
-                            "y": 500
-                        },
-                        "type": "input"
-                    },
-                    {
-                        "item": "input_MVREqCpo",
-                        "position": {
-                            "h": 82,
-                            "w": 200,
-                            "x": 400,
-                            "y": 500
-                        },
-                        "type": "input"
-                    },
-                    {
-                        "item": "input_hpNhkxje",
-                        "position": {
-                            "h": 82,
-                            "w": 200,
-                            "x": 600,
-                            "y": 500
-                        },
-                        "type": "input"
-                    },
-                    {
-                        "item": "input_I790y77c",
-                        "position": {
-                            "h": 82,
-                            "w": 200,
-                            "x": 800,
-                            "y": 500
-                        },
-                        "type": "input"
-                    },
-                    {
-                        "item": "input_QwzZOY5x",
-                        "position": {
-                            "h": 82,
-                            "w": 200,
-                            "x": 1000,
-                            "y": 500
-                        },
-                        "type": "input"
-                    },
-                    {
-                        "item": "input_C0JD3GeP",
-                        "position": {
-                            "h": 82,
-                            "w": 200,
-                            "x": 1200,
-                            "y": 500
-                        },
-                        "type": "input"
-                    },
-                    {
-                        "item": "input_KLK9g89r",
-                        "position": {
-                            "h": 82,
-                            "w": 200,
-                            "x": 0,
-                            "y": 582
-                        },
-                        "type": "input"
-                    },
-                    {
-                        "item": "input_uvyUTmBs",
-                        "position": {
-                            "h": 82,
-                            "w": 200,
-                            "x": 200,
-                            "y": 582
-                        },
-                        "type": "input"
-                    },
-                    {
-                        "item": "input_HRZbsjhI",
-                        "position": {
-                            "h": 82,
-                            "w": 200,
-                            "x": 400,
-                            "y": 582
-                        },
-                        "type": "input"
-                    },
-                    {
-                        "item": "viz_ctVP7SW6",
-                        "position": {
-                            "h": 440,
-                            "w": 1440,
-                            "x": 0,
-                            "y": 660
-                        },
-                        "type": "block"
-                    },
-                    {
-                        "item": "viz_zVJza7r7",
-                        "position": {
-                            "h": 210,
-                            "w": 440,
-                            "x": 1000,
-                            "y": 80
-                        },
-                        "type": "block"
-                    },
-                    {
-                        "item": "viz_NmGr4sE4",
-                        "position": {
-                            "h": 210,
-                            "w": 440,
-                            "x": 1000,
-                            "y": 290
+                            "y": 530
                         },
                         "type": "block"
                     },
@@ -922,61 +1239,331 @@
                         "item": "input_global_trp",
                         "position": {
                             "h": 80,
-                            "w": 250,
-                            "x": 0,
-                            "y": 0
+                            "w": 320,
+                            "x": 30,
+                            "y": 20
                         },
                         "type": "input"
                     },
                     {
-                        "item": "input_4T2s3YoN",
+                        "item": "viz_AlCY9C2n",
+                        "position": {
+                            "h": 410,
+                            "w": 320,
+                            "x": 30,
+                            "y": 100
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "input_JrdTjdM4",
                         "position": {
                             "h": 80,
-                            "w": 250,
-                            "x": 250,
-                            "y": 0
+                            "w": 320,
+                            "x": 380,
+                            "y": 20
                         },
                         "type": "input"
                     },
                     {
-                        "item": "input_yj3EJd5D",
+                        "item": "viz_lnGt6Mk3",
+                        "position": {
+                            "h": 100,
+                            "w": 100,
+                            "x": 380,
+                            "y": 530
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_1PmcEWg7",
+                        "position": {
+                            "h": 100,
+                            "w": 100,
+                            "x": 490,
+                            "y": 530
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_UIBRugGT",
+                        "position": {
+                            "h": 100,
+                            "w": 100,
+                            "x": 600,
+                            "y": 530
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_TLN1YDOd",
+                        "position": {
+                            "h": 410,
+                            "w": 320,
+                            "x": 380,
+                            "y": 100
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_cFZw3uPl",
+                        "position": {
+                            "h": 20,
+                            "w": 100,
+                            "x": 480,
+                            "y": 530
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "input_H38WvLyS",
                         "position": {
                             "h": 80,
-                            "w": 250,
-                            "x": 500,
-                            "y": 0
+                            "w": 320,
+                            "x": 730,
+                            "y": 20
                         },
                         "type": "input"
                     },
                     {
-                        "item": "input_ua1GiINz",
+                        "item": "viz_09AeIQxz",
+                        "position": {
+                            "h": 100,
+                            "w": 100,
+                            "x": 730,
+                            "y": 530
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_khS7TyXk",
+                        "position": {
+                            "h": 100,
+                            "w": 100,
+                            "x": 840,
+                            "y": 530
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_MM1BJkCP",
+                        "position": {
+                            "h": 100,
+                            "w": 100,
+                            "x": 950,
+                            "y": 530
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_wwxzu1MR",
+                        "position": {
+                            "h": 410,
+                            "w": 320,
+                            "x": 730,
+                            "y": 100
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "input_hf1kkyxZ",
                         "position": {
                             "h": 80,
-                            "w": 250,
-                            "x": 750,
-                            "y": 0
+                            "w": 320,
+                            "x": 1080,
+                            "y": 20
                         },
                         "type": "input"
                     },
                     {
-                        "item": "input_mIJHHd09",
+                        "item": "viz_jvlTwTn7",
+                        "position": {
+                            "h": 100,
+                            "w": 100,
+                            "x": 1080,
+                            "y": 530
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_hvdka4Hd",
+                        "position": {
+                            "h": 100,
+                            "w": 100,
+                            "x": 1190,
+                            "y": 530
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_3Z3FVPHx",
+                        "position": {
+                            "h": 100,
+                            "w": 100,
+                            "x": 1300,
+                            "y": 530
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_3sLD5v2Q",
+                        "position": {
+                            "h": 410,
+                            "w": 320,
+                            "x": 1080,
+                            "y": 100
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "input_fLwI4YSu",
                         "position": {
                             "h": 80,
-                            "w": 440,
-                            "x": 1000,
-                            "y": 0
+                            "w": 320,
+                            "x": 30,
+                            "y": 650
+                        },
+                        "type": "input"
+                    },
+                    {
+                        "item": "viz_AmzgItG5",
+                        "position": {
+                            "h": 370,
+                            "w": 1340,
+                            "x": 40,
+                            "y": 730
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "input_ofvdXZ0x",
+                        "position": {
+                            "h": 82,
+                            "w": 198,
+                            "x": 20,
+                            "y": 1170
+                        },
+                        "type": "input"
+                    },
+                    {
+                        "item": "input_S1ORxzIN",
+                        "position": {
+                            "h": 82,
+                            "w": 198,
+                            "x": 218,
+                            "y": 1170
+                        },
+                        "type": "input"
+                    },
+                    {
+                        "item": "input_MVREqCpo",
+                        "position": {
+                            "h": 82,
+                            "w": 198,
+                            "x": 416,
+                            "y": 1170
+                        },
+                        "type": "input"
+                    },
+                    {
+                        "item": "input_hpNhkxje",
+                        "position": {
+                            "h": 82,
+                            "w": 198,
+                            "x": 614,
+                            "y": 1170
+                        },
+                        "type": "input"
+                    },
+                    {
+                        "item": "input_I790y77c",
+                        "position": {
+                            "h": 82,
+                            "w": 198,
+                            "x": 810,
+                            "y": 1170
+                        },
+                        "type": "input"
+                    },
+                    {
+                        "item": "input_QwzZOY5x",
+                        "position": {
+                            "h": 82,
+                            "w": 198,
+                            "x": 1010,
+                            "y": 1170
+                        },
+                        "type": "input"
+                    },
+                    {
+                        "item": "input_C0JD3GeP",
+                        "position": {
+                            "h": 82,
+                            "w": 198,
+                            "x": 1208,
+                            "y": 1170
+                        },
+                        "type": "input"
+                    },
+                    {
+                        "item": "input_KLK9g89r",
+                        "position": {
+                            "h": 82,
+                            "w": 198,
+                            "x": 20,
+                            "y": 1252
+                        },
+                        "type": "input"
+                    },
+                    {
+                        "item": "input_uvyUTmBs",
+                        "position": {
+                            "h": 82,
+                            "w": 198,
+                            "x": 210,
+                            "y": 1250
+                        },
+                        "type": "input"
+                    },
+                    {
+                        "item": "input_HRZbsjhI",
+                        "position": {
+                            "h": 82,
+                            "w": 198,
+                            "x": 416,
+                            "y": 1252
                         },
                         "type": "input"
                     },
                     {
                         "item": "input_eAUB5pGR",
                         "position": {
-                            "h": 80,
-                            "w": 380,
-                            "x": 610,
-                            "y": 580
+                            "h": 82,
+                            "w": 198,
+                            "x": 614,
+                            "y": 1252
                         },
                         "type": "input"
+                    },
+                    {
+                        "item": "viz_cvyu8G0k",
+                        "position": {
+                            "h": 30,
+                            "w": 170,
+                            "x": 20,
+                            "y": 1250
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_5r65PA4l",
+                        "position": {
+                            "h": 40,
+                            "w": 220,
+                            "x": 30,
+                            "y": 1330
+                        },
+                        "type": "block"
                     }
                 ],
                 "type": "absolute"
