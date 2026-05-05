@@ -1,0 +1,998 @@
+{
+    "title": "User SignIn Audit and Insights",
+    "description": "Professional Absolute Layout Dashboard",
+    "inputs": {
+        "input_KCL4HEwD": {
+            "context": {
+                "formattedConfig": {
+                    "number": {
+                        "prefix": ""
+                    }
+                },
+                "formattedStatics": ">statics | formatByType(formattedConfig)",
+                "label": ">primary | seriesByName(\"properties.location.countryOrRegion\") | renameSeries(\"label\") | formatByType(formattedConfig)",
+                "statics": [
+                    [
+                        "All"
+                    ],
+                    [
+                        "*"
+                    ]
+                ],
+                "value": ">primary | seriesByName(\"properties.location.countryOrRegion\") | renameSeries(\"value\") | formatByType(formattedConfig)"
+            },
+            "dataSources": {
+                "primary": "ds_gWKmVZ4h"
+            },
+            "options": {
+                "defaultValue": "*",
+                "items": ">frame(label, value) | prepend(formattedStatics) | objects()",
+                "token": "tkn_country"
+            },
+            "title": "Country",
+            "type": "input.dropdown"
+        },
+        "input_OUqgPHiE": {
+            "context": {
+                "formattedConfig": {
+                    "number": {
+                        "prefix": ""
+                    }
+                },
+                "formattedStatics": ">statics | formatByType(formattedConfig)",
+                "label": ">primary | seriesByName(\"properties.appliedConditionalAccessPolicies{}.displayName\") | renameSeries(\"label\") | formatByType(formattedConfig)",
+                "statics": [
+                    [
+                        "All"
+                    ],
+                    [
+                        "*"
+                    ]
+                ],
+                "value": ">primary | seriesByName(\"properties.appliedConditionalAccessPolicies{}.displayName\") | renameSeries(\"value\") | formatByType(formattedConfig)"
+            },
+            "dataSources": {
+                "primary": "ds_KB5XZqfL"
+            },
+            "options": {
+                "defaultValue": "*",
+                "items": ">frame(label, value) | prepend(formattedStatics) | objects()",
+                "token": "tkn_ca_policy_name"
+            },
+            "title": "CA Policy Name",
+            "type": "input.dropdown"
+        },
+        "input_RaA7gLrl": {
+            "context": {
+                "formattedConfig": {
+                    "number": {
+                        "prefix": ""
+                    }
+                },
+                "formattedStatics": ">statics | formatByType(formattedConfig)",
+                "label": ">primary | seriesByName(\"properties.deviceDetail.isManaged\") | renameSeries(\"label\") | formatByType(formattedConfig)",
+                "statics": [
+                    [
+                        "All"
+                    ],
+                    [
+                        "*"
+                    ]
+                ],
+                "value": ">primary | seriesByName(\"properties.deviceDetail.isManaged\") | renameSeries(\"value\") | formatByType(formattedConfig)"
+            },
+            "dataSources": {
+                "primary": "ds_WxpKyp4g"
+            },
+            "options": {
+                "defaultValue": "*",
+                "items": ">frame(label, value) | prepend(formattedStatics) | objects()",
+                "token": "tkn_is_device_managed"
+            },
+            "title": "Is Device Managed",
+            "type": "input.dropdown"
+        },
+        "input_dJQYBXaM": {
+            "context": {
+                "formattedConfig": {
+                    "number": {
+                        "prefix": ""
+                    }
+                },
+                "formattedStatics": ">statics | formatByType(formattedConfig)",
+                "label": ">primary | seriesByName(\"properties.networkLocationDetails{}.networkNames{}\") | renameSeries(\"label\") | formatByType(formattedConfig)",
+                "statics": [
+                    [
+                        "All"
+                    ],
+                    [
+                        "*"
+                    ]
+                ],
+                "value": ">primary | seriesByName(\"properties.networkLocationDetails{}.networkNames{}\") | renameSeries(\"value\") | formatByType(formattedConfig)"
+            },
+            "dataSources": {
+                "primary": "ds_gcnEwCpF"
+            },
+            "options": {
+                "defaultValue": "*",
+                "items": ">frame(label, value) | prepend(formattedStatics) | objects()",
+                "token": "tkn_location_name"
+            },
+            "title": "Location Name",
+            "type": "input.dropdown"
+        },
+        "input_kmb1AFmy": {
+            "context": {
+                "formattedConfig": {
+                    "number": {
+                        "prefix": ""
+                    }
+                },
+                "formattedStatics": ">statics | formatByType(formattedConfig)",
+                "label": ">primary | seriesByName(\"properties.authenticationDetails{}.authenticationMethod\") | renameSeries(\"label\") | formatByType(formattedConfig)",
+                "statics": [
+                    [
+                        "All"
+                    ],
+                    [
+                        "*"
+                    ]
+                ],
+                "value": ">primary | seriesByName(\"properties.authenticationDetails{}.authenticationMethod\") | renameSeries(\"value\") | formatByType(formattedConfig)"
+            },
+            "dataSources": {
+                "primary": "ds_mHGg11j7"
+            },
+            "options": {
+                "defaultValue": "*",
+                "items": ">frame(label, value) | prepend(formattedStatics) | objects()",
+                "token": "tkn_authentication_method"
+            },
+            "title": "Authentication Method",
+            "type": "input.dropdown"
+        },
+        "input_wHIrVUa1": {
+            "context": {
+                "formattedConfig": {
+                    "number": {
+                        "prefix": ""
+                    }
+                },
+                "formattedStatics": ">statics | formatByType(formattedConfig)",
+                "label": ">primary | seriesByName(\"properties.deviceDetail.trustType\") | renameSeries(\"label\") | formatByType(formattedConfig)",
+                "statics": [
+                    [
+                        "All"
+                    ],
+                    [
+                        "*"
+                    ]
+                ],
+                "value": ">primary | seriesByName(\"properties.deviceDetail.trustType\") | renameSeries(\"value\") | formatByType(formattedConfig)"
+            },
+            "dataSources": {
+                "primary": "ds_Ab7b6GmV"
+            },
+            "options": {
+                "defaultValue": "*",
+                "items": ">frame(label, value) | prepend(formattedStatics) | objects()",
+                "token": "tkn_device_join_type"
+            },
+            "title": "Device Join Type",
+            "type": "input.dropdown"
+        },
+        "tkn_application": {
+            "options": {
+                "defaultValue": "*",
+                "token": "tkn_application"
+            },
+            "title": "Application",
+            "type": "input.text"
+        },
+        "tkn_ip_address": {
+            "options": {
+                "defaultValue": "*",
+                "token": "tkn_ip_address"
+            },
+            "title": "IP Address",
+            "type": "input.text"
+        },
+        "tkn_resource": {
+            "options": {
+                "defaultValue": "*",
+                "token": "tkn_resource"
+            },
+            "title": "Resource",
+            "type": "input.text"
+        },
+        "tkn_timerange": {
+            "options": {
+                "defaultValue": "-30d@d,now",
+                "token": "tkn_timerange"
+            },
+            "title": "Audit Time",
+            "type": "input.timerange"
+        },
+        "tkn_timerange2": {
+            "options": {
+                "defaultValue": "-7d@h,now",
+                "token": "tkn_timerange2"
+            },
+            "title": "Insights TimeRange",
+            "type": "input.timerange"
+        },
+        "tkn_upn": {
+            "options": {
+                "defaultValue": "svc-*",
+                "token": "tkn_upn"
+            },
+            "title": "Audit UPN",
+            "type": "input.text"
+        },
+        "tkn_upn2": {
+            "options": {
+                "defaultValue": "*",
+                "token": "tkn_upn2"
+            },
+            "title": "Insights UPN",
+            "type": "input.text"
+        }
+    },
+    "defaults": {
+        "dataSources": {}
+    },
+    "visualizations": {
+        "shape_box6": {
+            "options": {
+                "borderRadius": "8px",
+                "fillColor": "#1B2027",
+                "strokeColor": "#FFFFFF",
+                "strokeWidth": 1
+            },
+            "type": "splunk.rectangle"
+        },
+        "viz_1QHnRMIQ": {
+            "options": {
+                "borderRadius": "8px",
+                "fillColor": "#1B2027",
+                "strokeColor": "#FFFFFF",
+                "strokeWidth": 1
+            },
+            "type": "splunk.rectangle"
+        },
+        "viz_4vD8vMWB": {
+            "containerOptions": {
+                "visibility": {
+                    "hideWhenNoData": true
+                }
+            },
+            "dataSources": {
+                "primary": "ds_CXAhEneZ"
+            },
+            "eventHandlers": [
+                {
+                    "options": {
+                        "tokens": [
+                            {
+                                "key": "row.UPN.value",
+                                "token": "token_jSk6vZzx"
+                            }
+                        ]
+                    },
+                    "type": "drilldown.setToken"
+                }
+            ],
+            "options": {
+                "backgroundColor": "transparent",
+                "columnFormat": {
+                    "CA Policy Name": {
+                        "width": 200
+                    }
+                },
+                "count": 5,
+                "fontSize": "small",
+                "headerVisibility": "fixed",
+                "rowNumbers": true,
+                "showInternalFields": false,
+                "showRowNumbers": true
+            },
+            "title": "Policy Detail",
+            "type": "splunk.table"
+        },
+        "viz_BYxZMf8h": {
+            "dataSources": {
+                "primary": "ds_70CuizgZ"
+            },
+            "options": {
+                "backgroundColor": "transparent",
+                "center": [
+                    -29.844387366890516,
+                    136.35538727491416
+                ],
+                "zoom": 1.4789442680543146
+            },
+            "title": "Failed Login Locations",
+            "type": "splunk.map"
+        },
+        "viz_JcTQn7C9": {
+            "type": "splunk.rectangle"
+        },
+        "viz_NN4rJSLp": {
+            "dataSources": {
+                "primary": "ds_cKpy9Sfy"
+            },
+            "options": {
+                "backgroundColor": "transparent"
+            },
+            "title": "Country",
+            "type": "splunk.pie"
+        },
+        "viz_Q6lHOVow": {
+            "dataSources": {
+                "primary": "ds_3adqBQSk"
+            },
+            "options": {
+                "align": "left",
+                "backgroundColor": "#31373e"
+            },
+            "type": "splunk.singlevalue"
+        },
+        "viz_audit_table": {
+            "dataSources": {
+                "primary": "ds_audit_table"
+            },
+            "eventHandlers": [
+                {
+                    "options": {
+                        "tokens": [
+                            {
+                                "key": "row.UPN.value",
+                                "token": "tkn_upn_table"
+                            }
+                        ]
+                    },
+                    "type": "drilldown.setToken"
+                }
+            ],
+            "options": {
+                "backgroundColor": "transparent",
+                "columnFormat": {
+                    "CA Policy Name": {
+                        "width": 200
+                    }
+                },
+                "count": 5,
+                "fontSize": "small",
+                "headerVisibility": "fixed",
+                "rowNumbers": true,
+                "showInternalFields": false,
+                "showRowNumbers": true
+            },
+            "title": "SignIn User Audit Table",
+            "type": "splunk.table"
+        },
+        "viz_client_app": {
+            "dataSources": {
+                "primary": "ds_client_app"
+            },
+            "options": {
+                "backgroundColor": "transparent"
+            },
+            "title": "Client App",
+            "type": "splunk.pie"
+        },
+        "viz_device_platform": {
+            "dataSources": {
+                "primary": "ds_device_platform"
+            },
+            "options": {
+                "backgroundColor": "transparent"
+            },
+            "title": "Device Platform",
+            "type": "splunk.pie"
+        },
+        "viz_device_state": {
+            "dataSources": {
+                "primary": "ds_device_state"
+            },
+            "options": {
+                "backgroundColor": "transparent"
+            },
+            "title": "Device State",
+            "type": "splunk.pie"
+        },
+        "viz_enterprise_apps": {
+            "dataSources": {
+                "primary": "ds_enterprise_apps"
+            },
+            "options": {
+                "backgroundColor": "transparent",
+                "count": 10
+            },
+            "title": "Applications Evaluated",
+            "type": "splunk.table"
+        },
+        "viz_jRYnHl9V": {
+            "options": {
+                "borderRadius": "8px",
+                "fillColor": "#1B2027",
+                "strokeColor": "#FFFFFF",
+                "strokeWidth": 1
+            },
+            "type": "splunk.rectangle"
+        },
+        "viz_locations": {
+            "dataSources": {
+                "primary": "ds_locations"
+            },
+            "options": {
+                "backgroundColor": "transparent",
+                "center": [
+                    -34.06359579131454,
+                    150.8363364059495
+                ],
+                "zoom": 3.005192611532003
+            },
+            "title": "Successful Login Locations",
+            "type": "splunk.map"
+        },
+        "viz_nl3imXXI": {
+            "options": {
+                "borderRadius": "8px",
+                "fillColor": "#1B2027",
+                "strokeColor": "#FFFFFF",
+                "strokeWidth": 1
+            },
+            "type": "splunk.rectangle"
+        },
+        "viz_rY3hoyIZ": {
+            "dataSources": {
+                "primary": "ds_4olH7GCc"
+            },
+            "options": {
+                "backgroundColor": "transparent"
+            },
+            "title": "Location",
+            "type": "splunk.pie"
+        },
+        "viz_vD743hhs": {
+            "options": {
+                "borderRadius": "8px",
+                "fillColor": "#1B2027",
+                "strokeColor": "#FFFFFF",
+                "strokeWidth": 1
+            },
+            "type": "splunk.rectangle"
+        },
+        "viz_vvLRBUgY": {
+            "options": {
+                "borderRadius": "8px",
+                "fillColor": "#1B2027",
+                "strokeColor": "#FFFFFF",
+                "strokeWidth": 1
+            },
+            "type": "splunk.rectangle"
+        }
+    },
+    "dataSources": {
+        "ds_3adqBQSk": {
+            "name": "Search_1",
+            "options": {
+                "extend": "ds_audit_table",
+                "query": "| stats count \n| eval count = \"Total Accounts: \".count"
+            },
+            "type": "ds.chain"
+        },
+        "ds_4olH7GCc": {
+            "name": "16",
+            "options": {
+                "query": "sourcetype=\"mscs:storage:blob:json\" index=azure category=SignInLogs \"properties.userPrincipalName\"=\"$tkn_upn2$\" | stats count by properties.networkLocationDetails{}.networkNames{} \n|  rename properties.networkLocationDetails{}.networkNames{} as Location",
+                "queryParameters": {
+                    "earliest": "$tkn_timerange2.earliest$",
+                    "latest": "$tkn_timerange2.latest$"
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_70CuizgZ": {
+            "name": "7",
+            "options": {
+                "query": "sourcetype=\"mscs:storage:blob:json\" index=azure category=SignInLogs \"properties.userPrincipalName\"=\"$tkn_upn2$\" \n| search resultSignature!=\"SUCCESS\"\n| spath path=properties.location.geoCoordinates.latitude output=lat \n| spath path=properties.location.geoCoordinates.longitude output=lon \n| eval lat=tonumber(lat), lon=tonumber(lon) \n| geostats latfield=lat longfield=lon count",
+                "queryParameters": {
+                    "earliest": "$tkn_timerange2.earliest$",
+                    "latest": "$tkn_timerange2.latest$"
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_Ab7b6GmV": {
+            "name": "13",
+            "options": {
+                "query": "sourcetype=\"mscs:storage:blob:json\" index=azure category=SignInLogs sourcetype=\"mscs:storage:blob:json\" index=azure category=SignInLogs | stats count by properties.deviceDetail.trustType",
+                "queryParameters": {
+                    "earliest": "$tkn_timerange.earliest$",
+                    "latest": "$tkn_timerange.latest$"
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_CXAhEneZ": {
+            "name": "17",
+            "options": {
+                "query": "sourcetype=\"mscs:storage:blob:json\" index=azure category=SignInLogs \"properties.userPrincipalName\"=\"$tkn_upn_table$\"\n| spath path=properties.appliedConditionalAccessPolicies{} output=ca_policy_obj \n| eval ca_policy_obj=if(isnull(ca_policy_obj), \"{}\", ca_policy_obj) \n| mvexpand ca_policy_obj \n| spath input=ca_policy_obj \n| eval \"Grant Controls Enforced\" = coalesce('enforcedGrantControls{}', \"-\") \n| eval \"Session Controls Enforced\" = coalesce('enforcedSessionControls{}', \"-\") \n| rename properties.userPrincipalName AS \"UPN\" properties.appDisplayName AS Application displayName AS \"CA Policy Name\" result AS \"CA Policy Result\" \n| table _time UPN Application \"CA Policy Name\" \"Grant Controls Enforced\" \"Session Controls Enforced\" \"CA Policy Result\"",
+                "queryParameters": {
+                    "earliest": "$tkn_timerange.earliest$",
+                    "latest": "$tkn_timerange.latest$"
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_KB5XZqfL": {
+            "name": "11",
+            "options": {
+                "query": "sourcetype=\"mscs:storage:blob:json\" index=azure category=SignInLogs sourcetype=\"mscs:storage:blob:json\" index=azure category=SignInLogs | stats count by properties.appliedConditionalAccessPolicies{}.displayName",
+                "queryParameters": {
+                    "earliest": "$tkn_timerange.earliest$",
+                    "latest": "$tkn_timerange.latest$"
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_WxpKyp4g": {
+            "name": "12",
+            "options": {
+                "query": "sourcetype=\"mscs:storage:blob:json\" index=azure category=SignInLogs sourcetype=\"mscs:storage:blob:json\" index=azure category=SignInLogs | stats count by properties.deviceDetail.isManaged",
+                "queryParameters": {
+                    "earliest": "$tkn_timerange.earliest$",
+                    "latest": "$tkn_timerange.latest$"
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_audit_table": {
+            "name": "1",
+            "options": {
+                "query": "sourcetype=\"mscs:storage:blob:json\" index=azure category=SignInLogs \"properties.userPrincipalName\"=\"$tkn_upn$\" properties.resourceDisplayName=\"*$tkn_resource$*\" properties.appDisplayName=\"*$tkn_application$*\" properties.authenticationDetails{}.authenticationMethod=\"*$tkn_authentication_method$*\" properties.ipAddress=\"*$tkn_ip_address$*\" properties.networkLocationDetails{}.networkNames{}=\"*$tkn_location_name$*\" properties.location.countryOrRegion=\"*$tkn_country$*\" properties.deviceDetail.isManaged=\"*$tkn_is_device_managed$*\" properties.appliedConditionalAccessPolicies{}.displayName=\"*$tkn_ca_policy_name$*\" properties.deviceDetail.trustType=\"*$tkn_device_join_type$*\" \n\n| eval auth_count = max(coalesce(mvcount('properties.authenticationDetails{}.authenticationMethod'), 0), coalesce(mvcount('properties.authenticationDetails{}.succeeded'), 0)) \n| eval auth_idx = mvrange(1, auth_count + 1) \n\n| eval \"Authentication Method\" = mvmap(auth_idx, auth_idx . \". \" . if(isnull(mvindex('properties.authenticationDetails{}.authenticationMethod', auth_idx-1)) OR mvindex('properties.authenticationDetails{}.authenticationMethod', auth_idx-1)==\"\", \"-\", mvindex('properties.authenticationDetails{}.authenticationMethod', auth_idx-1))) \n| eval \"Authentication method detail\" = mvmap(auth_idx, auth_idx . \". \" . if(isnull(mvindex('properties.authenticationDetails{}.authenticationMethodDetail', auth_idx-1)) OR mvindex('properties.authenticationDetails{}.authenticationMethodDetail', auth_idx-1)==\"\", \"-\", mvindex('properties.authenticationDetails{}.authenticationMethodDetail', auth_idx-1))) \n| eval \"Authentication Method Succeeded\" = mvmap(auth_idx, auth_idx . \". \" . if(isnull(mvindex('properties.authenticationDetails{}.succeeded', auth_idx-1)) OR mvindex('properties.authenticationDetails{}.succeeded', auth_idx-1)==\"\", \"-\", mvindex('properties.authenticationDetails{}.succeeded', auth_idx-1))) \n| eval \"Authentication Method Result Detail\" = mvmap(auth_idx, auth_idx . \". \" . if(isnull(mvindex('properties.authenticationDetails{}.authenticationStepResultDetail', auth_idx-1)) OR mvindex('properties.authenticationDetails{}.authenticationStepResultDetail', auth_idx-1)==\"\", \"-\", mvindex('properties.authenticationDetails{}.authenticationStepResultDetail', auth_idx-1))) \n\n| rename properties.userDisplayName AS User properties.userPrincipalName AS \"UPN\" properties.resourceDisplayName AS Resource properties.appDisplayName AS Application properties.clientAppUsed AS \"Client App\" properties.ipAddress AS \"IP Address\" properties.networkLocationDetails{}.networkType AS \"Network Location Type\" properties.networkLocationDetails{}.networkNames{} AS \"Location Name\" properties.location.countryOrRegion AS \"Country\" properties.location.city AS \"City\" properties.location.state AS \"State\" properties.deviceDetail.operatingSystem AS \"OS\" properties.deviceDetail.browser AS \"Browser\" properties.deviceDetail.deviceId AS \"Device ID\" properties.deviceDetail.isManaged AS \"Is Device Managed\" properties.isInteractive AS \"Is Session Interactive\" properties.deviceDetail.trustType as \"Device Join Type\" \n\n| table _time User UPN Resource Application \"Client App\" \"IP Address\" \"Network Location Type\" \"Location Name\" \"Country\" \"City\" \"State\" \"OS\" \"Browser\" \"Device ID\" \"Is Device Managed\" \"Device Join Type\" \"Is Session Interactive\" \"Authentication Method\" \"Authentication method detail\" \"Authentication Method Succeeded\" \"Authentication Method Result Detail\"",
+                "queryParameters": {
+                    "earliest": "$tkn_timerange.earliest$",
+                    "latest": "$tkn_timerange.latest$"
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_cKpy9Sfy": {
+            "name": "15",
+            "options": {
+                "query": "sourcetype=\"mscs:storage:blob:json\" index=azure category=SignInLogs \"properties.userPrincipalName\"=\"$tkn_upn2$\" | stats count by properties.location.countryOrRegion \n|  rename properties.location.countryOrRegion as \"Country\"",
+                "queryParameters": {
+                    "earliest": "$tkn_timerange2.earliest$",
+                    "latest": "$tkn_timerange2.latest$"
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_client_app": {
+            "name": "2",
+            "options": {
+                "query": "sourcetype=\"mscs:storage:blob:json\" index=azure category=SignInLogs \"properties.userPrincipalName\"=\"$tkn_upn2$\" | stats count by properties.clientAppUsed \n|  rename properties.clientAppUsed as \"Client App\"",
+                "queryParameters": {
+                    "earliest": "$tkn_timerange2.earliest$",
+                    "latest": "$tkn_timerange2.latest$"
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_device_platform": {
+            "name": "3",
+            "options": {
+                "query": "sourcetype=\"mscs:storage:blob:json\" index=azure category=SignInLogs \"properties.userPrincipalName\"=\"$tkn_upn2$\" | stats count by properties.deviceDetail.operatingSystem \n|  rename properties.deviceDetail.operatingSystem as \"Device Platform\"",
+                "queryParameters": {
+                    "earliest": "$tkn_timerange2.earliest$",
+                    "latest": "$tkn_timerange2.latest$"
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_device_state": {
+            "name": "4",
+            "options": {
+                "query": "sourcetype=\"mscs:storage:blob:json\" index=azure category=SignInLogs \"properties.userPrincipalName\"=\"$tkn_upn2$\" | stats count by properties.deviceDetail.trustType \n|  rename properties.deviceDetail.trustType as \"Device State\"",
+                "queryParameters": {
+                    "earliest": "$tkn_timerange2.earliest$",
+                    "latest": "$tkn_timerange2.latest$"
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_enterprise_apps": {
+            "name": "5",
+            "options": {
+                "query": "sourcetype=\"mscs:storage:blob:json\" index=azure category=SignInLogs \"properties.userPrincipalName\"=\"$tkn_upn2$\" | rename properties.appDisplayName AS \"Enterprise Applications\" | stats count by \"Enterprise Applications\" | sort count desc",
+                "queryParameters": {
+                    "earliest": "$tkn_timerange2.earliest$",
+                    "latest": "$tkn_timerange2.latest$"
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_gWKmVZ4h": {
+            "name": "10",
+            "options": {
+                "query": "sourcetype=\"mscs:storage:blob:json\" index=azure category=SignInLogs | stats count by properties.location.countryOrRegion",
+                "queryParameters": {
+                    "earliest": "$tkn_timerange.earliest$",
+                    "latest": "$tkn_timerange.latest$"
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_gcnEwCpF": {
+            "name": "9",
+            "options": {
+                "query": "sourcetype=\"mscs:storage:blob:json\" index=azure category=SignInLogs | stats count by properties.networkLocationDetails{}.networkNames{}",
+                "queryParameters": {
+                    "earliest": "$tkn_timerange.earliest$",
+                    "latest": "$tkn_timerange.latest$"
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_locations": {
+            "name": "6",
+            "options": {
+                "query": "sourcetype=\"mscs:storage:blob:json\" index=azure category=SignInLogs \"properties.userPrincipalName\"=\"$tkn_upn2$\" \n| search resultSignature=\"SUCCESS\"\n| spath path=properties.location.geoCoordinates.latitude output=lat \n| spath path=properties.location.geoCoordinates.longitude output=lon \n| eval lat=tonumber(lat), lon=tonumber(lon) \n| geostats latfield=lat longfield=lon count",
+                "queryParameters": {
+                    "earliest": "$tkn_timerange2.earliest$",
+                    "latest": "$tkn_timerange2.latest$"
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_mHGg11j7": {
+            "name": "8",
+            "options": {
+                "query": "sourcetype=\"mscs:storage:blob:json\" index=azure category=SignInLogs | stats count by properties.authenticationDetails{}.authenticationMethod",
+                "queryParameters": {
+                    "earliest": "$tkn_timerange.earliest$",
+                    "latest": "$tkn_timerange.latest$"
+                }
+            },
+            "type": "ds.search"
+        }
+    },
+    "layout": {
+        "globalInputs": [],
+        "layoutDefinitions": {
+            "layout_1": {
+                "options": {
+                    "backgroundColor": "#0E1217",
+                    "display": "fit-to-width",
+                    "height": 2200,
+                    "width": 1900
+                },
+                "structure": [
+                    {
+                        "item": "viz_JcTQn7C9",
+                        "position": {
+                            "h": 1190,
+                            "w": 1900,
+                            "x": 0,
+                            "y": 1010
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_nl3imXXI",
+                        "position": {
+                            "h": 320,
+                            "w": 1880,
+                            "x": 10,
+                            "y": 1870
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_vD743hhs",
+                        "position": {
+                            "h": 320,
+                            "w": 1880,
+                            "x": 10,
+                            "y": 1870
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_1QHnRMIQ",
+                        "position": {
+                            "h": 1000,
+                            "w": 1900,
+                            "x": 0,
+                            "y": 0
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_vvLRBUgY",
+                        "position": {
+                            "h": 580,
+                            "w": 1880,
+                            "x": 10,
+                            "y": 400
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_jRYnHl9V",
+                        "position": {
+                            "h": 300,
+                            "w": 1880,
+                            "x": 10,
+                            "y": 90
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "tkn_timerange2",
+                        "position": {
+                            "h": 90,
+                            "w": 220,
+                            "x": 10,
+                            "y": 0
+                        },
+                        "type": "input"
+                    },
+                    {
+                        "item": "tkn_upn2",
+                        "position": {
+                            "h": 90,
+                            "w": 220,
+                            "x": 240,
+                            "y": 0
+                        },
+                        "type": "input"
+                    },
+                    {
+                        "item": "viz_device_state",
+                        "position": {
+                            "h": 280,
+                            "w": 210,
+                            "x": 740,
+                            "y": 100
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_client_app",
+                        "position": {
+                            "h": 280,
+                            "w": 210,
+                            "x": 1210,
+                            "y": 100
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_locations",
+                        "position": {
+                            "h": 540,
+                            "w": 930,
+                            "x": 20,
+                            "y": 420
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_enterprise_apps",
+                        "position": {
+                            "h": 290,
+                            "w": 400,
+                            "x": 1480,
+                            "y": 100
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "tkn_timerange",
+                        "position": {
+                            "h": 90,
+                            "w": 220,
+                            "x": 10,
+                            "y": 1060
+                        },
+                        "type": "input"
+                    },
+                    {
+                        "item": "tkn_upn",
+                        "position": {
+                            "h": 90,
+                            "w": 220,
+                            "x": 240,
+                            "y": 1060
+                        },
+                        "type": "input"
+                    },
+                    {
+                        "item": "tkn_resource",
+                        "position": {
+                            "h": 90,
+                            "w": 220,
+                            "x": 470,
+                            "y": 1060
+                        },
+                        "type": "input"
+                    },
+                    {
+                        "item": "tkn_application",
+                        "position": {
+                            "h": 90,
+                            "w": 220,
+                            "x": 700,
+                            "y": 1060
+                        },
+                        "type": "input"
+                    },
+                    {
+                        "item": "tkn_ip_address",
+                        "position": {
+                            "h": 90,
+                            "w": 220,
+                            "x": 930,
+                            "y": 1060
+                        },
+                        "type": "input"
+                    },
+                    {
+                        "item": "shape_box6",
+                        "position": {
+                            "h": 630,
+                            "w": 1880,
+                            "x": 10,
+                            "y": 1230
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_audit_table",
+                        "position": {
+                            "h": 610,
+                            "w": 1860,
+                            "x": 20,
+                            "y": 1240
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_device_platform",
+                        "position": {
+                            "h": 280,
+                            "w": 210,
+                            "x": 970,
+                            "y": 100
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_BYxZMf8h",
+                        "position": {
+                            "h": 550,
+                            "w": 910,
+                            "x": 970,
+                            "y": 420
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "input_kmb1AFmy",
+                        "position": {
+                            "h": 82,
+                            "w": 198,
+                            "x": 1620,
+                            "y": 1060
+                        },
+                        "type": "input"
+                    },
+                    {
+                        "item": "input_dJQYBXaM",
+                        "position": {
+                            "h": 82,
+                            "w": 220,
+                            "x": 1390,
+                            "y": 1060
+                        },
+                        "type": "input"
+                    },
+                    {
+                        "item": "input_KCL4HEwD",
+                        "position": {
+                            "h": 82,
+                            "w": 220,
+                            "x": 10,
+                            "y": 1140
+                        },
+                        "type": "input"
+                    },
+                    {
+                        "item": "input_OUqgPHiE",
+                        "position": {
+                            "h": 82,
+                            "w": 220,
+                            "x": 1160,
+                            "y": 1060
+                        },
+                        "type": "input"
+                    },
+                    {
+                        "item": "input_RaA7gLrl",
+                        "position": {
+                            "h": 82,
+                            "w": 220,
+                            "x": 470,
+                            "y": 1140
+                        },
+                        "type": "input"
+                    },
+                    {
+                        "item": "input_wHIrVUa1",
+                        "position": {
+                            "h": 82,
+                            "w": 220,
+                            "x": 240,
+                            "y": 1140
+                        },
+                        "type": "input"
+                    },
+                    {
+                        "item": "viz_NN4rJSLp",
+                        "position": {
+                            "h": 290,
+                            "w": 210,
+                            "x": 510,
+                            "y": 100
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_rY3hoyIZ",
+                        "position": {
+                            "h": 280,
+                            "w": 460,
+                            "x": 30,
+                            "y": 100
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_Q6lHOVow",
+                        "position": {
+                            "h": 30,
+                            "w": 210,
+                            "x": 2,
+                            "y": 1030
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_4vD8vMWB",
+                        "position": {
+                            "h": 280,
+                            "w": 1860,
+                            "x": 20,
+                            "y": 1880
+                        },
+                        "type": "block"
+                    }
+                ],
+                "type": "absolute"
+            }
+        },
+        "tabs": {
+            "items": [
+                {
+                    "label": "User SignIn Insights",
+                    "layoutId": "layout_1"
+                }
+            ]
+        }
+    }
+}
