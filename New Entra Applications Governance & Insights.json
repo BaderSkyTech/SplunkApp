@@ -1,0 +1,2314 @@
+{
+    "title": "New Entra Applications Governance & Insights",
+    "description": "",
+    "inputs": {
+        "input_global_trp": {
+            "options": {
+                "defaultValue": "-24h@h,now",
+                "token": "global_time"
+            },
+            "title": "Global Time Range",
+            "type": "input.timerange"
+        }
+    },
+    "defaults": {
+        "dataSources": {
+            "ds.search": {
+                "options": {
+                    "queryParameters": {
+                        "earliest": "$global_time.earliest$",
+                        "latest": "$global_time.latest$"
+                    }
+                }
+            },
+            "ds.spl2": {
+                "options": {
+                    "queryParameters": {
+                        "earliest": "$global_time.earliest$",
+                        "latest": "$global_time.latest$"
+                    }
+                }
+            }
+        },
+        "visualizations": {
+            "global": {
+                "showProgressBar": true
+            }
+        }
+    },
+    "visualizations": {
+        "deco_hero_app_background": {
+            "options": {
+                "fillColor": "#0A2342",
+                "fillOpacity": 1,
+                "rx": 16,
+                "ry": 16,
+                "strokeColor": "transparent",
+                "strokeOpacity": 0,
+                "strokeWidth": 1
+            },
+            "type": "splunk.rectangle"
+        },
+        "deco_hero_app_subtitle": {
+            "options": {
+                "backgroundColor": "#0A2342",
+                "customFontSize": 12,
+                "fontColor": "#FFFFFF",
+                "fontFamily": "Splunk Platform Sans",
+                "fontSize": "custom",
+                "markdown": "Credential inventory, expiry posture and lifecycle activity"
+            },
+            "type": "splunk.markdown"
+        },
+        "deco_hero_app_title": {
+            "options": {
+                "backgroundColor": "#0A2342",
+                "customFontSize": 14,
+                "fontColor": "#FFFFFF",
+                "fontFamily": "Splunk Platform Sans",
+                "fontSize": "custom",
+                "markdown": "# App Registrations"
+            },
+            "type": "splunk.markdown"
+        },
+        "deco_hero_enterprise_background": {
+            "options": {
+                "fillColor": "#0A2342",
+                "fillOpacity": 1,
+                "rx": 16,
+                "ry": 16,
+                "strokeColor": "transparent",
+                "strokeOpacity": 0,
+                "strokeWidth": 1
+            },
+            "type": "splunk.rectangle"
+        },
+        "deco_hero_enterprise_subtitle": {
+            "options": {
+                "backgroundColor": "#0A2342",
+                "customFontSize": 12,
+                "fontColor": "#FFFFFF",
+                "fontFamily": "Splunk Platform Sans",
+                "fontSize": "custom",
+                "markdown": "Service principal posture, SSO coverage and governance exceptions"
+            },
+            "type": "splunk.markdown"
+        },
+        "deco_hero_enterprise_title": {
+            "options": {
+                "backgroundColor": "#0A2342",
+                "customFontSize": 14,
+                "fontColor": "#FFFFFF",
+                "fontFamily": "Splunk Platform Sans",
+                "fontSize": "custom",
+                "markdown": "# Enterprise Applications"
+            },
+            "type": "splunk.markdown"
+        },
+        "deco_section_app_activity": {
+            "options": {
+                "backgroundColor": "#E6F6F3",
+                "customFontSize": 13,
+                "fontColor": "#087F8C",
+                "fontFamily": "Splunk Platform Sans",
+                "fontSize": "custom",
+                "markdown": "### 05  REGISTRATION ACTIVITY"
+            },
+            "type": "splunk.markdown"
+        },
+        "deco_section_app_certificates": {
+            "options": {
+                "backgroundColor": "#FFF0E0",
+                "customFontSize": 13,
+                "fontColor": "#C2410C",
+                "fontFamily": "Splunk Platform Sans",
+                "fontSize": "custom",
+                "markdown": "### 02  CERTIFICATE EXPOSURE"
+            },
+            "type": "splunk.markdown"
+        },
+        "deco_section_app_deletion": {
+            "options": {
+                "backgroundColor": "#FDE8E7",
+                "customFontSize": 13,
+                "fontColor": "#B42318",
+                "fontFamily": "Splunk Platform Sans",
+                "fontSize": "custom",
+                "markdown": "### 06  DELETION ACTIVITY"
+            },
+            "type": "splunk.markdown"
+        },
+        "deco_section_app_inventory": {
+            "options": {
+                "backgroundColor": "#D9EAFE",
+                "customFontSize": 13,
+                "fontColor": "#0B5CAD",
+                "fontFamily": "Splunk Platform Sans",
+                "fontSize": "custom",
+                "markdown": "### 01  INVENTORY OVERVIEW"
+            },
+            "type": "splunk.markdown"
+        },
+        "deco_section_app_lifecycle": {
+            "options": {
+                "backgroundColor": "#E0F2FE",
+                "customFontSize": 13,
+                "fontColor": "#0B5CAD",
+                "fontFamily": "Splunk Platform Sans",
+                "fontSize": "custom",
+                "markdown": "### 04  CREDENTIAL LIFECYCLE OUTLOOK"
+            },
+            "type": "splunk.markdown"
+        },
+        "deco_section_app_secrets": {
+            "options": {
+                "backgroundColor": "#F0E7FF",
+                "customFontSize": 13,
+                "fontColor": "#6941C6",
+                "fontFamily": "Splunk Platform Sans",
+                "fontSize": "custom",
+                "markdown": "### 03  CLIENT SECRET EXPOSURE"
+            },
+            "type": "splunk.markdown"
+        },
+        "deco_section_enterprise_deletion": {
+            "options": {
+                "backgroundColor": "#FDE8E7",
+                "customFontSize": 13,
+                "fontColor": "#B42318",
+                "fontFamily": "Splunk Platform Sans",
+                "fontSize": "custom",
+                "markdown": "### 03  DELETION ACTIVITY"
+            },
+            "type": "splunk.markdown"
+        },
+        "deco_section_enterprise_governance": {
+            "options": {
+                "backgroundColor": "#F0E7FF",
+                "customFontSize": 13,
+                "fontColor": "#6941C6",
+                "fontFamily": "Splunk Platform Sans",
+                "fontSize": "custom",
+                "markdown": "### 04  GOVERNANCE EXCEPTIONS"
+            },
+            "type": "splunk.markdown"
+        },
+        "deco_section_enterprise_identity": {
+            "options": {
+                "backgroundColor": "#E6F6F3",
+                "customFontSize": 13,
+                "fontColor": "#087F8C",
+                "fontFamily": "Splunk Platform Sans",
+                "fontSize": "custom",
+                "markdown": "### 02  SSO & CREATION ACTIVITY"
+            },
+            "type": "splunk.markdown"
+        },
+        "deco_section_enterprise_inventory": {
+            "options": {
+                "backgroundColor": "#D9EAFE",
+                "customFontSize": 13,
+                "fontColor": "#0B5CAD",
+                "fontFamily": "Splunk Platform Sans",
+                "fontSize": "custom",
+                "markdown": "### 01  INVENTORY & CERTIFICATE POSTURE"
+            },
+            "type": "splunk.markdown"
+        },
+        "deco_shadow_07yncQlL": {
+            "options": {
+                "fillColor": "#8FA4BA",
+                "fillOpacity": 0.2,
+                "rx": 8,
+                "ry": 8,
+                "strokeColor": "transparent",
+                "strokeOpacity": 0,
+                "strokeWidth": 1
+            },
+            "type": "splunk.rectangle"
+        },
+        "deco_shadow_68g5fro4": {
+            "options": {
+                "fillColor": "#8FA4BA",
+                "fillOpacity": 0.2,
+                "rx": 8,
+                "ry": 8,
+                "strokeColor": "transparent",
+                "strokeOpacity": 0,
+                "strokeWidth": 1
+            },
+            "type": "splunk.rectangle"
+        },
+        "deco_shadow_BCgWiWkb": {
+            "options": {
+                "fillColor": "#8FA4BA",
+                "fillOpacity": 0.2,
+                "rx": 8,
+                "ry": 8,
+                "strokeColor": "transparent",
+                "strokeOpacity": 0,
+                "strokeWidth": 1
+            },
+            "type": "splunk.rectangle"
+        },
+        "deco_shadow_BsNG9unq": {
+            "options": {
+                "fillColor": "#8FA4BA",
+                "fillOpacity": 0.2,
+                "rx": 8,
+                "ry": 8,
+                "strokeColor": "transparent",
+                "strokeOpacity": 0,
+                "strokeWidth": 1
+            },
+            "type": "splunk.rectangle"
+        },
+        "deco_shadow_Eu5XcvoO": {
+            "options": {
+                "fillColor": "#8FA4BA",
+                "fillOpacity": 0.2,
+                "rx": 8,
+                "ry": 8,
+                "strokeColor": "transparent",
+                "strokeOpacity": 0,
+                "strokeWidth": 1
+            },
+            "type": "splunk.rectangle"
+        },
+        "deco_shadow_GdSNpfGc": {
+            "options": {
+                "fillColor": "#8FA4BA",
+                "fillOpacity": 0.2,
+                "rx": 8,
+                "ry": 8,
+                "strokeColor": "transparent",
+                "strokeOpacity": 0,
+                "strokeWidth": 1
+            },
+            "type": "splunk.rectangle"
+        },
+        "deco_shadow_GrM3T83j": {
+            "options": {
+                "fillColor": "#8FA4BA",
+                "fillOpacity": 0.2,
+                "rx": 8,
+                "ry": 8,
+                "strokeColor": "transparent",
+                "strokeOpacity": 0,
+                "strokeWidth": 1
+            },
+            "type": "splunk.rectangle"
+        },
+        "deco_shadow_ICLWFFq3": {
+            "options": {
+                "fillColor": "#8FA4BA",
+                "fillOpacity": 0.2,
+                "rx": 8,
+                "ry": 8,
+                "strokeColor": "transparent",
+                "strokeOpacity": 0,
+                "strokeWidth": 1
+            },
+            "type": "splunk.rectangle"
+        },
+        "deco_shadow_QSvJFbe5": {
+            "options": {
+                "fillColor": "#8FA4BA",
+                "fillOpacity": 0.2,
+                "rx": 8,
+                "ry": 8,
+                "strokeColor": "transparent",
+                "strokeOpacity": 0,
+                "strokeWidth": 1
+            },
+            "type": "splunk.rectangle"
+        },
+        "deco_shadow_SfDHuFbJ": {
+            "options": {
+                "fillColor": "#8FA4BA",
+                "fillOpacity": 0.2,
+                "rx": 8,
+                "ry": 8,
+                "strokeColor": "transparent",
+                "strokeOpacity": 0,
+                "strokeWidth": 1
+            },
+            "type": "splunk.rectangle"
+        },
+        "deco_shadow_TBF96Beh": {
+            "options": {
+                "fillColor": "#8FA4BA",
+                "fillOpacity": 0.2,
+                "rx": 8,
+                "ry": 8,
+                "strokeColor": "transparent",
+                "strokeOpacity": 0,
+                "strokeWidth": 1
+            },
+            "type": "splunk.rectangle"
+        },
+        "deco_shadow_TK4dcITL": {
+            "options": {
+                "fillColor": "#8FA4BA",
+                "fillOpacity": 0.2,
+                "rx": 8,
+                "ry": 8,
+                "strokeColor": "transparent",
+                "strokeOpacity": 0,
+                "strokeWidth": 1
+            },
+            "type": "splunk.rectangle"
+        },
+        "deco_shadow_Tw9bgQin": {
+            "options": {
+                "fillColor": "#8FA4BA",
+                "fillOpacity": 0.2,
+                "rx": 8,
+                "ry": 8,
+                "strokeColor": "transparent",
+                "strokeOpacity": 0,
+                "strokeWidth": 1
+            },
+            "type": "splunk.rectangle"
+        },
+        "deco_shadow_XWonNbA3": {
+            "options": {
+                "fillColor": "#8FA4BA",
+                "fillOpacity": 0.2,
+                "rx": 8,
+                "ry": 8,
+                "strokeColor": "transparent",
+                "strokeOpacity": 0,
+                "strokeWidth": 1
+            },
+            "type": "splunk.rectangle"
+        },
+        "deco_shadow_YP0t98aO": {
+            "options": {
+                "fillColor": "#8FA4BA",
+                "fillOpacity": 0.2,
+                "rx": 8,
+                "ry": 8,
+                "strokeColor": "transparent",
+                "strokeOpacity": 0,
+                "strokeWidth": 1
+            },
+            "type": "splunk.rectangle"
+        },
+        "deco_shadow_gZ2pQo4b": {
+            "options": {
+                "fillColor": "#8FA4BA",
+                "fillOpacity": 0.2,
+                "rx": 8,
+                "ry": 8,
+                "strokeColor": "transparent",
+                "strokeOpacity": 0,
+                "strokeWidth": 1
+            },
+            "type": "splunk.rectangle"
+        },
+        "deco_shadow_gdEN9QmX": {
+            "options": {
+                "fillColor": "#8FA4BA",
+                "fillOpacity": 0.2,
+                "rx": 8,
+                "ry": 8,
+                "strokeColor": "transparent",
+                "strokeOpacity": 0,
+                "strokeWidth": 1
+            },
+            "type": "splunk.rectangle"
+        },
+        "deco_shadow_gqAPGVxv": {
+            "options": {
+                "fillColor": "#8FA4BA",
+                "fillOpacity": 0.2,
+                "rx": 8,
+                "ry": 8,
+                "strokeColor": "transparent",
+                "strokeOpacity": 0,
+                "strokeWidth": 1
+            },
+            "type": "splunk.rectangle"
+        },
+        "deco_shadow_kMOVgmnv": {
+            "options": {
+                "fillColor": "#8FA4BA",
+                "fillOpacity": 0.2,
+                "rx": 8,
+                "ry": 8,
+                "strokeColor": "transparent",
+                "strokeOpacity": 0,
+                "strokeWidth": 1
+            },
+            "type": "splunk.rectangle"
+        },
+        "deco_shadow_qhfv7zty": {
+            "options": {
+                "fillColor": "#8FA4BA",
+                "fillOpacity": 0.2,
+                "rx": 8,
+                "ry": 8,
+                "strokeColor": "transparent",
+                "strokeOpacity": 0,
+                "strokeWidth": 1
+            },
+            "type": "splunk.rectangle"
+        },
+        "deco_shadow_rO56kdbY": {
+            "options": {
+                "fillColor": "#8FA4BA",
+                "fillOpacity": 0.2,
+                "rx": 8,
+                "ry": 8,
+                "strokeColor": "transparent",
+                "strokeOpacity": 0,
+                "strokeWidth": 1
+            },
+            "type": "splunk.rectangle"
+        },
+        "deco_shadow_rdj3QACp": {
+            "options": {
+                "fillColor": "#8FA4BA",
+                "fillOpacity": 0.2,
+                "rx": 8,
+                "ry": 8,
+                "strokeColor": "transparent",
+                "strokeOpacity": 0,
+                "strokeWidth": 1
+            },
+            "type": "splunk.rectangle"
+        },
+        "deco_shadow_xCnWqcCu": {
+            "options": {
+                "fillColor": "#8FA4BA",
+                "fillOpacity": 0.2,
+                "rx": 8,
+                "ry": 8,
+                "strokeColor": "transparent",
+                "strokeOpacity": 0,
+                "strokeWidth": 1
+            },
+            "type": "splunk.rectangle"
+        },
+        "deco_shadow_xpiZPC6h": {
+            "options": {
+                "fillColor": "#8FA4BA",
+                "fillOpacity": 0.2,
+                "rx": 8,
+                "ry": 8,
+                "strokeColor": "transparent",
+                "strokeOpacity": 0,
+                "strokeWidth": 1
+            },
+            "type": "splunk.rectangle"
+        },
+        "viz_07yncQlL": {
+            "containerOptions": {
+                "description": {
+                    "color": "#61758A"
+                },
+                "title": {
+                    "color": "#24364B"
+                }
+            },
+            "dataSources": {
+                "primary": "ds_IZlcBTeq"
+            },
+            "options": {
+                "align": "center",
+                "backgroundColor": "#FFFFFF",
+                "majorColor": "#6941C6",
+                "majorFontSize": 42,
+                "numberPrecision": 0,
+                "shouldUseThousandSeparators": true,
+                "sparklineDisplay": "off",
+                "trendDisplay": "off"
+            },
+            "title": "Applications Using Client Secrets",
+            "type": "splunk.singlevalue"
+        },
+        "viz_68g5fro4": {
+            "containerOptions": {
+                "description": {
+                    "color": "#61758A"
+                },
+                "title": {
+                    "color": "#24364B"
+                }
+            },
+            "dataSources": {
+                "primary": "ds_zMFXmxwv"
+            },
+            "options": {
+                "align": "center",
+                "backgroundColor": "#FFFFFF",
+                "majorColor": "#0B5CAD",
+                "majorFontSize": 42,
+                "numberPrecision": 0,
+                "shouldUseThousandSeparators": true,
+                "sparklineDisplay": "off",
+                "trendDisplay": "off"
+            },
+            "showLastUpdated": false,
+            "showProgressBar": true,
+            "title": "Total App Registration",
+            "type": "splunk.singlevalue"
+        },
+        "viz_BCgWiWkb": {
+            "containerOptions": {
+                "description": {
+                    "color": "#61758A"
+                },
+                "title": {
+                    "color": "#24364B"
+                }
+            },
+            "dataSources": {
+                "primary": "ds_1UEtUbmZ"
+            },
+            "options": {
+                "areaOpacity": 0.18,
+                "backgroundColor": "#FFFFFF",
+                "dataValuesDisplay": "off",
+                "legendDisplay": "off",
+                "legendMode": "standard",
+                "legendTruncation": "ellipsisMiddle",
+                "lineWidth": 3,
+                "nullValueDisplay": "gaps",
+                "seriesColors": [
+                    "#0B5CAD"
+                ],
+                "showIndependentYRanges": false,
+                "showOverlayY2Axis": false,
+                "showRoundedY2AxisLabels": false,
+                "showSplitSeries": false,
+                "showXMajorGridLines": false,
+                "showY2MajorGridLines": true,
+                "showYMajorGridLines": true,
+                "stackMode": "auto",
+                "xAxisLabelRotation": 0,
+                "xAxisTitleVisibility": "hide",
+                "y2AxisAbbreviation": "auto",
+                "y2AxisScale": "linear",
+                "y2AxisTitleVisibility": "hide",
+                "yAxisAbbreviation": "auto",
+                "yAxisScale": "linear",
+                "yAxisTitleVisibility": "hide"
+            },
+            "title": "App Registration Trend",
+            "type": "splunk.area"
+        },
+        "viz_BsNG9unq": {
+            "containerOptions": {
+                "description": {
+                    "color": "#61758A"
+                },
+                "title": {
+                    "color": "#24364B"
+                }
+            },
+            "dataSources": {
+                "primary": "ds_NlXd9yjP"
+            },
+            "eventHandlers": [
+                {
+                    "options": {
+                        "earliest": "auto",
+                        "latest": "auto",
+                        "newTab": true,
+                        "query": "index=ms_entra_id (sourcetype=\"microsoft:applications\")\r\n| spath input=_raw path=id output=obj_id\r\n| spath input=_raw path=appId output=app_id\r\n| spath input=_raw path=displayName output=app_name\r\n| eval k = sourcetype . \"::\" . obj_id\r\n| stats latest(_raw) AS raw latest(app_name) AS app_name latest(app_id) as app_id BY k\r\n| spath input=raw path=keyCredentials{}.keyId output=key_id\r\n| spath input=raw path=keyCredentials{}.endDateTime output=end_raw\r\n| eval z = mvzip(key_id, end_raw, \"|~|\")\r\n| mvexpand z\r\n| eval p = split(z, \"|~|\"), key_id = mvindex(p,0), end_raw = mvindex(p,1)\r\n| eval ts = replace(end_raw, \"[.][0-9]+\", \"\")\r\n| eval exp = coalesce(strptime(ts,\"%Y-%m-%dT%H:%M:%S%z\"), strptime(ts,\"%Y-%m-%dT%H:%M:%SZ\"))\r\n| where exp >= now() AND exp <= now() + (30 * 86400)\r\n| eval expires_at = strftime(exp,\"%Y-%m-%d %H:%M:%S\")\r\n| eval days_remaining = round((exp - now()) / 86400, 1)\r\n| table app_name app_id key_id expires_at days_remaining\r\n| sort days_remaining",
+                        "type": "custom"
+                    },
+                    "type": "drilldown.linkToSearch"
+                }
+            ],
+            "options": {
+                "align": "center",
+                "backgroundColor": "#FFFAE6",
+                "majorColor": "#9A6700",
+                "majorFontSize": 42,
+                "numberPrecision": 0,
+                "shouldUseThousandSeparators": true,
+                "sparklineDisplay": "off",
+                "trendDisplay": "off"
+            },
+            "title": "Certificate Expiry - 30 Days",
+            "type": "splunk.singlevalue"
+        },
+        "viz_Eu5XcvoO": {
+            "containerOptions": {
+                "description": {
+                    "color": "#61758A"
+                },
+                "title": {
+                    "color": "#24364B"
+                }
+            },
+            "context": {},
+            "dataSources": {
+                "primary": "ds_iT2H7YWs"
+            },
+            "options": {
+                "align": "center",
+                "backgroundColor": "#FFF4E5",
+                "majorColor": "#C2410C",
+                "majorFontSize": 42,
+                "numberPrecision": 0,
+                "shouldUseThousandSeparators": true,
+                "sparklineDisplay": "off",
+                "trendDisplay": "off"
+            },
+            "showLastUpdated": false,
+            "showProgressBar": true,
+            "title": "Certs expiring in 10 Days",
+            "type": "splunk.singlevalue"
+        },
+        "viz_GdSNpfGc": {
+            "containerOptions": {
+                "description": {
+                    "color": "#61758A"
+                },
+                "title": {
+                    "color": "#24364B"
+                }
+            },
+            "dataSources": {
+                "primary": "ds_dIXLczBk"
+            },
+            "options": {
+                "align": "center",
+                "backgroundColor": "#FFF1F0",
+                "majorColor": "#B42318",
+                "majorFontSize": 42,
+                "numberPrecision": 0,
+                "shouldUseThousandSeparators": true,
+                "sparklineDisplay": "off",
+                "trendDisplay": "off"
+            },
+            "showLastUpdated": false,
+            "showProgressBar": true,
+            "title": "Certificates Expired",
+            "type": "splunk.singlevalue"
+        },
+        "viz_GrM3T83j": {
+            "containerOptions": {
+                "description": {
+                    "color": "#61758A"
+                },
+                "title": {
+                    "color": "#24364B"
+                }
+            },
+            "dataSources": {
+                "primary": "ds_GQ5cM9do"
+            },
+            "options": {
+                "areaOpacity": 0.18,
+                "backgroundColor": "#FFFFFF",
+                "dataValuesDisplay": "off",
+                "legendDisplay": "off",
+                "legendMode": "standard",
+                "legendTruncation": "ellipsisMiddle",
+                "lineWidth": 3,
+                "nullValueDisplay": "gaps",
+                "seriesColors": [
+                    "#087F8C"
+                ],
+                "showIndependentYRanges": false,
+                "showOverlayY2Axis": false,
+                "showRoundedY2AxisLabels": false,
+                "showSplitSeries": false,
+                "showXMajorGridLines": false,
+                "showY2MajorGridLines": true,
+                "showYMajorGridLines": true,
+                "stackMode": "auto",
+                "xAxisLabelRotation": 0,
+                "xAxisTitleVisibility": "hide",
+                "y2AxisAbbreviation": "auto",
+                "y2AxisScale": "linear",
+                "y2AxisTitleVisibility": "hide",
+                "yAxisAbbreviation": "auto",
+                "yAxisScale": "linear",
+                "yAxisTitleVisibility": "hide"
+            },
+            "title": "Enterprise Applications Creation Trend",
+            "type": "splunk.area"
+        },
+        "viz_ICLWFFq3": {
+            "containerOptions": {
+                "description": {
+                    "color": "#61758A"
+                },
+                "title": {
+                    "color": "#24364B"
+                }
+            },
+            "dataSources": {
+                "primary": "ds_THbEw6HW"
+            },
+            "options": {
+                "areaOpacity": 0.18,
+                "backgroundColor": "#FFFFFF",
+                "legendDisplay": "off",
+                "lineWidth": 3,
+                "seriesColors": [
+                    "#6941C6"
+                ],
+                "showXMajorGridLines": false,
+                "showYMajorGridLines": true,
+                "xAxisTitleVisibility": "hide",
+                "y2AxisTitleVisibility": "hide",
+                "yAxisTitleVisibility": "hide"
+            },
+            "showLastUpdated": false,
+            "showProgressBar": true,
+            "title": "Secret Expiry Trend",
+            "type": "splunk.area"
+        },
+        "viz_QSvJFbe5": {
+            "containerOptions": {
+                "description": {
+                    "color": "#61758A"
+                },
+                "title": {
+                    "color": "#24364B"
+                }
+            },
+            "context": {
+                "convertedColorRange": [
+                    {
+                        "from": 100,
+                        "value": "#dc4e41"
+                    },
+                    {
+                        "from": 70,
+                        "to": 100,
+                        "value": "#f1813f"
+                    },
+                    {
+                        "from": 30,
+                        "to": 70,
+                        "value": "#f8be34"
+                    },
+                    {
+                        "from": 0,
+                        "to": 30,
+                        "value": "#0877a6"
+                    },
+                    {
+                        "to": 0,
+                        "value": "#53a051"
+                    }
+                ]
+            },
+            "dataSources": {
+                "primary": "ds_ioSDfZN7"
+            },
+            "options": {
+                "align": "center",
+                "backgroundColor": "#FFF1F0",
+                "majorColor": "#B42318",
+                "majorFontSize": 42,
+                "numberPrecision": 0,
+                "shouldUseThousandSeparators": true,
+                "sparklineDisplay": "off",
+                "trendDisplay": "off",
+                "unitPosition": "after"
+            },
+            "title": "SPN Hard Delete - Next 30 Days",
+            "type": "splunk.singlevalue"
+        },
+        "viz_SfDHuFbJ": {
+            "containerOptions": {
+                "description": {
+                    "color": "#61758A"
+                },
+                "title": {
+                    "color": "#24364B"
+                }
+            },
+            "dataSources": {
+                "primary": "ds_cNQ6ceLp"
+            },
+            "eventHandlers": [
+                {
+                    "options": {
+                        "earliest": "auto",
+                        "latest": "auto",
+                        "newTab": true,
+                        "query": "index=ms_entra_id (sourcetype=\"microsoft:applications\")\r\n| spath input=_raw path=id output=obj_id\r\n| spath input=_raw path=appId output=app_id\r\n| spath input=_raw path=displayName output=app_name\r\n| eval k = sourcetype . \"::\" . obj_id\r\n| stats latest(_raw) AS raw latest(app_name) AS app_name latest(app_id) as app_id BY k\r\n| spath input=raw path=passwordCredentials{}.keyId output=key_id\r\n| spath input=raw path=passwordCredentials{}.endDateTime output=end_raw\r\n| eval z = mvzip(key_id, end_raw, \"|~|\")\r\n| mvexpand z\r\n| eval p = split(z, \"|~|\"), key_id = mvindex(p,0), end_raw = mvindex(p,1)\r\n| eval ts = replace(end_raw, \"[.][0-9]+\", \"\")\r\n| eval exp = coalesce(strptime(ts,\"%Y-%m-%dT%H:%M:%S%z\"), strptime(ts,\"%Y-%m-%dT%H:%M:%SZ\"))\r\n| where exp >= now() AND exp <= now() + (30 * 86400)\r\n| eval expires_at = strftime(exp,\"%Y-%m-%d %H:%M:%S\")\r\n| eval days_remaining = round((exp - now()) / 86400, 1)\r\n| table app_name app_id key_id expires_at days_remaining\r\n| sort days_remaining",
+                        "type": "custom"
+                    },
+                    "type": "drilldown.linkToSearch"
+                }
+            ],
+            "options": {
+                "align": "center",
+                "backgroundColor": "#FFFAE6",
+                "majorColor": "#9A6700",
+                "majorFontSize": 42,
+                "numberPrecision": 0,
+                "shouldUseThousandSeparators": true,
+                "sparklineDisplay": "off",
+                "trendDisplay": "off"
+            },
+            "title": "Secret Expiry - 30 Days",
+            "type": "splunk.singlevalue"
+        },
+        "viz_TBF96Beh": {
+            "containerOptions": {
+                "description": {
+                    "color": "#61758A"
+                },
+                "title": {
+                    "color": "#24364B"
+                }
+            },
+            "context": {},
+            "dataSources": {
+                "primary": "ds_2HkfbAJM"
+            },
+            "options": {
+                "align": "center",
+                "backgroundColor": "#EEF6FF",
+                "majorColor": "#0B5CAD",
+                "majorFontSize": 42,
+                "numberPrecision": 0,
+                "shouldUseThousandSeparators": true,
+                "sparklineDisplay": "off",
+                "trendDisplay": "off"
+            },
+            "showLastUpdated": false,
+            "showProgressBar": true,
+            "title": "Certs expiring in 90 Days",
+            "type": "splunk.singlevalue"
+        },
+        "viz_TK4dcITL": {
+            "containerOptions": {
+                "description": {
+                    "color": "#61758A"
+                },
+                "title": {
+                    "color": "#24364B"
+                },
+                "visibility": {}
+            },
+            "dataSources": {
+                "primary": "ds_ryMNrdZr"
+            },
+            "options": {
+                "backgroundColor": "#FFFFFF",
+                "labelDisplay": "valuesAndPercentage",
+                "seriesColors": [
+                    "#0B5CAD",
+                    "#087F8C",
+                    "#6941C6",
+                    "#D97706",
+                    "#B42318"
+                ],
+                "showDonutHole": true
+            },
+            "showLastUpdated": false,
+            "showProgressBar": true,
+            "title": "SSO Mode",
+            "type": "splunk.pie"
+        },
+        "viz_Tw9bgQin": {
+            "containerOptions": {
+                "description": {
+                    "color": "#61758A"
+                },
+                "title": {
+                    "color": "#24364B"
+                }
+            },
+            "context": {
+                "convertedColorRange": [
+                    {
+                        "from": 8,
+                        "value": "#dc4e41"
+                    },
+                    {
+                        "from": 4,
+                        "to": 8,
+                        "value": "#555"
+                    },
+                    {
+                        "from": 3,
+                        "to": 4,
+                        "value": "#f1813f"
+                    },
+                    {
+                        "from": 2,
+                        "to": 3,
+                        "value": "#f8be34"
+                    },
+                    {
+                        "from": 1,
+                        "to": 2,
+                        "value": "#0877a6"
+                    },
+                    {
+                        "to": 1,
+                        "value": "#53a051"
+                    }
+                ]
+            },
+            "dataSources": {
+                "primary": "ds_8fCnVLFx"
+            },
+            "eventHandlers": [
+                {
+                    "options": {
+                        "earliest": "auto",
+                        "latest": "auto",
+                        "newTab": false,
+                        "query": "index=ms_entra_id sourcetype=\"microsoft:servicePrincipals\" \r\n| spath input=_raw path=tags{} output=tags \r\n| spath input=_raw path=appId output=appId \r\n| spath input=_raw path=id output=obj_id \r\n| spath input=_raw path=displayName output=displayName \r\n| spath input=_raw path=notificationEmailAddresses{} output=notification_email \r\n| eval tags=if(isnull(tags), \"\", tags) \r\n| eval exclude_pva=if(mvfind(tags, \"^power-virtual-agents-\") >= 0, 1, 0) \r\n| eval exclude_agent_instance=if(mvfind(tags, \"^AgenticInstance$\") >= 0, 1, 0) \r\n| eval exclude_agent_app=if(mvfind(tags, \"^AgenticApp$\") >= 0, 1, 0) \r\n| where mvfind(tags, \"^WindowsAzureActiveDirectoryIntegratedApp$\") >= 0 \r\n| where exclude_pva=0\r\n    AND exclude_agent_instance=0\r\n    AND exclude_agent_app=0 \r\n| search NOT \r\n    [| search index=ms_entra_id sourcetype=\"microsoft:directoryAudits\"\r\n        operationType=Delete\r\n        category=ApplicationManagement\r\n        activityDisplayName=\"Delete application\" \r\n    | rename additionalDetails{}.value as appId \r\n    | dedup appId \r\n    | table appId \r\n    | format\r\n        ] \r\n| eval notification_email=mvmap(notification_email, lower(notification_email)) \r\n| eval notification_email=mvfilter(\r\n    notification_email!=\"corporateapplications@ndis.gov.au\"\r\n    AND NOT match(notification_email, \"cache\")\r\n    ) \r\n| where isnotnull(notification_email)\r\n    AND mvcount(notification_email)>0 \r\n| eval notification_email=mvjoin(notification_email, \", \") \r\n| dedup appId \r\n| table appId displayName notification_email \r\n| sort displayName\r\n| stats list(displayName) as displayName, count by notification_email",
+                        "type": "custom"
+                    },
+                    "type": "drilldown.linkToSearch"
+                }
+            ],
+            "options": {
+                "backgroundColor": "> majorValue | rangeValue(convertedColorRange)",
+                "majorColor": "#24364B",
+                "majorFontSize": 34,
+                "numberPrecision": 0,
+                "shouldUseThousandSeparators": true,
+                "sparklineDisplay": "off",
+                "splitByLayout": "trellis",
+                "trellisColumns": 10,
+                "trellisMinColumnWidth": 120,
+                "trellisPageCount": 50,
+                "trellisRowHeight": 68,
+                "trendDisplay": "off",
+                "unitPosition": "after"
+            },
+            "title": "Non Corp Emails Notification Registered",
+            "type": "splunk.singlevalue"
+        },
+        "viz_XWonNbA3": {
+            "containerOptions": {
+                "description": {
+                    "color": "#61758A"
+                },
+                "title": {
+                    "color": "#24364B"
+                }
+            },
+            "context": {},
+            "dataSources": {
+                "primary": "ds_oLgU4yuh"
+            },
+            "options": {
+                "align": "center",
+                "backgroundColor": "#FFFAE6",
+                "majorColor": "#9A6700",
+                "majorFontSize": 42,
+                "numberPrecision": 0,
+                "shouldUseThousandSeparators": true,
+                "sparklineDisplay": "off",
+                "trendDisplay": "off"
+            },
+            "showLastUpdated": false,
+            "showProgressBar": true,
+            "title": "Certificates Expiring in 30 Days",
+            "type": "splunk.singlevalue"
+        },
+        "viz_YP0t98aO": {
+            "containerOptions": {
+                "description": {
+                    "color": "#61758A"
+                },
+                "title": {
+                    "color": "#24364B"
+                }
+            },
+            "context": {
+                "convertedColorRange": [
+                    {
+                        "from": 100,
+                        "value": "#dc4e41"
+                    },
+                    {
+                        "from": 70,
+                        "to": 100,
+                        "value": "#f1813f"
+                    },
+                    {
+                        "from": 30,
+                        "to": 70,
+                        "value": "#f8be34"
+                    },
+                    {
+                        "from": 0,
+                        "to": 30,
+                        "value": "#0877a6"
+                    },
+                    {
+                        "to": 0,
+                        "value": "#53a051"
+                    }
+                ]
+            },
+            "dataSources": {
+                "primary": "ds_b7mefxRZ"
+            },
+            "options": {
+                "align": "center",
+                "backgroundColor": "#FFF1F0",
+                "majorColor": "#B42318",
+                "majorFontSize": 42,
+                "numberPrecision": 0,
+                "shouldUseThousandSeparators": true,
+                "sparklineDisplay": "off",
+                "trendDisplay": "off",
+                "unitPosition": "after"
+            },
+            "title": "Ent. Apps Hard Delete - Next 30 Days",
+            "type": "splunk.singlevalue"
+        },
+        "viz_gZ2pQo4b": {
+            "containerOptions": {
+                "description": {
+                    "color": "#61758A"
+                },
+                "title": {
+                    "color": "#24364B"
+                }
+            },
+            "dataSources": {
+                "primary": "ds_0z3tPpd2"
+            },
+            "eventHandlers": [
+                {
+                    "options": {
+                        "earliest": "auto",
+                        "latest": "auto",
+                        "newTab": true,
+                        "query": "index=ms_entra_id (sourcetype=\"microsoft:applications\")\r\n| spath input=_raw path=id output=obj_id\r\n| spath input=_raw path=appId output=app_id\r\n| spath input=_raw path=displayName output=app_name\r\n| eval k = sourcetype . \"::\" . obj_id\r\n| stats latest(_raw) AS raw latest(app_id) AS app_id latest(app_name) AS app_name latest(app_id) as app_id BY k\r\n| spath input=raw path=keyCredentials{}.keyId output=key_id\r\n| spath input=raw path=keyCredentials{}.endDateTime output=end_raw\r\n| eval z = mvzip(key_id, end_raw, \"|~|\")\r\n| mvexpand z\r\n| eval p = split(z, \"|~|\"), key_id = mvindex(p,0), end_raw = mvindex(p,1)\r\n| eval ts = replace(end_raw, \"[.][0-9]+\", \"\")\r\n| eval exp = coalesce(\r\n    strptime(ts,\"%Y-%m-%dT%H:%M:%S%z\"),\r\n    strptime(ts,\"%Y-%m-%dT%H:%M:%SZ\")\r\n  )\r\n| where exp >= now() - (10 * 86400) AND exp < now()\r\n| eval expired_at = strftime(exp,\"%Y-%m-%d %H:%M:%S\")\r\n| eval days_since_expiry = round((now() - exp) / 86400, 1)\r\n| table app_name app_id  key_id expired_at days_since_expiry\r\n| sort - expired_at",
+                        "type": "custom"
+                    },
+                    "type": "drilldown.linkToSearch"
+                }
+            ],
+            "options": {
+                "align": "center",
+                "backgroundColor": "#FFF4E5",
+                "majorColor": "#C2410C",
+                "majorFontSize": 42,
+                "numberPrecision": 0,
+                "shouldUseThousandSeparators": true,
+                "sparklineDisplay": "off",
+                "trendDisplay": "off"
+            },
+            "title": "Certificate Expiry - 10 Days",
+            "type": "splunk.singlevalue"
+        },
+        "viz_gdEN9QmX": {
+            "containerOptions": {
+                "description": {
+                    "color": "#61758A"
+                },
+                "title": {
+                    "color": "#24364B"
+                }
+            },
+            "dataSources": {
+                "primary": "ds_YC97HOhn"
+            },
+            "options": {
+                "areaOpacity": 0.18,
+                "backgroundColor": "#FFFFFF",
+                "dataValuesDisplay": "off",
+                "legendDisplay": "off",
+                "legendMode": "standard",
+                "legendTruncation": "ellipsisMiddle",
+                "lineWidth": 3,
+                "nullValueDisplay": "gaps",
+                "seriesColors": [
+                    "#B42318"
+                ],
+                "showIndependentYRanges": false,
+                "showOverlayY2Axis": false,
+                "showRoundedY2AxisLabels": false,
+                "showSplitSeries": false,
+                "showXMajorGridLines": false,
+                "showY2MajorGridLines": true,
+                "showYMajorGridLines": true,
+                "stackMode": "auto",
+                "xAxisLabelRotation": 0,
+                "xAxisTitleVisibility": "hide",
+                "y2AxisAbbreviation": "auto",
+                "y2AxisScale": "log",
+                "y2AxisTitleVisibility": "hide",
+                "yAxisAbbreviation": "auto",
+                "yAxisScale": "log",
+                "yAxisTitleVisibility": "hide"
+            },
+            "title": "SPN Deleted - Last 6 Months",
+            "type": "splunk.area"
+        },
+        "viz_gqAPGVxv": {
+            "containerOptions": {
+                "description": {
+                    "color": "#61758A"
+                },
+                "title": {
+                    "color": "#24364B"
+                }
+            },
+            "dataSources": {
+                "primary": "ds_VbSD0dGP"
+            },
+            "options": {
+                "areaOpacity": 0.18,
+                "backgroundColor": "#FFFFFF",
+                "legendDisplay": "off",
+                "lineWidth": 3,
+                "seriesColors": [
+                    "#0B5CAD"
+                ],
+                "showXMajorGridLines": false,
+                "showYMajorGridLines": true,
+                "xAxisTitleVisibility": "hide",
+                "y2AxisTitleVisibility": "hide",
+                "yAxisTitleVisibility": "hide"
+            },
+            "showLastUpdated": false,
+            "showProgressBar": true,
+            "title": "Certificate Expiry Trend",
+            "type": "splunk.area"
+        },
+        "viz_kMOVgmnv": {
+            "containerOptions": {
+                "description": {
+                    "color": "#61758A"
+                },
+                "title": {
+                    "color": "#24364B"
+                }
+            },
+            "context": {},
+            "dataSources": {
+                "primary": "ds_IjWpdgOu"
+            },
+            "options": {
+                "align": "center",
+                "backgroundColor": "#FFFFFF",
+                "majorColor": "#0B5CAD",
+                "majorFontSize": 42,
+                "numberPrecision": 0,
+                "shouldUseThousandSeparators": true,
+                "sparklineDisplay": "off",
+                "trendDisplay": "off"
+            },
+            "showLastUpdated": false,
+            "showProgressBar": true,
+            "title": "Enterprise Applications",
+            "type": "splunk.singlevalue"
+        },
+        "viz_qhfv7zty": {
+            "containerOptions": {
+                "description": {
+                    "color": "#61758A"
+                },
+                "title": {
+                    "color": "#24364B"
+                }
+            },
+            "dataSources": {
+                "primary": "ds_ukjZiFn2"
+            },
+            "options": {
+                "areaOpacity": 0.18,
+                "backgroundColor": "#FFFFFF",
+                "dataValuesDisplay": "off",
+                "legendDisplay": "off",
+                "legendMode": "standard",
+                "legendTruncation": "ellipsisMiddle",
+                "lineWidth": 3,
+                "nullValueDisplay": "gaps",
+                "seriesColors": [
+                    "#B42318"
+                ],
+                "showIndependentYRanges": false,
+                "showOverlayY2Axis": false,
+                "showRoundedY2AxisLabels": false,
+                "showSplitSeries": false,
+                "showXMajorGridLines": false,
+                "showY2MajorGridLines": true,
+                "showYMajorGridLines": true,
+                "stackMode": "auto",
+                "xAxisLabelRotation": 0,
+                "xAxisTitleVisibility": "hide",
+                "y2AxisAbbreviation": "auto",
+                "y2AxisScale": "log",
+                "y2AxisTitleVisibility": "hide",
+                "yAxisAbbreviation": "auto",
+                "yAxisScale": "log",
+                "yAxisTitleVisibility": "hide"
+            },
+            "title": "Ent Apps Deleted - Last 6 Months",
+            "type": "splunk.area"
+        },
+        "viz_rO56kdbY": {
+            "containerOptions": {
+                "description": {
+                    "color": "#61758A"
+                },
+                "title": {
+                    "color": "#24364B"
+                }
+            },
+            "context": {},
+            "dataSources": {
+                "primary": "ds_HqdXtNLb"
+            },
+            "options": {
+                "align": "center",
+                "backgroundColor": "#FFFFFF",
+                "majorColor": "#087F8C",
+                "majorFontSize": 42,
+                "numberPrecision": 0,
+                "shouldUseThousandSeparators": true,
+                "sparklineDisplay": "off",
+                "trendDisplay": "off"
+            },
+            "showLastUpdated": false,
+            "showProgressBar": true,
+            "title": "Ent. Apps with Certificates",
+            "type": "splunk.singlevalue"
+        },
+        "viz_rdj3QACp": {
+            "containerOptions": {
+                "description": {
+                    "color": "#61758A"
+                },
+                "title": {
+                    "color": "#24364B"
+                }
+            },
+            "context": {},
+            "dataSources": {
+                "primary": "ds_NYgO7JOD"
+            },
+            "options": {
+                "align": "center",
+                "backgroundColor": "#FFF1F0",
+                "majorColor": "#B42318",
+                "majorFontSize": 42,
+                "numberPrecision": 0,
+                "shouldUseThousandSeparators": true,
+                "sparklineDisplay": "off",
+                "trendDisplay": "off"
+            },
+            "showLastUpdated": false,
+            "showProgressBar": true,
+            "title": "Secret Expired",
+            "type": "splunk.singlevalue"
+        },
+        "viz_xCnWqcCu": {
+            "containerOptions": {
+                "description": {
+                    "color": "#61758A"
+                },
+                "title": {
+                    "color": "#24364B"
+                }
+            },
+            "dataSources": {
+                "primary": "ds_PKuPxUFh"
+            },
+            "eventHandlers": [
+                {
+                    "options": {
+                        "earliest": "auto",
+                        "latest": "auto",
+                        "newTab": true,
+                        "query": "index=ms_entra_id (sourcetype=\"microsoft:applications\")\r\n| spath input=_raw path=id output=obj_id\r\n| spath input=_raw path=appId output=app_id\r\n| spath input=_raw path=displayName output=app_name\r\n| eval k = sourcetype . \"::\" . obj_id\r\n| stats latest(_raw) AS raw latest(app_name) AS app_name latest(app_id) as app_id BY k\r\n| spath input=raw path=passwordCredentials{}.keyId output=key_id\r\n| spath input=raw path=passwordCredentials{}.endDateTime output=end_raw\r\n| eval z = mvzip(key_id, end_raw, \"|~|\")\r\n| mvexpand z\r\n| eval p = split(z, \"|~|\"), key_id = mvindex(p,0), end_raw = mvindex(p,1)\r\n| eval ts = replace(end_raw, \"[.][0-9]+\", \"\")\r\n| eval exp = coalesce(strptime(ts,\"%Y-%m-%dT%H:%M:%S%z\"), strptime(ts,\"%Y-%m-%dT%H:%M:%SZ\"))\r\n| where exp >= now() AND exp <= now() + (10 * 86400)\r\n| eval expires_at = strftime(exp,\"%Y-%m-%d %H:%M:%S\")\r\n| eval days_remaining = round((exp - now()) / 86400, 1)\r\n| table app_name app_id key_id expires_at days_remaining\r\n| sort days_remaining",
+                        "type": "custom"
+                    },
+                    "type": "drilldown.linkToSearch"
+                }
+            ],
+            "options": {
+                "align": "center",
+                "backgroundColor": "#FFF4E5",
+                "majorColor": "#C2410C",
+                "majorFontSize": 42,
+                "numberPrecision": 0,
+                "shouldUseThousandSeparators": true,
+                "sparklineDisplay": "off",
+                "trendDisplay": "off"
+            },
+            "title": "Secret Expiry - 10 Days",
+            "type": "splunk.singlevalue"
+        },
+        "viz_xpiZPC6h": {
+            "containerOptions": {
+                "description": {
+                    "color": "#61758A"
+                },
+                "title": {
+                    "color": "#24364B"
+                }
+            },
+            "dataSources": {
+                "primary": "ds_3qOgmyi8"
+            },
+            "options": {
+                "align": "center",
+                "backgroundColor": "#FFFFFF",
+                "majorColor": "#087F8C",
+                "majorFontSize": 42,
+                "numberPrecision": 0,
+                "shouldUseThousandSeparators": true,
+                "sparklineDisplay": "off",
+                "trendDisplay": "off"
+            },
+            "title": "Applications Using Certificates",
+            "type": "splunk.singlevalue"
+        }
+    },
+    "dataSources": {
+        "ds_0z3tPpd2": {
+            "name": "CertificatesExpiry_10Days",
+            "options": {
+                "query": "index=ms_entra_id (sourcetype=\"microsoft:applications\")\r\n| spath input=_raw path=id output=obj_id\r\n| eval k = sourcetype . \"::\" . obj_id\r\n| stats latest(_raw) AS raw BY k\r\n| spath input=raw path=keyCredentials{}.keyId       output=key_id\r\n| spath input=raw path=keyCredentials{}.endDateTime output=end_raw\r\n| eval z = mvzip(key_id, end_raw, \"|~|\")\r\n| mvexpand z\r\n| eval p = split(z, \"|~|\"), key_id = mvindex(p,0), end_raw = mvindex(p,1)\r\n| eval ts = replace(end_raw, \"[.][0-9]+\", \"\")\r\n| eval exp = coalesce(strptime(ts,\"%Y-%m-%dT%H:%M:%S%z\"), strptime(ts,\"%Y-%m-%dT%H:%M:%SZ\"))\r\n| where exp >= now() AND exp <= now() + (10 * 86400)\r\n| stats dc(key_id) AS expiring_certificates"
+            },
+            "type": "ds.search"
+        },
+        "ds_1UEtUbmZ": {
+            "name": "App Registration Trend search",
+            "options": {
+                "query": "index=ms_entra_id sourcetype=\"microsoft:applications\"\r\n| spath input=_raw path=appId output=appId\r\n| spath input=_raw path=createdDateTime output=createdDateTime\r\n| eval created_epoch=strptime(createdDateTime,\"%Y-%m-%dT%H:%M:%SZ\")\r\n| where created_epoch >= relative_time(now(), \"-6mon@d\")\r\n| sort 0 appId -created_epoch\r\n| dedup appId\r\n| eval _time=created_epoch\r\n| timechart span=1d count as \"Applications Created\"",
+                "queryParameters": {
+                    "earliest": "-6mon@mon",
+                    "latest": "now",
+                    "sampleRatio": 1
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_2HkfbAJM": {
+            "name": "Certs expiring in 90 Days search",
+            "options": {
+                "query": "index=ms_entra_id sourcetype=\"microsoft:servicePrincipals\" \r\n| spath input=_raw path=tags{} output=tags \r\n| spath input=_raw path=appId output=appId \r\n| spath input=_raw path=id output=obj_id \r\n| spath input=_raw path=displayName output=displayName \r\n| where mvfind(tags, \"^WindowsAzureActiveDirectoryIntegratedApp$$\") >= 0 \r\n| search NOT \r\n    [| search index=ms_entra_id sourcetype=\"microsoft:directoryAudits\"\r\n        operationType=Delete\r\n        category=ApplicationManagement\r\n        activityDisplayName=\"Delete application\" \r\n    | rename additionalDetails{}.value as appId \r\n    | dedup appId \r\n    | table appId \r\n    | format\r\n        ] \r\n| spath input=_raw path=keyCredentials{}.keyId output=key_id \r\n| spath input=_raw path=keyCredentials{}.endDateTime output=end_raw \r\n| spath input=_raw path=keyCredentials{}.customKeyIdentifier output=customkeyidentifier \r\n| where isnotnull(key_id) AND isnotnull(end_raw) \r\n| eval z=mvzip(\r\n    mvzip(key_id,end_raw,\"|~|\"),\r\n    customkeyidentifier,\r\n    \"|~|\"\r\n    ) \r\n| mvexpand z \r\n| eval p=split(z,\"|~|\") \r\n| eval key_id=mvindex(p,0) \r\n| eval end_raw=mvindex(p,1) \r\n| eval customkeyidentifier=mvindex(p,2) \r\n| eval ts=replace(end_raw,\"[.][0-9]+\",\"\") \r\n| eval exp=coalesce(\r\n    strptime(ts,\"%Y-%m-%dT%H:%M:%S%z\"),\r\n    strptime(ts,\"%Y-%m-%dT%H:%M:%SZ\")\r\n    ) \r\n| where exp>=now() AND exp<=now()+(10*86400) \r\n| eval expires_at=strftime(exp,\"%Y-%m-%d %H:%M:%S\") \r\n| eval days_remaining=round((exp-now())/86400,1) \r\n| dedup customkeyidentifier \r\n| table displayName appId obj_id key_id customkeyidentifier expires_at days_remaining \r\n| sort days_remaining\r\n| stats count",
+                "queryParameters": {
+                    "earliest": "0",
+                    "sampleRatio": 1
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_3qOgmyi8": {
+            "name": "ApplicationsUsingCertificates",
+            "options": {
+                "query": "index=msgraph_prod sourcetype=\"microsoft:applications\" \r\n| where isnotnull('keyCredentials{}.endDateTime') \r\n| stats dc(appId)"
+            },
+            "type": "ds.search"
+        },
+        "ds_8fCnVLFx": {
+            "name": "Non Corp Emails Notification Registered search",
+            "options": {
+                "query": "index=ms_entra_id sourcetype=\"microsoft:servicePrincipals\" \r\n| spath input=_raw path=tags{} output=tags \r\n| spath input=_raw path=appId output=appId \r\n| spath input=_raw path=id output=obj_id \r\n| spath input=_raw path=displayName output=displayName \r\n| spath input=_raw path=notificationEmailAddresses{} output=notification_email \r\n| eval tags=if(isnull(tags), \"\", tags) \r\n| eval exclude_pva=if(mvfind(tags, \"^power-virtual-agents-\") >= 0, 1, 0) \r\n| eval exclude_agent_instance=if(mvfind(tags, \"^AgenticInstance$$\") >= 0, 1, 0) \r\n| eval exclude_agent_app=if(mvfind(tags, \"^AgenticApp$$\") >= 0, 1, 0) \r\n| where mvfind(tags, \"^WindowsAzureActiveDirectoryIntegratedApp$$\") >= 0 \r\n| where exclude_pva=0\r\n    AND exclude_agent_instance=0\r\n    AND exclude_agent_app=0 \r\n| search NOT \r\n    [| search index=ms_entra_id sourcetype=\"microsoft:directoryAudits\"\r\n        operationType=Delete\r\n        category=ApplicationManagement\r\n        activityDisplayName=\"Delete application\" \r\n    | rename additionalDetails{}.value as appId \r\n    | dedup appId \r\n    | table appId \r\n    | format\r\n        ] \r\n| eval notification_email=mvmap(notification_email, lower(notification_email)) \r\n| eval notification_email=mvfilter(\r\n    notification_email!=\"corporateapplications@ndis.gov.au\"\r\n    AND NOT match(notification_email, \"cache\")\r\n    ) \r\n| where isnotnull(notification_email)\r\n    AND mvcount(notification_email)>0 \r\n| eval notification_email=mvjoin(notification_email, \", \") \r\n| dedup appId \r\n| table appId displayName notification_email \r\n| sort displayName\r\n| stats count by notification_email",
+                "queryParameters": {
+                    "earliest": "0",
+                    "latest": "now",
+                    "sampleRatio": 1
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_GQ5cM9do": {
+            "name": "Enterprise Applications Creation Trend search",
+            "options": {
+                "query": "index=ms_entra_id sourcetype=\"microsoft:servicePrincipals\"\r\n| spath input=_raw path=tags{} output=tags\r\n| spath input=_raw path=appId output=appId\r\n| spath input=_raw path=id output=obj_id\r\n| spath input=_raw path=displayName output=displayName\r\n| spath input=_raw path=createdDateTime output=createdDateTime\r\n\r\n| eval tags=if(isnull(tags), \"\", tags)\r\n\r\n| eval exclude_pva=if(mvfind(tags, \"^power-virtual-agents-\") >= 0, 1, 0)\r\n| eval exclude_agent_instance=if(mvfind(tags, \"^AgenticInstance$$\") >= 0, 1, 0)\r\n| eval exclude_agent_app=if(mvfind(tags, \"^AgenticApp$$\") >= 0, 1, 0)\r\n\r\n| where mvfind(tags, \"^WindowsAzureActiveDirectoryIntegratedApp$$\") >= 0\r\n| where exclude_pva=0 AND exclude_agent_instance=0 AND exclude_agent_app=0\r\n\r\n| search NOT [\r\n    | search index=ms_entra_id sourcetype=\"microsoft:directoryAudits\"\r\n        operationType=Delete\r\n        category=ApplicationManagement\r\n        activityDisplayName=\"Delete application\"\r\n    | rename additionalDetails{}.value as appId\r\n    | dedup appId\r\n    | table appId\r\n    | format\r\n]\r\n\r\n| eval _time=strptime(createdDateTime,\"%Y-%m-%dT%H:%M:%SZ\")\r\n\r\n| where _time >= relative_time(now(), \"-6mon@d\")\r\n\r\n| dedup appId\r\n\r\n| timechart span=1d count as \"Service Principals Created\" usenull=true useother=false",
+                "queryParameters": {
+                    "earliest": "0",
+                    "latest": "now",
+                    "sampleRatio": 1
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_HqdXtNLb": {
+            "name": "Ent. Apps with Certificates search",
+            "options": {
+                "query": "index=ms_entra_id sourcetype=\"microsoft:servicePrincipals\" \r\n| spath input=_raw path=tags{} output=tags \r\n| spath input=_raw path=appId output=appId \r\n| spath input=_raw path=id output=obj_id \r\n| spath input=_raw path=displayName output=displayName \r\n| where mvfind(tags, \"^WindowsAzureActiveDirectoryIntegratedApp$$\") >= 0 \r\n| search NOT \r\n    [| search index=ms_entra_id sourcetype=\"microsoft:directoryAudits\"\r\n        operationType=Delete\r\n        category=ApplicationManagement\r\n        activityDisplayName=\"Delete application\" \r\n    | rename additionalDetails{}.value as appId \r\n    | dedup appId \r\n    | table appId \r\n    | format\r\n        ] \r\n| spath input=_raw path=keyCredentials{}.keyId output=key_id \r\n| where isnotnull(key_id) \r\n| dedup appId \r\n| table displayName appId obj_id \r\n| sort displayName\r\n| stats count",
+                "queryParameters": {
+                    "earliest": "0",
+                    "sampleRatio": 1
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_IZlcBTeq": {
+            "name": "ApplicationsUsingClientSecrets",
+            "options": {
+                "query": "index=msgraph_prod sourcetype=\"microsoft:applications\" \r\n| where isnotnull('passwordCredentials{}.hint') \r\n| stats dc(appId)"
+            },
+            "type": "ds.search"
+        },
+        "ds_IjWpdgOu": {
+            "name": "Enterprise Applications search",
+            "options": {
+                "query": "index=ms_entra_id sourcetype=\"microsoft:servicePrincipals\" \r\n| spath input=_raw path=tags{} output=tags \r\n| spath input=_raw path=appId output=appId \r\n| spath input=_raw path=id output=obj_id \r\n| spath input=_raw path=displayName output=displayName \r\n| eval tags=if(isnull(tags), \"\", tags) \r\n| eval exclude_pva=if(mvfind(tags, \"^power-virtual-agents-\") >= 0, 1, 0) \r\n| eval exclude_agent_instance=if(mvfind(tags, \"^AgenticInstance$$\") >= 0, 1, 0) \r\n| eval exclude_agent_app=if(mvfind(tags, \"^AgenticApp$$\") >= 0, 1, 0) \r\n| where mvfind(tags, \"^WindowsAzureActiveDirectoryIntegratedApp$$\") >= 0 \r\n| where exclude_pva=0 AND exclude_agent_instance=0 AND exclude_agent_app=0 \r\n| dedup appId \r\n| table displayName appId obj_id tags \r\n| sort displayName \r\n| search NOT \r\n    [| search index=ms_entra_id sourcetype=\"microsoft:directoryAudits\" operationType=Delete category=ApplicationManagement activityDisplayName=\"Delete application\" \r\n    | rename additionalDetails{}.value as \"appId\" \r\n    | table appId \r\n    | format ]\r\n    | stats count",
+                "queryParameters": {
+                    "earliest": "0",
+                    "sampleRatio": 1
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_JmlX3VaF": {
+            "name": "Non Corp Application Notification Email search",
+            "options": {
+                "query": "index=ms_entra_id sourcetype=\"microsoft:servicePrincipals\" \r\n| spath input=_raw path=tags{} output=tags \r\n| spath input=_raw path=appId output=appId \r\n| spath input=_raw path=id output=obj_id \r\n| spath input=_raw path=displayName output=displayName \r\n| spath input=_raw path=notificationEmailAddresses{} output=notification_email \r\n| eval tags=if(isnull(tags), \"\", tags) \r\n| eval exclude_pva=if(mvfind(tags, \"^power-virtual-agents-\") >= 0, 1, 0) \r\n| eval exclude_agent_instance=if(mvfind(tags, \"^AgenticInstance$$\") >= 0, 1, 0) \r\n| eval exclude_agent_app=if(mvfind(tags, \"^AgenticApp$$\") >= 0, 1, 0) \r\n| where mvfind(tags, \"^WindowsAzureActiveDirectoryIntegratedApp$$\") >= 0 \r\n| where exclude_pva=0\r\n    AND exclude_agent_instance=0\r\n    AND exclude_agent_app=0 \r\n| search NOT \r\n    [| search index=ms_entra_id sourcetype=\"microsoft:directoryAudits\"\r\n        operationType=Delete\r\n        category=ApplicationManagement\r\n        activityDisplayName=\"Delete application\" \r\n    | rename additionalDetails{}.value as appId \r\n    | dedup appId \r\n    | table appId \r\n    | format\r\n        ] \r\n| eval notification_email=mvmap(notification_email, lower(notification_email)) \r\n| eval notification_email=mvfilter(\r\n    notification_email!=\"corporateapplications@ndis.gov.au\"\r\n    AND NOT match(notification_email, \"cache\")\r\n    ) \r\n| where isnotnull(notification_email)\r\n    AND mvcount(notification_email)>0 \r\n| eval notification_email=mvjoin(notification_email, \", \") \r\n| dedup appId \r\n| table appId displayName notification_email \r\n| sort displayName\r\n| stats list(displayName) as displayName, count by notification_email",
+                "queryParameters": {
+                    "earliest": "0",
+                    "sampleRatio": 1
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_NYgO7JOD": {
+            "name": "Secret Expired search",
+            "options": {
+                "query": "index=ms_entra_id (sourcetype=\"microsoft:applications\" OR sourcetype=\"microsoft:servicePrincipals\")\r\n| spath input=_raw path=id output=obj_id\r\n| eval k = sourcetype . \"::\" . obj_id\r\n| stats latest(_raw) AS raw BY k\r\n| spath input=raw path=passwordCredentials{}.keyId       output=key_id\r\n| spath input=raw path=passwordCredentials{}.endDateTime output=end_raw\r\n| eval z = mvzip(key_id, end_raw, \"|~|\")\r\n| mvexpand z\r\n| eval p = split(z, \"|~|\"), key_id = mvindex(p,0), end_raw = mvindex(p,1)\r\n| eval ts = replace(end_raw, \"[.][0-9]+\", \"\")\r\n| eval exp = coalesce(strptime(ts,\"%Y-%m-%dT%H:%M:%S%z\"), strptime(ts,\"%Y-%m-%dT%H:%M:%SZ\"))\r\n| where exp < now()\r\n| stats dc(key_id) AS expired_secrets",
+                "queryParameters": {
+                    "earliest": "0",
+                    "sampleRatio": 1
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_NlXd9yjP": {
+            "name": "CertificatesExpiry_30Days",
+            "options": {
+                "query": "index=ms_entra_id (sourcetype=\"microsoft:applications\")\r\n| spath input=_raw path=id output=obj_id\r\n| eval k = sourcetype . \"::\" . obj_id\r\n| stats latest(_raw) AS raw BY k\r\n| spath input=raw path=keyCredentials{}.keyId       output=key_id\r\n| spath input=raw path=keyCredentials{}.endDateTime output=end_raw\r\n| eval z = mvzip(key_id, end_raw, \"|~|\")\r\n| mvexpand z\r\n| eval p = split(z, \"|~|\"), key_id = mvindex(p,0), end_raw = mvindex(p,1)\r\n| eval ts = replace(end_raw, \"[.][0-9]+\", \"\")\r\n| eval exp = coalesce(strptime(ts,\"%Y-%m-%dT%H:%M:%S%z\"), strptime(ts,\"%Y-%m-%dT%H:%M:%SZ\"))\r\n| where exp >= now() AND exp <= now() + (30 * 86400)\r\n| stats dc(key_id) AS expiring_certificates"
+            },
+            "type": "ds.search"
+        },
+        "ds_PKuPxUFh": {
+            "name": "SecretExpiry_10Days",
+            "options": {
+                "query": "index=ms_entra_id (sourcetype=\"microsoft:applications\")\r\n| spath input=_raw path=id output=obj_id\r\n| eval k = sourcetype . \"::\" . obj_id\r\n| stats latest(_raw) AS raw BY k\r\n| spath input=raw path=passwordCredentials{}.keyId       output=key_id\r\n| spath input=raw path=passwordCredentials{}.endDateTime output=end_raw\r\n| eval z = mvzip(key_id, end_raw, \"|~|\")\r\n| mvexpand z\r\n| eval p = split(z, \"|~|\"), key_id = mvindex(p,0), end_raw = mvindex(p,1)\r\n| eval ts = replace(end_raw, \"[.][0-9]+\", \"\")\r\n| eval exp = coalesce(\r\n    strptime(ts,\"%Y-%m-%dT%H:%M:%S%z\"),\r\n    strptime(ts,\"%Y-%m-%dT%H:%M:%SZ\")\r\n  )\r\n| where exp >= now() AND exp <= now() + (10 * 86400)\r\n| stats dc(key_id) AS expiring_secrets"
+            },
+            "type": "ds.search"
+        },
+        "ds_THbEw6HW": {
+            "name": "SecretExpiryTrend",
+            "options": {
+                "query": "index=ms_entra_id (sourcetype=\"microsoft:applications\")\r\n| spath input=_raw path=id output=obj_id\r\n| eval k = sourcetype . \"::\" . obj_id\r\n| stats latest(_raw) AS raw BY k\r\n| spath input=raw path=passwordCredentials{}.keyId output=key_id\r\n| spath input=raw path=passwordCredentials{}.endDateTime output=end_raw\r\n| eval z = mvzip(key_id, end_raw, \"|~|\")\r\n| mvexpand z\r\n| eval p = split(z, \"|~|\")\r\n| eval key_id = mvindex(p,0), end_raw = mvindex(p,1)\r\n| eval ts = replace(end_raw, \"[.][0-9]+\", \"\")\r\n| eval exp = coalesce(\r\n    strptime(ts,\"%Y-%m-%dT%H:%M:%S%z\"),\r\n    strptime(ts,\"%Y-%m-%dT%H:%M:%SZ\")\r\n  )\r\n| where isnotnull(exp)\r\n| eval bucket = case(\r\n    exp >= now()-(60*86400) AND exp < now()-(30*86400), \"Past 30-60 Days\",\r\n    exp >= now()-(30*86400) AND exp < now(), \"Past 30 Days\",\r\n    exp >= now() AND exp < now()+(30*86400), \"Next 30 Days\",\r\n    exp >= now()+(30*86400) AND exp < now()+(60*86400), \"Next 30-60 Days\",\r\n    exp >= now()+(60*86400) AND exp < now()+(90*86400), \"Next 60-90 Days\"\r\n  )\r\n| where isnotnull(bucket)\r\n| stats dc(key_id) AS total_secrets BY bucket\r\n| append [\r\n    | makeresults\r\n    | eval bucket=\"Past 30-60 Days\", bucket_order=1\r\n    | append [ | makeresults | eval bucket=\"Past 30 Days\", bucket_order=2 ]\r\n    | append [ | makeresults | eval bucket=\"Next 30 Days\", bucket_order=3 ]\r\n    | append [ | makeresults | eval bucket=\"Next 30-60 Days\", bucket_order=4 ]\r\n    | append [ | makeresults | eval bucket=\"Next 60-90 Days\", bucket_order=5 ]\r\n    | eval total_secrets=0\r\n    | table bucket bucket_order total_secrets\r\n]\r\n| stats max(total_secrets) AS total_secrets BY bucket\r\n| eval bucket_order=case(\r\n    bucket=\"Past 30-60 Days\",1,\r\n    bucket=\"Past 30 Days\",2,\r\n    bucket=\"Next 30 Days\",3,\r\n    bucket=\"Next 30-60 Days\",4,\r\n    bucket=\"Next 60-90 Days\",5\r\n  )\r\n| sort bucket_order\r\n| table bucket total_secrets"
+            },
+            "type": "ds.search"
+        },
+        "ds_VbSD0dGP": {
+            "name": "CertificateExpiryTrend",
+            "options": {
+                "query": "index=ms_entra_id (sourcetype=\"microsoft:applications\")\r\n| spath input=_raw path=id output=obj_id\r\n| eval k = sourcetype . \"::\" . obj_id\r\n| stats latest(_raw) AS raw BY k\r\n| spath input=raw path=keyCredentials{}.keyId output=key_id\r\n| spath input=raw path=keyCredentials{}.endDateTime output=end_raw\r\n| eval z = mvzip(key_id, end_raw, \"|~|\")\r\n| mvexpand z\r\n| eval p = split(z, \"|~|\")\r\n| eval key_id = mvindex(p,0), end_raw = mvindex(p,1)\r\n| eval ts = replace(end_raw, \"[.][0-9]+\", \"\")\r\n| eval exp = coalesce(\r\n    strptime(ts,\"%Y-%m-%dT%H:%M:%S%z\"),\r\n    strptime(ts,\"%Y-%m-%dT%H:%M:%SZ\")\r\n  )\r\n| where isnotnull(exp)\r\n| eval bucket = case(\r\n    exp >= now()-(60*86400) AND exp < now()-(30*86400), \"Past 30-60 Days\",\r\n    exp >= now()-(30*86400) AND exp < now(), \"Past 30 Days\",\r\n    exp >= now() AND exp < now()+(30*86400), \"Next 30 Days\",\r\n    exp >= now()+(30*86400) AND exp < now()+(60*86400), \"Next 30-60 Days\",\r\n    exp >= now()+(60*86400) AND exp < now()+(90*86400), \"Next 60-90 Days\"\r\n  )\r\n| where isnotnull(bucket)\r\n| stats dc(key_id) AS total_certificates BY bucket\r\n| append [\r\n    | makeresults\r\n    | eval bucket=\"Past 30-60 Days\", bucket_order=1\r\n    | append [ | makeresults | eval bucket=\"Past 30 Days\", bucket_order=2 ]\r\n    | append [ | makeresults | eval bucket=\"Next 30 Days\", bucket_order=3 ]\r\n    | append [ | makeresults | eval bucket=\"Next 30-60 Days\", bucket_order=4 ]\r\n    | append [ | makeresults | eval bucket=\"Next 60-90 Days\", bucket_order=5 ]\r\n    | eval total_certificates=0\r\n    | table bucket bucket_order total_certificates\r\n]\r\n| stats max(total_certificates) AS total_certificates BY bucket\r\n| eval bucket_order=case(\r\n    bucket=\"Past 30-60 Days\",1,\r\n    bucket=\"Past 30 Days\",2,\r\n    bucket=\"Next 30 Days\",3,\r\n    bucket=\"Next 30-60 Days\",4,\r\n    bucket=\"Next 60-90 Days\",5\r\n  )\r\n| sort bucket_order\r\n| table bucket total_certificates"
+            },
+            "type": "ds.search"
+        },
+        "ds_YC97HOhn": {
+            "name": "SPN Deleted - Last 6 Months search",
+            "options": {
+                "query": "index=ms_azure_prod sourcetype=\"azure:aad:audit\"\r\ncategory=ApplicationManagement\r\nactivityDisplayName=\"Delete application\"\r\n| spath input=_raw path=activityDateTime output=activityDateTime\r\n| eval ts=replace(activityDateTime,\"[.][0-9]+Z$$\",\"Z\")\r\n| eval _time=strptime(ts,\"%Y-%m-%dT%H:%M:%SZ\")\r\n| where _time >= relative_time(now(), \"-6mon@d\")\r\n| timechart span=1d count as \"Applications Deleted\"",
+                "queryParameters": {
+                    "earliest": "-6mon@mon",
+                    "latest": "now",
+                    "sampleRatio": 1
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_b7mefxRZ": {
+            "name": "Ent. Apps Hard Delete - Next 30 Days search",
+            "options": {
+                "query": "index=ms_azure_prod sourcetype=\"azure:aad:audit\"\r\ncategory=ApplicationManagement\r\nactivityDisplayName=\"remove service principal\"\r\n| spath input=_raw path=activityDateTime output=activityDateTime\r\n| eval ts=replace(activityDateTime,\"[.][0-9]+Z$$\",\"Z\")\r\n| eval activity_epoch=strptime(ts,\"%Y-%m-%dT%H:%M:%SZ\")\r\n| where activity_epoch >= relative_time(now(), \"-30d\")\r\n    AND activity_epoch <= now()\r\n| stats count as \"Service Principals Removed - Last 30 Days\"",
+                "queryParameters": {
+                    "earliest": "-6mon@mon",
+                    "latest": "now",
+                    "sampleRatio": 1
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_cNQ6ceLp": {
+            "name": "SecretExpiry_30Days",
+            "options": {
+                "query": "index=ms_entra_id (sourcetype=\"microsoft:applications\")\r\n| spath input=_raw path=id output=obj_id\r\n| eval k = sourcetype . \"::\" . obj_id\r\n| stats latest(_raw) AS raw BY k\r\n| spath input=raw path=passwordCredentials{}.keyId       output=key_id\r\n| spath input=raw path=passwordCredentials{}.endDateTime output=end_raw\r\n| eval z = mvzip(key_id, end_raw, \"|~|\")\r\n| mvexpand z\r\n| eval p = split(z, \"|~|\"), key_id = mvindex(p,0), end_raw = mvindex(p,1)\r\n| eval ts = replace(end_raw, \"[.][0-9]+\", \"\")\r\n| eval exp = coalesce(\r\n    strptime(ts,\"%Y-%m-%dT%H:%M:%S%z\"),\r\n    strptime(ts,\"%Y-%m-%dT%H:%M:%SZ\")\r\n  )\r\n| where exp >= now() AND exp <= now() + (30 * 86400)\r\n| stats dc(key_id) AS expiring_secrets"
+            },
+            "type": "ds.search"
+        },
+        "ds_dIXLczBk": {
+            "name": "Table search 2",
+            "options": {
+                "query": "index=ms_entra_id (sourcetype=\"microsoft:applications\" OR sourcetype=\"microsoft:servicePrincipals\")\r\n| spath input=_raw path=id output=obj_id\r\n| eval k = sourcetype . \"::\" . obj_id\r\n| stats latest(_raw) AS raw BY k\r\n| spath input=raw path=keyCredentials{}.keyId       output=key_id\r\n| spath input=raw path=keyCredentials{}.endDateTime output=end_raw\r\n| eval z = mvzip(key_id, end_raw, \"|~|\")\r\n| mvexpand z\r\n| eval p = split(z, \"|~|\"), key_id = mvindex(p,0), end_raw = mvindex(p,1)\r\n| eval ts = replace(end_raw, \"[.][0-9]+\", \"\")\r\n| eval exp = coalesce(strptime(ts,\"%Y-%m-%dT%H:%M:%S%z\"), strptime(ts,\"%Y-%m-%dT%H:%M:%SZ\"))\r\n| where exp < now()\r\n| stats dc(key_id) AS expired_certificates",
+                "queryParameters": {
+                    "earliest": "0",
+                    "sampleRatio": 1
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_iT2H7YWs": {
+            "name": "Certs expiring in 10 Days search",
+            "options": {
+                "query": "index=ms_entra_id sourcetype=\"microsoft:servicePrincipals\" \r\n| spath input=_raw path=tags{} output=tags \r\n| spath input=_raw path=appId output=appId \r\n| spath input=_raw path=id output=obj_id \r\n| spath input=_raw path=displayName output=displayName \r\n| where mvfind(tags, \"^WindowsAzureActiveDirectoryIntegratedApp$$\") >= 0 \r\n| search NOT \r\n    [| search index=ms_entra_id sourcetype=\"microsoft:directoryAudits\"\r\n        operationType=Delete\r\n        category=ApplicationManagement\r\n        activityDisplayName=\"Delete application\" \r\n    | rename additionalDetails{}.value as appId \r\n    | dedup appId \r\n    | table appId \r\n    | format\r\n        ] \r\n| spath input=_raw path=keyCredentials{}.keyId output=key_id \r\n| spath input=_raw path=keyCredentials{}.endDateTime output=end_raw \r\n| spath input=_raw path=keyCredentials{}.customKeyIdentifier output=customkeyidentifier \r\n| where isnotnull(key_id) AND isnotnull(end_raw) \r\n| eval z=mvzip(\r\n    mvzip(key_id,end_raw,\"|~|\"),\r\n    customkeyidentifier,\r\n    \"|~|\"\r\n    ) \r\n| mvexpand z \r\n| eval p=split(z,\"|~|\") \r\n| eval key_id=mvindex(p,0) \r\n| eval end_raw=mvindex(p,1) \r\n| eval customkeyidentifier=mvindex(p,2) \r\n| eval ts=replace(end_raw,\"[.][0-9]+\",\"\") \r\n| eval exp=coalesce(\r\n    strptime(ts,\"%Y-%m-%dT%H:%M:%S%z\"),\r\n    strptime(ts,\"%Y-%m-%dT%H:%M:%SZ\")\r\n    ) \r\n| where exp>=now() AND exp<=now()+(10*86400) \r\n| eval expires_at=strftime(exp,\"%Y-%m-%d %H:%M:%S\") \r\n| eval days_remaining=round((exp-now())/86400,1) \r\n| dedup customkeyidentifier \r\n| table displayName appId obj_id key_id customkeyidentifier expires_at days_remaining \r\n| sort days_remaining\r\n| stats count",
+                "queryParameters": {
+                    "earliest": "0",
+                    "sampleRatio": 1
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_ioSDfZN7": {
+            "name": "SPN Hard Delete - Next 30 Days search",
+            "options": {
+                "query": "index=ms_azure_prod sourcetype=\"azure:aad:audit\"\r\ncategory=ApplicationManagement\r\nactivityDisplayName=\"Delete application\"\r\n| spath input=_raw path=activityDateTime output=activityDateTime\r\n| eval ts=replace(activityDateTime,\"[.][0-9]+Z$$\",\"Z\")\r\n| eval activity_epoch=strptime(ts,\"%Y-%m-%dT%H:%M:%SZ\")\r\n| where activity_epoch >= relative_time(now(), \"-30d\")\r\n    AND activity_epoch <= now()\r\n| stats count as \"Applications Deleted - Last 30 Days\"",
+                "queryParameters": {
+                    "earliest": "-6mon@mon",
+                    "latest": "now",
+                    "sampleRatio": 1
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_oLgU4yuh": {
+            "name": "Certificates Expiring in 30 Days search",
+            "options": {
+                "query": "index=ms_entra_id sourcetype=\"microsoft:servicePrincipals\" \r\n| spath input=_raw path=tags{} output=tags \r\n| spath input=_raw path=appId output=appId \r\n| spath input=_raw path=id output=obj_id \r\n| spath input=_raw path=displayName output=displayName \r\n| where mvfind(tags, \"^WindowsAzureActiveDirectoryIntegratedApp$$\") >= 0 \r\n| search NOT \r\n    [| search index=ms_entra_id sourcetype=\"microsoft:directoryAudits\"\r\n        operationType=Delete\r\n        category=ApplicationManagement\r\n        activityDisplayName=\"Delete application\" \r\n    | rename additionalDetails{}.value as appId \r\n    | dedup appId \r\n    | table appId \r\n    | format\r\n        ] \r\n| spath input=_raw path=keyCredentials{}.keyId output=key_id \r\n| spath input=_raw path=keyCredentials{}.endDateTime output=end_raw \r\n| spath input=_raw path=keyCredentials{}.customKeyIdentifier output=customkeyidentifier \r\n| where isnotnull(key_id) AND isnotnull(end_raw) \r\n| eval z=mvzip(\r\n    mvzip(key_id,end_raw,\"|~|\"),\r\n    customkeyidentifier,\r\n    \"|~|\"\r\n    ) \r\n| mvexpand z \r\n| eval p=split(z,\"|~|\") \r\n| eval key_id=mvindex(p,0) \r\n| eval end_raw=mvindex(p,1) \r\n| eval customkeyidentifier=mvindex(p,2) \r\n| eval ts=replace(end_raw,\"[.][0-9]+\",\"\") \r\n| eval exp=coalesce(\r\n    strptime(ts,\"%Y-%m-%dT%H:%M:%S%z\"),\r\n    strptime(ts,\"%Y-%m-%dT%H:%M:%SZ\")\r\n    ) \r\n| where exp>=now() AND exp<=now()+(30*86400) \r\n| eval expires_at=strftime(exp,\"%Y-%m-%d %H:%M:%S\") \r\n| eval days_remaining=round((exp-now())/86400,1) \r\n| dedup customkeyidentifier \r\n| table displayName appId obj_id key_id customkeyidentifier expires_at days_remaining \r\n| sort days_remaining\r\n| stats count",
+                "queryParameters": {
+                    "earliest": "0",
+                    "sampleRatio": 1
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_ryMNrdZr": {
+            "name": "SSO Mode search",
+            "options": {
+                "query": "index=ms_entra_id sourcetype=\"microsoft:servicePrincipals\" \r\n| spath input=_raw path=tags{} output=tags \r\n| spath input=_raw path=appId output=appId \r\n| spath input=_raw path=id output=obj_id \r\n| spath input=_raw path=displayName output=displayName \r\n| eval tags=if(isnull(tags), \"\", tags) \r\n| eval exclude_pva=if(mvfind(tags, \"^power-virtual-agents-\") >= 0, 1, 0) \r\n| eval exclude_agent_instance=if(mvfind(tags, \"^AgenticInstance$$\") >= 0, 1, 0) \r\n| eval exclude_agent_app=if(mvfind(tags, \"^AgenticApp$$\") >= 0, 1, 0) \r\n| where mvfind(tags, \"^WindowsAzureActiveDirectoryIntegratedApp$$\") >= 0 \r\n| where exclude_pva=0 AND exclude_agent_instance=0 AND exclude_agent_app=0 \r\n| dedup appId \r\n| table displayName appId obj_id tags preferredSingleSignOnMode\r\n| sort displayName \r\n| search NOT \r\n    [| search index=ms_entra_id sourcetype=\"microsoft:directoryAudits\" operationType=Delete category=ApplicationManagement activityDisplayName=\"Delete application\" \r\n    | rename additionalDetails{}.value as \"appId\" \r\n    | table appId \r\n    | format ]\r\n    | search preferredSingleSignOnMode!=\"notSupported\"\r\n | stats count by preferredSingleSignOnMode",
+                "queryParameters": {
+                    "earliest": "0",
+                    "latest": "now",
+                    "sampleRatio": 1
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_ukjZiFn2": {
+            "name": "Ent Apps Deleted search",
+            "options": {
+                "query": "index=ms_azure_prod sourcetype=\"azure:aad:audit\"\r\ncategory=ApplicationManagement\r\nactivityDisplayName=\"remove service principal\"\r\n| spath input=_raw path=activityDateTime output=activityDateTime\r\n| eval ts=replace(activityDateTime,\"[.][0-9]+Z$$\",\"Z\")\r\n| eval _time=strptime(ts,\"%Y-%m-%dT%H:%M:%SZ\")\r\n| where _time >= relative_time(now(), \"-6mon@d\")\r\n| timechart span=1d count as \"Service Principals Removed\"",
+                "queryParameters": {
+                    "earliest": "-6mon@mon",
+                    "latest": "now",
+                    "sampleRatio": 1
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_zMFXmxwv": {
+            "name": "Table search",
+            "options": {
+                "query": "index=ms_entra_id sourcetype=\"microsoft:applications\"\n| dedup appId\n| stats count",
+                "queryParameters": {
+                    "earliest": "0",
+                    "sampleRatio": 1
+                }
+            },
+            "type": "ds.search"
+        }
+    },
+    "layout": {
+        "globalInputs": [
+            "input_global_trp"
+        ],
+        "layoutDefinitions": {
+            "layout_1": {
+                "options": {
+                    "backgroundColor": "#E9EFF7",
+                    "display": "auto",
+                    "height": 2046,
+                    "width": 1440
+                },
+                "structure": [
+                    {
+                        "item": "deco_shadow_68g5fro4",
+                        "position": {
+                            "h": 168,
+                            "w": 453,
+                            "x": 27,
+                            "y": 213
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "deco_shadow_xpiZPC6h",
+                        "position": {
+                            "h": 168,
+                            "w": 453,
+                            "x": 496,
+                            "y": 213
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "deco_shadow_07yncQlL",
+                        "position": {
+                            "h": 168,
+                            "w": 454,
+                            "x": 965,
+                            "y": 213
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "deco_shadow_GdSNpfGc",
+                        "position": {
+                            "h": 168,
+                            "w": 453,
+                            "x": 27,
+                            "y": 461
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "deco_shadow_gZ2pQo4b",
+                        "position": {
+                            "h": 168,
+                            "w": 453,
+                            "x": 496,
+                            "y": 461
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "deco_shadow_BsNG9unq",
+                        "position": {
+                            "h": 168,
+                            "w": 454,
+                            "x": 965,
+                            "y": 461
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "deco_shadow_rdj3QACp",
+                        "position": {
+                            "h": 168,
+                            "w": 453,
+                            "x": 27,
+                            "y": 709
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "deco_shadow_xCnWqcCu",
+                        "position": {
+                            "h": 168,
+                            "w": 453,
+                            "x": 496,
+                            "y": 709
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "deco_shadow_SfDHuFbJ",
+                        "position": {
+                            "h": 168,
+                            "w": 454,
+                            "x": 965,
+                            "y": 709
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "deco_shadow_ICLWFFq3",
+                        "position": {
+                            "h": 324,
+                            "w": 688,
+                            "x": 27,
+                            "y": 957
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "deco_shadow_gqAPGVxv",
+                        "position": {
+                            "h": 324,
+                            "w": 688,
+                            "x": 731,
+                            "y": 957
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "deco_shadow_BCgWiWkb",
+                        "position": {
+                            "h": 300,
+                            "w": 1392,
+                            "x": 27,
+                            "y": 1361
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "deco_shadow_gdEN9QmX",
+                        "position": {
+                            "h": 286,
+                            "w": 1040,
+                            "x": 27,
+                            "y": 1741
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "deco_shadow_QSvJFbe5",
+                        "position": {
+                            "h": 286,
+                            "w": 336,
+                            "x": 1083,
+                            "y": 1741
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "deco_hero_app_background",
+                        "position": {
+                            "h": 104,
+                            "w": 1392,
+                            "x": 24,
+                            "y": 24
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "deco_hero_app_title",
+                        "position": {
+                            "h": 48,
+                            "w": 920,
+                            "x": 54,
+                            "y": 34
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "deco_hero_app_subtitle",
+                        "position": {
+                            "h": 34,
+                            "w": 920,
+                            "x": 54,
+                            "y": 84
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "deco_section_app_inventory",
+                        "position": {
+                            "h": 40,
+                            "w": 1392,
+                            "x": 24,
+                            "y": 152
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "deco_section_app_certificates",
+                        "position": {
+                            "h": 40,
+                            "w": 1392,
+                            "x": 24,
+                            "y": 400
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "deco_section_app_secrets",
+                        "position": {
+                            "h": 40,
+                            "w": 1392,
+                            "x": 24,
+                            "y": 648
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "deco_section_app_lifecycle",
+                        "position": {
+                            "h": 40,
+                            "w": 1392,
+                            "x": 24,
+                            "y": 896
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "deco_section_app_activity",
+                        "position": {
+                            "h": 40,
+                            "w": 1392,
+                            "x": 24,
+                            "y": 1300
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "deco_section_app_deletion",
+                        "position": {
+                            "h": 40,
+                            "w": 1392,
+                            "x": 24,
+                            "y": 1680
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_68g5fro4",
+                        "position": {
+                            "h": 168,
+                            "w": 453,
+                            "x": 24,
+                            "y": 208
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_xpiZPC6h",
+                        "position": {
+                            "h": 168,
+                            "w": 453,
+                            "x": 493,
+                            "y": 208
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_07yncQlL",
+                        "position": {
+                            "h": 168,
+                            "w": 454,
+                            "x": 962,
+                            "y": 208
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_GdSNpfGc",
+                        "position": {
+                            "h": 168,
+                            "w": 453,
+                            "x": 24,
+                            "y": 456
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_gZ2pQo4b",
+                        "position": {
+                            "h": 168,
+                            "w": 453,
+                            "x": 493,
+                            "y": 456
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_BsNG9unq",
+                        "position": {
+                            "h": 168,
+                            "w": 454,
+                            "x": 962,
+                            "y": 456
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_rdj3QACp",
+                        "position": {
+                            "h": 168,
+                            "w": 453,
+                            "x": 24,
+                            "y": 704
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_xCnWqcCu",
+                        "position": {
+                            "h": 168,
+                            "w": 453,
+                            "x": 493,
+                            "y": 704
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_SfDHuFbJ",
+                        "position": {
+                            "h": 168,
+                            "w": 454,
+                            "x": 962,
+                            "y": 704
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_ICLWFFq3",
+                        "position": {
+                            "h": 324,
+                            "w": 688,
+                            "x": 24,
+                            "y": 952
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_gqAPGVxv",
+                        "position": {
+                            "h": 324,
+                            "w": 688,
+                            "x": 728,
+                            "y": 952
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_BCgWiWkb",
+                        "position": {
+                            "h": 300,
+                            "w": 1392,
+                            "x": 24,
+                            "y": 1356
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_gdEN9QmX",
+                        "position": {
+                            "h": 286,
+                            "w": 1040,
+                            "x": 24,
+                            "y": 1736
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_QSvJFbe5",
+                        "position": {
+                            "h": 286,
+                            "w": 336,
+                            "x": 1080,
+                            "y": 1736
+                        },
+                        "type": "block"
+                    }
+                ],
+                "type": "absolute"
+            },
+            "layout_sihdCCk0": {
+                "options": {
+                    "backgroundColor": "#E9EFF7",
+                    "display": "auto",
+                    "height": 1546,
+                    "width": 1440
+                },
+                "structure": [
+                    {
+                        "item": "deco_shadow_kMOVgmnv",
+                        "position": {
+                            "h": 168,
+                            "w": 265,
+                            "x": 27,
+                            "y": 213
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "deco_shadow_rO56kdbY",
+                        "position": {
+                            "h": 168,
+                            "w": 265,
+                            "x": 308,
+                            "y": 213
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "deco_shadow_Eu5XcvoO",
+                        "position": {
+                            "h": 168,
+                            "w": 265,
+                            "x": 589,
+                            "y": 213
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "deco_shadow_XWonNbA3",
+                        "position": {
+                            "h": 168,
+                            "w": 265,
+                            "x": 870,
+                            "y": 213
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "deco_shadow_TBF96Beh",
+                        "position": {
+                            "h": 168,
+                            "w": 268,
+                            "x": 1151,
+                            "y": 213
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "deco_shadow_TK4dcITL",
+                        "position": {
+                            "h": 320,
+                            "w": 420,
+                            "x": 27,
+                            "y": 461
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "deco_shadow_GrM3T83j",
+                        "position": {
+                            "h": 320,
+                            "w": 956,
+                            "x": 463,
+                            "y": 461
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "deco_shadow_qhfv7zty",
+                        "position": {
+                            "h": 286,
+                            "w": 1040,
+                            "x": 27,
+                            "y": 861
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "deco_shadow_YP0t98aO",
+                        "position": {
+                            "h": 286,
+                            "w": 336,
+                            "x": 1083,
+                            "y": 861
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "deco_shadow_Tw9bgQin",
+                        "position": {
+                            "h": 300,
+                            "w": 1392,
+                            "x": 27,
+                            "y": 1227
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "deco_hero_enterprise_background",
+                        "position": {
+                            "h": 104,
+                            "w": 1392,
+                            "x": 24,
+                            "y": 24
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "deco_hero_enterprise_title",
+                        "position": {
+                            "h": 48,
+                            "w": 920,
+                            "x": 54,
+                            "y": 34
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "deco_hero_enterprise_subtitle",
+                        "position": {
+                            "h": 34,
+                            "w": 920,
+                            "x": 54,
+                            "y": 84
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "deco_section_enterprise_inventory",
+                        "position": {
+                            "h": 40,
+                            "w": 1392,
+                            "x": 24,
+                            "y": 152
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "deco_section_enterprise_identity",
+                        "position": {
+                            "h": 40,
+                            "w": 1392,
+                            "x": 24,
+                            "y": 400
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "deco_section_enterprise_deletion",
+                        "position": {
+                            "h": 40,
+                            "w": 1392,
+                            "x": 24,
+                            "y": 800
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "deco_section_enterprise_governance",
+                        "position": {
+                            "h": 40,
+                            "w": 1392,
+                            "x": 24,
+                            "y": 1166
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_kMOVgmnv",
+                        "position": {
+                            "h": 168,
+                            "w": 265,
+                            "x": 24,
+                            "y": 208
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_rO56kdbY",
+                        "position": {
+                            "h": 168,
+                            "w": 265,
+                            "x": 305,
+                            "y": 208
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_Eu5XcvoO",
+                        "position": {
+                            "h": 168,
+                            "w": 265,
+                            "x": 586,
+                            "y": 208
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_XWonNbA3",
+                        "position": {
+                            "h": 168,
+                            "w": 265,
+                            "x": 867,
+                            "y": 208
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_TBF96Beh",
+                        "position": {
+                            "h": 168,
+                            "w": 268,
+                            "x": 1148,
+                            "y": 208
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_TK4dcITL",
+                        "position": {
+                            "h": 320,
+                            "w": 420,
+                            "x": 24,
+                            "y": 456
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_GrM3T83j",
+                        "position": {
+                            "h": 320,
+                            "w": 956,
+                            "x": 460,
+                            "y": 456
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_qhfv7zty",
+                        "position": {
+                            "h": 286,
+                            "w": 1040,
+                            "x": 24,
+                            "y": 856
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_YP0t98aO",
+                        "position": {
+                            "h": 286,
+                            "w": 336,
+                            "x": 1080,
+                            "y": 856
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_Tw9bgQin",
+                        "position": {
+                            "h": 300,
+                            "w": 1392,
+                            "x": 24,
+                            "y": 1222
+                        },
+                        "type": "block"
+                    }
+                ],
+                "type": "absolute"
+            }
+        },
+        "options": {},
+        "tabs": {
+            "items": [
+                {
+                    "label": "App Registrations",
+                    "layoutId": "layout_1"
+                },
+                {
+                    "label": "Enterprise Applications",
+                    "layoutId": "layout_sihdCCk0"
+                }
+            ]
+        }
+    },
+    "applicationProperties": {
+        "hideEdit": false,
+        "hideExport": false
+    }
+}
