@@ -1,0 +1,1055 @@
+{
+    "title": "New Entra Applications Governance & Insights",
+    "description": "",
+    "inputs": {
+        "input_global_trp": {
+            "options": {
+                "defaultValue": "-24h@h,now",
+                "token": "global_time"
+            },
+            "title": "Global Time Range",
+            "type": "input.timerange"
+        }
+    },
+    "defaults": {
+        "dataSources": {
+            "ds.search": {
+                "options": {
+                    "queryParameters": {
+                        "earliest": "$global_time.earliest$",
+                        "latest": "$global_time.latest$"
+                    }
+                }
+            },
+            "ds.spl2": {
+                "options": {
+                    "queryParameters": {
+                        "earliest": "$global_time.earliest$",
+                        "latest": "$global_time.latest$"
+                    }
+                }
+            }
+        },
+        "visualizations": {
+            "global": {
+                "showProgressBar": true
+            }
+        }
+    },
+    "visualizations": {
+        "viz_07yncQlL": {
+            "dataSources": {
+                "primary": "ds_IZlcBTeq"
+            },
+            "title": "Applications Using Client Secrets",
+            "type": "splunk.singlevalue"
+        },
+        "viz_68g5fro4": {
+            "containerOptions": {},
+            "dataSources": {
+                "primary": "ds_zMFXmxwv"
+            },
+            "showLastUpdated": false,
+            "showProgressBar": true,
+            "title": "Total App Registration",
+            "type": "splunk.singlevalue"
+        },
+        "viz_BCgWiWkb": {
+            "dataSources": {
+                "primary": "ds_1UEtUbmZ"
+            },
+            "options": {
+                "dataValuesDisplay": "off",
+                "legendDisplay": "right",
+                "legendMode": "standard",
+                "legendTruncation": "ellipsisMiddle",
+                "nullValueDisplay": "gaps",
+                "showIndependentYRanges": false,
+                "showOverlayY2Axis": false,
+                "showRoundedY2AxisLabels": false,
+                "showSplitSeries": false,
+                "showY2MajorGridLines": true,
+                "stackMode": "auto",
+                "xAxisLabelRotation": 0,
+                "xAxisTitleVisibility": "show",
+                "y2AxisAbbreviation": "auto",
+                "y2AxisScale": "linear",
+                "y2AxisTitleVisibility": "show",
+                "yAxisAbbreviation": "auto",
+                "yAxisScale": "linear",
+                "yAxisTitleVisibility": "show"
+            },
+            "title": "App Registration Trend",
+            "type": "splunk.area"
+        },
+        "viz_BsNG9unq": {
+            "dataSources": {
+                "primary": "ds_NlXd9yjP"
+            },
+            "eventHandlers": [
+                {
+                    "options": {
+                        "earliest": "auto",
+                        "latest": "auto",
+                        "newTab": true,
+                        "query": "index=ms_entra_id (sourcetype=\"microsoft:applications\")\r\n| spath input=_raw path=id output=obj_id\r\n| spath input=_raw path=appId output=app_id\r\n| spath input=_raw path=displayName output=app_name\r\n| eval k = sourcetype . \"::\" . obj_id\r\n| stats latest(_raw) AS raw latest(app_name) AS app_name latest(app_id) as app_id BY k\r\n| spath input=raw path=keyCredentials{}.keyId output=key_id\r\n| spath input=raw path=keyCredentials{}.endDateTime output=end_raw\r\n| eval z = mvzip(key_id, end_raw, \"|~|\")\r\n| mvexpand z\r\n| eval p = split(z, \"|~|\"), key_id = mvindex(p,0), end_raw = mvindex(p,1)\r\n| eval ts = replace(end_raw, \"[.][0-9]+\", \"\")\r\n| eval exp = coalesce(strptime(ts,\"%Y-%m-%dT%H:%M:%S%z\"), strptime(ts,\"%Y-%m-%dT%H:%M:%SZ\"))\r\n| where exp >= now() AND exp <= now() + (30 * 86400)\r\n| eval expires_at = strftime(exp,\"%Y-%m-%d %H:%M:%S\")\r\n| eval days_remaining = round((exp - now()) / 86400, 1)\r\n| table app_name app_id key_id expires_at days_remaining\r\n| sort days_remaining",
+                        "type": "custom"
+                    },
+                    "type": "drilldown.linkToSearch"
+                }
+            ],
+            "title": "Certificate Expiry - 30 Days",
+            "type": "splunk.singlevalue"
+        },
+        "viz_Eu5XcvoO": {
+            "containerOptions": {},
+            "context": {},
+            "dataSources": {
+                "primary": "ds_iT2H7YWs"
+            },
+            "options": {},
+            "showLastUpdated": false,
+            "showProgressBar": true,
+            "title": "Certs expiring in 10 Days",
+            "type": "splunk.singlevalue"
+        },
+        "viz_GdSNpfGc": {
+            "containerOptions": {},
+            "dataSources": {
+                "primary": "ds_dIXLczBk"
+            },
+            "showLastUpdated": false,
+            "showProgressBar": true,
+            "title": "Certificates Expired",
+            "type": "splunk.singlevalue"
+        },
+        "viz_GrM3T83j": {
+            "dataSources": {
+                "primary": "ds_GQ5cM9do"
+            },
+            "options": {
+                "dataValuesDisplay": "off",
+                "legendDisplay": "right",
+                "legendMode": "standard",
+                "legendTruncation": "ellipsisMiddle",
+                "nullValueDisplay": "gaps",
+                "showIndependentYRanges": false,
+                "showOverlayY2Axis": false,
+                "showRoundedY2AxisLabels": false,
+                "showSplitSeries": false,
+                "showY2MajorGridLines": true,
+                "stackMode": "auto",
+                "xAxisLabelRotation": 0,
+                "xAxisTitleVisibility": "show",
+                "y2AxisAbbreviation": "auto",
+                "y2AxisScale": "linear",
+                "y2AxisTitleVisibility": "show",
+                "yAxisAbbreviation": "auto",
+                "yAxisScale": "linear",
+                "yAxisTitleVisibility": "show"
+            },
+            "title": "Enterprise Applications Creation Trend",
+            "type": "splunk.area"
+        },
+        "viz_ICLWFFq3": {
+            "containerOptions": {},
+            "dataSources": {
+                "primary": "ds_THbEw6HW"
+            },
+            "showLastUpdated": false,
+            "showProgressBar": true,
+            "title": "Secret Expiry Trend",
+            "type": "splunk.area"
+        },
+        "viz_QSvJFbe5": {
+            "context": {
+                "convertedColorRange": [
+                    {
+                        "from": 100,
+                        "value": "#dc4e41"
+                    },
+                    {
+                        "from": 70,
+                        "to": 100,
+                        "value": "#f1813f"
+                    },
+                    {
+                        "from": 30,
+                        "to": 70,
+                        "value": "#f8be34"
+                    },
+                    {
+                        "from": 0,
+                        "to": 30,
+                        "value": "#0877a6"
+                    },
+                    {
+                        "to": 0,
+                        "value": "#53a051"
+                    }
+                ]
+            },
+            "dataSources": {
+                "primary": "ds_ioSDfZN7"
+            },
+            "options": {
+                "majorColor": "#171d21",
+                "numberPrecision": 0,
+                "shouldUseThousandSeparators": true,
+                "sparklineDisplay": "below",
+                "trendDisplay": "absolute",
+                "unitPosition": "after"
+            },
+            "title": "SPN Hard Delete - Next 30 Days",
+            "type": "splunk.singlevalue"
+        },
+        "viz_SfDHuFbJ": {
+            "dataSources": {
+                "primary": "ds_cNQ6ceLp"
+            },
+            "eventHandlers": [
+                {
+                    "options": {
+                        "earliest": "auto",
+                        "latest": "auto",
+                        "newTab": true,
+                        "query": "index=ms_entra_id (sourcetype=\"microsoft:applications\")\r\n| spath input=_raw path=id output=obj_id\r\n| spath input=_raw path=appId output=app_id\r\n| spath input=_raw path=displayName output=app_name\r\n| eval k = sourcetype . \"::\" . obj_id\r\n| stats latest(_raw) AS raw latest(app_name) AS app_name latest(app_id) as app_id BY k\r\n| spath input=raw path=passwordCredentials{}.keyId output=key_id\r\n| spath input=raw path=passwordCredentials{}.endDateTime output=end_raw\r\n| eval z = mvzip(key_id, end_raw, \"|~|\")\r\n| mvexpand z\r\n| eval p = split(z, \"|~|\"), key_id = mvindex(p,0), end_raw = mvindex(p,1)\r\n| eval ts = replace(end_raw, \"[.][0-9]+\", \"\")\r\n| eval exp = coalesce(strptime(ts,\"%Y-%m-%dT%H:%M:%S%z\"), strptime(ts,\"%Y-%m-%dT%H:%M:%SZ\"))\r\n| where exp >= now() AND exp <= now() + (30 * 86400)\r\n| eval expires_at = strftime(exp,\"%Y-%m-%d %H:%M:%S\")\r\n| eval days_remaining = round((exp - now()) / 86400, 1)\r\n| table app_name app_id key_id expires_at days_remaining\r\n| sort days_remaining",
+                        "type": "custom"
+                    },
+                    "type": "drilldown.linkToSearch"
+                }
+            ],
+            "title": "Secret Expiry - 30 Days",
+            "type": "splunk.singlevalue"
+        },
+        "viz_TBF96Beh": {
+            "containerOptions": {},
+            "context": {},
+            "dataSources": {
+                "primary": "ds_2HkfbAJM"
+            },
+            "options": {},
+            "showLastUpdated": false,
+            "showProgressBar": true,
+            "title": "Certs expiring in 90 Days",
+            "type": "splunk.singlevalue"
+        },
+        "viz_TK4dcITL": {
+            "containerOptions": {
+                "visibility": {}
+            },
+            "dataSources": {
+                "primary": "ds_ryMNrdZr"
+            },
+            "showLastUpdated": false,
+            "showProgressBar": true,
+            "title": "SSO Mode",
+            "type": "splunk.pie"
+        },
+        "viz_Tw9bgQin": {
+            "context": {
+                "convertedColorRange": [
+                    {
+                        "from": 8,
+                        "value": "#dc4e41"
+                    },
+                    {
+                        "from": 4,
+                        "to": 8,
+                        "value": "#555"
+                    },
+                    {
+                        "from": 3,
+                        "to": 4,
+                        "value": "#f1813f"
+                    },
+                    {
+                        "from": 2,
+                        "to": 3,
+                        "value": "#f8be34"
+                    },
+                    {
+                        "from": 1,
+                        "to": 2,
+                        "value": "#0877a6"
+                    },
+                    {
+                        "to": 1,
+                        "value": "#53a051"
+                    }
+                ]
+            },
+            "dataSources": {
+                "primary": "ds_8fCnVLFx"
+            },
+            "eventHandlers": [
+                {
+                    "options": {
+                        "earliest": "auto",
+                        "latest": "auto",
+                        "newTab": false,
+                        "query": "index=ms_entra_id sourcetype=\"microsoft:servicePrincipals\" \r\n| spath input=_raw path=tags{} output=tags \r\n| spath input=_raw path=appId output=appId \r\n| spath input=_raw path=id output=obj_id \r\n| spath input=_raw path=displayName output=displayName \r\n| spath input=_raw path=notificationEmailAddresses{} output=notification_email \r\n| eval tags=if(isnull(tags), \"\", tags) \r\n| eval exclude_pva=if(mvfind(tags, \"^power-virtual-agents-\") >= 0, 1, 0) \r\n| eval exclude_agent_instance=if(mvfind(tags, \"^AgenticInstance$\") >= 0, 1, 0) \r\n| eval exclude_agent_app=if(mvfind(tags, \"^AgenticApp$\") >= 0, 1, 0) \r\n| where mvfind(tags, \"^WindowsAzureActiveDirectoryIntegratedApp$\") >= 0 \r\n| where exclude_pva=0\r\n    AND exclude_agent_instance=0\r\n    AND exclude_agent_app=0 \r\n| search NOT \r\n    [| search index=ms_entra_id sourcetype=\"microsoft:directoryAudits\"\r\n        operationType=Delete\r\n        category=ApplicationManagement\r\n        activityDisplayName=\"Delete application\" \r\n    | rename additionalDetails{}.value as appId \r\n    | dedup appId \r\n    | table appId \r\n    | format\r\n        ] \r\n| eval notification_email=mvmap(notification_email, lower(notification_email)) \r\n| eval notification_email=mvfilter(\r\n    notification_email!=\"corporateapplications@ndis.gov.au\"\r\n    AND NOT match(notification_email, \"cache\")\r\n    ) \r\n| where isnotnull(notification_email)\r\n    AND mvcount(notification_email)>0 \r\n| eval notification_email=mvjoin(notification_email, \", \") \r\n| dedup appId \r\n| table appId displayName notification_email \r\n| sort displayName\r\n| stats list(displayName) as displayName, count by notification_email",
+                        "type": "custom"
+                    },
+                    "type": "drilldown.linkToSearch"
+                }
+            ],
+            "options": {
+                "backgroundColor": "> majorValue | rangeValue(convertedColorRange)",
+                "numberPrecision": 0,
+                "shouldUseThousandSeparators": true,
+                "sparklineDisplay": "below",
+                "splitByLayout": "trellis",
+                "trellisColumns": 10,
+                "trellisMinColumnWidth": 120,
+                "trellisPageCount": 50,
+                "trellisRowHeight": 68,
+                "trendDisplay": "absolute",
+                "unitPosition": "after"
+            },
+            "title": "Non Corp Emails Notification Registered",
+            "type": "splunk.singlevalue"
+        },
+        "viz_XWonNbA3": {
+            "containerOptions": {},
+            "context": {},
+            "dataSources": {
+                "primary": "ds_oLgU4yuh"
+            },
+            "options": {},
+            "showLastUpdated": false,
+            "showProgressBar": true,
+            "title": "Certificates Expiring in 30 Days",
+            "type": "splunk.singlevalue"
+        },
+        "viz_YP0t98aO": {
+            "context": {
+                "convertedColorRange": [
+                    {
+                        "from": 100,
+                        "value": "#dc4e41"
+                    },
+                    {
+                        "from": 70,
+                        "to": 100,
+                        "value": "#f1813f"
+                    },
+                    {
+                        "from": 30,
+                        "to": 70,
+                        "value": "#f8be34"
+                    },
+                    {
+                        "from": 0,
+                        "to": 30,
+                        "value": "#0877a6"
+                    },
+                    {
+                        "to": 0,
+                        "value": "#53a051"
+                    }
+                ]
+            },
+            "dataSources": {
+                "primary": "ds_b7mefxRZ"
+            },
+            "options": {
+                "majorColor": "#171d21",
+                "numberPrecision": 0,
+                "shouldUseThousandSeparators": true,
+                "sparklineDisplay": "below",
+                "trendDisplay": "absolute",
+                "unitPosition": "after"
+            },
+            "title": "Ent. Apps Hard Delete - Next 30 Days",
+            "type": "splunk.singlevalue"
+        },
+        "viz_gZ2pQo4b": {
+            "dataSources": {
+                "primary": "ds_0z3tPpd2"
+            },
+            "eventHandlers": [
+                {
+                    "options": {
+                        "earliest": "auto",
+                        "latest": "auto",
+                        "newTab": true,
+                        "query": "index=ms_entra_id (sourcetype=\"microsoft:applications\")\r\n| spath input=_raw path=id output=obj_id\r\n| spath input=_raw path=appId output=app_id\r\n| spath input=_raw path=displayName output=app_name\r\n| eval k = sourcetype . \"::\" . obj_id\r\n| stats latest(_raw) AS raw latest(app_id) AS app_id latest(app_name) AS app_name latest(app_id) as app_id BY k\r\n| spath input=raw path=keyCredentials{}.keyId output=key_id\r\n| spath input=raw path=keyCredentials{}.endDateTime output=end_raw\r\n| eval z = mvzip(key_id, end_raw, \"|~|\")\r\n| mvexpand z\r\n| eval p = split(z, \"|~|\"), key_id = mvindex(p,0), end_raw = mvindex(p,1)\r\n| eval ts = replace(end_raw, \"[.][0-9]+\", \"\")\r\n| eval exp = coalesce(\r\n    strptime(ts,\"%Y-%m-%dT%H:%M:%S%z\"),\r\n    strptime(ts,\"%Y-%m-%dT%H:%M:%SZ\")\r\n  )\r\n| where exp >= now() - (10 * 86400) AND exp < now()\r\n| eval expired_at = strftime(exp,\"%Y-%m-%d %H:%M:%S\")\r\n| eval days_since_expiry = round((now() - exp) / 86400, 1)\r\n| table app_name app_id  key_id expired_at days_since_expiry\r\n| sort - expired_at",
+                        "type": "custom"
+                    },
+                    "type": "drilldown.linkToSearch"
+                }
+            ],
+            "title": "Certificate Expiry - 10 Days",
+            "type": "splunk.singlevalue"
+        },
+        "viz_gdEN9QmX": {
+            "dataSources": {
+                "primary": "ds_YC97HOhn"
+            },
+            "options": {
+                "dataValuesDisplay": "off",
+                "legendDisplay": "right",
+                "legendMode": "standard",
+                "legendTruncation": "ellipsisMiddle",
+                "nullValueDisplay": "gaps",
+                "showIndependentYRanges": false,
+                "showOverlayY2Axis": false,
+                "showRoundedY2AxisLabels": false,
+                "showSplitSeries": false,
+                "showY2MajorGridLines": true,
+                "stackMode": "auto",
+                "xAxisLabelRotation": 0,
+                "xAxisTitleVisibility": "show",
+                "y2AxisAbbreviation": "auto",
+                "y2AxisScale": "log",
+                "y2AxisTitleVisibility": "show",
+                "yAxisAbbreviation": "auto",
+                "yAxisScale": "log",
+                "yAxisTitleVisibility": "show"
+            },
+            "title": "SPN Deleted - Last 6 Months",
+            "type": "splunk.area"
+        },
+        "viz_gqAPGVxv": {
+            "containerOptions": {},
+            "dataSources": {
+                "primary": "ds_VbSD0dGP"
+            },
+            "options": {
+                "legendDisplay": "off",
+                "xAxisTitleVisibility": "hide",
+                "yAxisTitleVisibility": "hide"
+            },
+            "showLastUpdated": false,
+            "showProgressBar": true,
+            "title": "Certificate Expiry Trend",
+            "type": "splunk.area"
+        },
+        "viz_kMOVgmnv": {
+            "containerOptions": {},
+            "context": {},
+            "dataSources": {
+                "primary": "ds_IjWpdgOu"
+            },
+            "options": {},
+            "showLastUpdated": false,
+            "showProgressBar": true,
+            "title": "Enterprise Applications",
+            "type": "splunk.singlevalue"
+        },
+        "viz_qhfv7zty": {
+            "dataSources": {
+                "primary": "ds_ukjZiFn2"
+            },
+            "options": {
+                "dataValuesDisplay": "off",
+                "legendDisplay": "right",
+                "legendMode": "standard",
+                "legendTruncation": "ellipsisMiddle",
+                "nullValueDisplay": "gaps",
+                "showIndependentYRanges": false,
+                "showOverlayY2Axis": false,
+                "showRoundedY2AxisLabels": false,
+                "showSplitSeries": false,
+                "showY2MajorGridLines": true,
+                "stackMode": "auto",
+                "xAxisLabelRotation": 0,
+                "xAxisTitleVisibility": "show",
+                "y2AxisAbbreviation": "auto",
+                "y2AxisScale": "log",
+                "y2AxisTitleVisibility": "show",
+                "yAxisAbbreviation": "auto",
+                "yAxisScale": "log",
+                "yAxisTitleVisibility": "show"
+            },
+            "title": "Ent Apps Deleted - Last 6 Months",
+            "type": "splunk.area"
+        },
+        "viz_rO56kdbY": {
+            "containerOptions": {},
+            "context": {},
+            "dataSources": {
+                "primary": "ds_HqdXtNLb"
+            },
+            "options": {},
+            "showLastUpdated": false,
+            "showProgressBar": true,
+            "title": "Ent. Apps with Certificates",
+            "type": "splunk.singlevalue"
+        },
+        "viz_rdj3QACp": {
+            "containerOptions": {},
+            "context": {},
+            "dataSources": {
+                "primary": "ds_NYgO7JOD"
+            },
+            "options": {},
+            "showLastUpdated": false,
+            "showProgressBar": true,
+            "title": "Secret Expired",
+            "type": "splunk.singlevalue"
+        },
+        "viz_xCnWqcCu": {
+            "dataSources": {
+                "primary": "ds_PKuPxUFh"
+            },
+            "eventHandlers": [
+                {
+                    "options": {
+                        "earliest": "auto",
+                        "latest": "auto",
+                        "newTab": true,
+                        "query": "index=ms_entra_id (sourcetype=\"microsoft:applications\")\r\n| spath input=_raw path=id output=obj_id\r\n| spath input=_raw path=appId output=app_id\r\n| spath input=_raw path=displayName output=app_name\r\n| eval k = sourcetype . \"::\" . obj_id\r\n| stats latest(_raw) AS raw latest(app_name) AS app_name latest(app_id) as app_id BY k\r\n| spath input=raw path=passwordCredentials{}.keyId output=key_id\r\n| spath input=raw path=passwordCredentials{}.endDateTime output=end_raw\r\n| eval z = mvzip(key_id, end_raw, \"|~|\")\r\n| mvexpand z\r\n| eval p = split(z, \"|~|\"), key_id = mvindex(p,0), end_raw = mvindex(p,1)\r\n| eval ts = replace(end_raw, \"[.][0-9]+\", \"\")\r\n| eval exp = coalesce(strptime(ts,\"%Y-%m-%dT%H:%M:%S%z\"), strptime(ts,\"%Y-%m-%dT%H:%M:%SZ\"))\r\n| where exp >= now() AND exp <= now() + (10 * 86400)\r\n| eval expires_at = strftime(exp,\"%Y-%m-%d %H:%M:%S\")\r\n| eval days_remaining = round((exp - now()) / 86400, 1)\r\n| table app_name app_id key_id expires_at days_remaining\r\n| sort days_remaining",
+                        "type": "custom"
+                    },
+                    "type": "drilldown.linkToSearch"
+                }
+            ],
+            "title": "Secret Expiry - 10 Days",
+            "type": "splunk.singlevalue"
+        },
+        "viz_xpiZPC6h": {
+            "dataSources": {
+                "primary": "ds_3qOgmyi8"
+            },
+            "title": "Applications Using Certificates",
+            "type": "splunk.singlevalue"
+        }
+    },
+    "dataSources": {
+        "ds_0z3tPpd2": {
+            "name": "CertificatesExpiry_10Days",
+            "options": {
+                "query": "index=ms_entra_id (sourcetype=\"microsoft:applications\")\r\n| spath input=_raw path=id output=obj_id\r\n| eval k = sourcetype . \"::\" . obj_id\r\n| stats latest(_raw) AS raw BY k\r\n| spath input=raw path=keyCredentials{}.keyId       output=key_id\r\n| spath input=raw path=keyCredentials{}.endDateTime output=end_raw\r\n| eval z = mvzip(key_id, end_raw, \"|~|\")\r\n| mvexpand z\r\n| eval p = split(z, \"|~|\"), key_id = mvindex(p,0), end_raw = mvindex(p,1)\r\n| eval ts = replace(end_raw, \"[.][0-9]+\", \"\")\r\n| eval exp = coalesce(strptime(ts,\"%Y-%m-%dT%H:%M:%S%z\"), strptime(ts,\"%Y-%m-%dT%H:%M:%SZ\"))\r\n| where exp >= now() AND exp <= now() + (10 * 86400)\r\n| stats dc(key_id) AS expiring_certificates"
+            },
+            "type": "ds.search"
+        },
+        "ds_1UEtUbmZ": {
+            "name": "App Registration Trend search",
+            "options": {
+                "query": "index=ms_entra_id sourcetype=\"microsoft:applications\"\r\n| spath input=_raw path=appId output=appId\r\n| spath input=_raw path=createdDateTime output=createdDateTime\r\n| eval created_epoch=strptime(createdDateTime,\"%Y-%m-%dT%H:%M:%SZ\")\r\n| where created_epoch >= relative_time(now(), \"-6mon@d\")\r\n| sort 0 appId -created_epoch\r\n| dedup appId\r\n| eval _time=created_epoch\r\n| timechart span=1d count as \"Applications Created\"",
+                "queryParameters": {
+                    "earliest": "-6mon@mon",
+                    "latest": "now",
+                    "sampleRatio": 1
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_2HkfbAJM": {
+            "name": "Certs expiring in 90 Days search",
+            "options": {
+                "query": "index=ms_entra_id sourcetype=\"microsoft:servicePrincipals\" \r\n| spath input=_raw path=tags{} output=tags \r\n| spath input=_raw path=appId output=appId \r\n| spath input=_raw path=id output=obj_id \r\n| spath input=_raw path=displayName output=displayName \r\n| where mvfind(tags, \"^WindowsAzureActiveDirectoryIntegratedApp$$\") >= 0 \r\n| search NOT \r\n    [| search index=ms_entra_id sourcetype=\"microsoft:directoryAudits\"\r\n        operationType=Delete\r\n        category=ApplicationManagement\r\n        activityDisplayName=\"Delete application\" \r\n    | rename additionalDetails{}.value as appId \r\n    | dedup appId \r\n    | table appId \r\n    | format\r\n        ] \r\n| spath input=_raw path=keyCredentials{}.keyId output=key_id \r\n| spath input=_raw path=keyCredentials{}.endDateTime output=end_raw \r\n| spath input=_raw path=keyCredentials{}.customKeyIdentifier output=customkeyidentifier \r\n| where isnotnull(key_id) AND isnotnull(end_raw) \r\n| eval z=mvzip(\r\n    mvzip(key_id,end_raw,\"|~|\"),\r\n    customkeyidentifier,\r\n    \"|~|\"\r\n    ) \r\n| mvexpand z \r\n| eval p=split(z,\"|~|\") \r\n| eval key_id=mvindex(p,0) \r\n| eval end_raw=mvindex(p,1) \r\n| eval customkeyidentifier=mvindex(p,2) \r\n| eval ts=replace(end_raw,\"[.][0-9]+\",\"\") \r\n| eval exp=coalesce(\r\n    strptime(ts,\"%Y-%m-%dT%H:%M:%S%z\"),\r\n    strptime(ts,\"%Y-%m-%dT%H:%M:%SZ\")\r\n    ) \r\n| where exp>=now() AND exp<=now()+(10*86400) \r\n| eval expires_at=strftime(exp,\"%Y-%m-%d %H:%M:%S\") \r\n| eval days_remaining=round((exp-now())/86400,1) \r\n| dedup customkeyidentifier \r\n| table displayName appId obj_id key_id customkeyidentifier expires_at days_remaining \r\n| sort days_remaining\r\n| stats count",
+                "queryParameters": {
+                    "earliest": "0",
+                    "sampleRatio": 1
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_3qOgmyi8": {
+            "name": "ApplicationsUsingCertificates",
+            "options": {
+                "query": "index=msgraph_prod sourcetype=\"microsoft:applications\" \r\n| where isnotnull('keyCredentials{}.endDateTime') \r\n| stats dc(appId)"
+            },
+            "type": "ds.search"
+        },
+        "ds_8fCnVLFx": {
+            "name": "Non Corp Emails Notification Registered search",
+            "options": {
+                "query": "index=ms_entra_id sourcetype=\"microsoft:servicePrincipals\" \r\n| spath input=_raw path=tags{} output=tags \r\n| spath input=_raw path=appId output=appId \r\n| spath input=_raw path=id output=obj_id \r\n| spath input=_raw path=displayName output=displayName \r\n| spath input=_raw path=notificationEmailAddresses{} output=notification_email \r\n| eval tags=if(isnull(tags), \"\", tags) \r\n| eval exclude_pva=if(mvfind(tags, \"^power-virtual-agents-\") >= 0, 1, 0) \r\n| eval exclude_agent_instance=if(mvfind(tags, \"^AgenticInstance$$\") >= 0, 1, 0) \r\n| eval exclude_agent_app=if(mvfind(tags, \"^AgenticApp$$\") >= 0, 1, 0) \r\n| where mvfind(tags, \"^WindowsAzureActiveDirectoryIntegratedApp$$\") >= 0 \r\n| where exclude_pva=0\r\n    AND exclude_agent_instance=0\r\n    AND exclude_agent_app=0 \r\n| search NOT \r\n    [| search index=ms_entra_id sourcetype=\"microsoft:directoryAudits\"\r\n        operationType=Delete\r\n        category=ApplicationManagement\r\n        activityDisplayName=\"Delete application\" \r\n    | rename additionalDetails{}.value as appId \r\n    | dedup appId \r\n    | table appId \r\n    | format\r\n        ] \r\n| eval notification_email=mvmap(notification_email, lower(notification_email)) \r\n| eval notification_email=mvfilter(\r\n    notification_email!=\"corporateapplications@ndis.gov.au\"\r\n    AND NOT match(notification_email, \"cache\")\r\n    ) \r\n| where isnotnull(notification_email)\r\n    AND mvcount(notification_email)>0 \r\n| eval notification_email=mvjoin(notification_email, \", \") \r\n| dedup appId \r\n| table appId displayName notification_email \r\n| sort displayName\r\n| stats count by notification_email",
+                "queryParameters": {
+                    "earliest": "0",
+                    "latest": "now",
+                    "sampleRatio": 1
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_GQ5cM9do": {
+            "name": "Enterprise Applications Creation Trend search",
+            "options": {
+                "query": "index=ms_entra_id sourcetype=\"microsoft:servicePrincipals\"\r\n| spath input=_raw path=tags{} output=tags\r\n| spath input=_raw path=appId output=appId\r\n| spath input=_raw path=id output=obj_id\r\n| spath input=_raw path=displayName output=displayName\r\n| spath input=_raw path=createdDateTime output=createdDateTime\r\n\r\n| eval tags=if(isnull(tags), \"\", tags)\r\n\r\n| eval exclude_pva=if(mvfind(tags, \"^power-virtual-agents-\") >= 0, 1, 0)\r\n| eval exclude_agent_instance=if(mvfind(tags, \"^AgenticInstance$$\") >= 0, 1, 0)\r\n| eval exclude_agent_app=if(mvfind(tags, \"^AgenticApp$$\") >= 0, 1, 0)\r\n\r\n| where mvfind(tags, \"^WindowsAzureActiveDirectoryIntegratedApp$$\") >= 0\r\n| where exclude_pva=0 AND exclude_agent_instance=0 AND exclude_agent_app=0\r\n\r\n| search NOT [\r\n    | search index=ms_entra_id sourcetype=\"microsoft:directoryAudits\"\r\n        operationType=Delete\r\n        category=ApplicationManagement\r\n        activityDisplayName=\"Delete application\"\r\n    | rename additionalDetails{}.value as appId\r\n    | dedup appId\r\n    | table appId\r\n    | format\r\n]\r\n\r\n| eval _time=strptime(createdDateTime,\"%Y-%m-%dT%H:%M:%SZ\")\r\n\r\n| where _time >= relative_time(now(), \"-6mon@d\")\r\n\r\n| dedup appId\r\n\r\n| timechart span=1d count as \"Service Principals Created\" usenull=true useother=false",
+                "queryParameters": {
+                    "earliest": "0",
+                    "latest": "now",
+                    "sampleRatio": 1
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_HqdXtNLb": {
+            "name": "Ent. Apps with Certificates search",
+            "options": {
+                "query": "index=ms_entra_id sourcetype=\"microsoft:servicePrincipals\" \r\n| spath input=_raw path=tags{} output=tags \r\n| spath input=_raw path=appId output=appId \r\n| spath input=_raw path=id output=obj_id \r\n| spath input=_raw path=displayName output=displayName \r\n| where mvfind(tags, \"^WindowsAzureActiveDirectoryIntegratedApp$$\") >= 0 \r\n| search NOT \r\n    [| search index=ms_entra_id sourcetype=\"microsoft:directoryAudits\"\r\n        operationType=Delete\r\n        category=ApplicationManagement\r\n        activityDisplayName=\"Delete application\" \r\n    | rename additionalDetails{}.value as appId \r\n    | dedup appId \r\n    | table appId \r\n    | format\r\n        ] \r\n| spath input=_raw path=keyCredentials{}.keyId output=key_id \r\n| where isnotnull(key_id) \r\n| dedup appId \r\n| table displayName appId obj_id \r\n| sort displayName\r\n| stats count",
+                "queryParameters": {
+                    "earliest": "0",
+                    "sampleRatio": 1
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_IZlcBTeq": {
+            "name": "ApplicationsUsingClientSecrets",
+            "options": {
+                "query": "index=msgraph_prod sourcetype=\"microsoft:applications\" \r\n| where isnotnull('passwordCredentials{}.hint') \r\n| stats dc(appId)"
+            },
+            "type": "ds.search"
+        },
+        "ds_IjWpdgOu": {
+            "name": "Enterprise Applications search",
+            "options": {
+                "query": "index=ms_entra_id sourcetype=\"microsoft:servicePrincipals\" \r\n| spath input=_raw path=tags{} output=tags \r\n| spath input=_raw path=appId output=appId \r\n| spath input=_raw path=id output=obj_id \r\n| spath input=_raw path=displayName output=displayName \r\n| eval tags=if(isnull(tags), \"\", tags) \r\n| eval exclude_pva=if(mvfind(tags, \"^power-virtual-agents-\") >= 0, 1, 0) \r\n| eval exclude_agent_instance=if(mvfind(tags, \"^AgenticInstance$$\") >= 0, 1, 0) \r\n| eval exclude_agent_app=if(mvfind(tags, \"^AgenticApp$$\") >= 0, 1, 0) \r\n| where mvfind(tags, \"^WindowsAzureActiveDirectoryIntegratedApp$$\") >= 0 \r\n| where exclude_pva=0 AND exclude_agent_instance=0 AND exclude_agent_app=0 \r\n| dedup appId \r\n| table displayName appId obj_id tags \r\n| sort displayName \r\n| search NOT \r\n    [| search index=ms_entra_id sourcetype=\"microsoft:directoryAudits\" operationType=Delete category=ApplicationManagement activityDisplayName=\"Delete application\" \r\n    | rename additionalDetails{}.value as \"appId\" \r\n    | table appId \r\n    | format ]\r\n    | stats count",
+                "queryParameters": {
+                    "earliest": "0",
+                    "sampleRatio": 1
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_JmlX3VaF": {
+            "name": "Non Corp Application Notification Email search",
+            "options": {
+                "query": "index=ms_entra_id sourcetype=\"microsoft:servicePrincipals\" \r\n| spath input=_raw path=tags{} output=tags \r\n| spath input=_raw path=appId output=appId \r\n| spath input=_raw path=id output=obj_id \r\n| spath input=_raw path=displayName output=displayName \r\n| spath input=_raw path=notificationEmailAddresses{} output=notification_email \r\n| eval tags=if(isnull(tags), \"\", tags) \r\n| eval exclude_pva=if(mvfind(tags, \"^power-virtual-agents-\") >= 0, 1, 0) \r\n| eval exclude_agent_instance=if(mvfind(tags, \"^AgenticInstance$$\") >= 0, 1, 0) \r\n| eval exclude_agent_app=if(mvfind(tags, \"^AgenticApp$$\") >= 0, 1, 0) \r\n| where mvfind(tags, \"^WindowsAzureActiveDirectoryIntegratedApp$$\") >= 0 \r\n| where exclude_pva=0\r\n    AND exclude_agent_instance=0\r\n    AND exclude_agent_app=0 \r\n| search NOT \r\n    [| search index=ms_entra_id sourcetype=\"microsoft:directoryAudits\"\r\n        operationType=Delete\r\n        category=ApplicationManagement\r\n        activityDisplayName=\"Delete application\" \r\n    | rename additionalDetails{}.value as appId \r\n    | dedup appId \r\n    | table appId \r\n    | format\r\n        ] \r\n| eval notification_email=mvmap(notification_email, lower(notification_email)) \r\n| eval notification_email=mvfilter(\r\n    notification_email!=\"corporateapplications@ndis.gov.au\"\r\n    AND NOT match(notification_email, \"cache\")\r\n    ) \r\n| where isnotnull(notification_email)\r\n    AND mvcount(notification_email)>0 \r\n| eval notification_email=mvjoin(notification_email, \", \") \r\n| dedup appId \r\n| table appId displayName notification_email \r\n| sort displayName\r\n| stats list(displayName) as displayName, count by notification_email",
+                "queryParameters": {
+                    "earliest": "0",
+                    "sampleRatio": 1
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_NYgO7JOD": {
+            "name": "Secret Expired search",
+            "options": {
+                "query": "index=ms_entra_id (sourcetype=\"microsoft:applications\" OR sourcetype=\"microsoft:servicePrincipals\")\r\n| spath input=_raw path=id output=obj_id\r\n| eval k = sourcetype . \"::\" . obj_id\r\n| stats latest(_raw) AS raw BY k\r\n| spath input=raw path=passwordCredentials{}.keyId       output=key_id\r\n| spath input=raw path=passwordCredentials{}.endDateTime output=end_raw\r\n| eval z = mvzip(key_id, end_raw, \"|~|\")\r\n| mvexpand z\r\n| eval p = split(z, \"|~|\"), key_id = mvindex(p,0), end_raw = mvindex(p,1)\r\n| eval ts = replace(end_raw, \"[.][0-9]+\", \"\")\r\n| eval exp = coalesce(strptime(ts,\"%Y-%m-%dT%H:%M:%S%z\"), strptime(ts,\"%Y-%m-%dT%H:%M:%SZ\"))\r\n| where exp < now()\r\n| stats dc(key_id) AS expired_secrets",
+                "queryParameters": {
+                    "earliest": "0",
+                    "sampleRatio": 1
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_NlXd9yjP": {
+            "name": "CertificatesExpiry_30Days",
+            "options": {
+                "query": "index=ms_entra_id (sourcetype=\"microsoft:applications\")\r\n| spath input=_raw path=id output=obj_id\r\n| eval k = sourcetype . \"::\" . obj_id\r\n| stats latest(_raw) AS raw BY k\r\n| spath input=raw path=keyCredentials{}.keyId       output=key_id\r\n| spath input=raw path=keyCredentials{}.endDateTime output=end_raw\r\n| eval z = mvzip(key_id, end_raw, \"|~|\")\r\n| mvexpand z\r\n| eval p = split(z, \"|~|\"), key_id = mvindex(p,0), end_raw = mvindex(p,1)\r\n| eval ts = replace(end_raw, \"[.][0-9]+\", \"\")\r\n| eval exp = coalesce(strptime(ts,\"%Y-%m-%dT%H:%M:%S%z\"), strptime(ts,\"%Y-%m-%dT%H:%M:%SZ\"))\r\n| where exp >= now() AND exp <= now() + (30 * 86400)\r\n| stats dc(key_id) AS expiring_certificates"
+            },
+            "type": "ds.search"
+        },
+        "ds_PKuPxUFh": {
+            "name": "SecretExpiry_10Days",
+            "options": {
+                "query": "index=ms_entra_id (sourcetype=\"microsoft:applications\")\r\n| spath input=_raw path=id output=obj_id\r\n| eval k = sourcetype . \"::\" . obj_id\r\n| stats latest(_raw) AS raw BY k\r\n| spath input=raw path=passwordCredentials{}.keyId       output=key_id\r\n| spath input=raw path=passwordCredentials{}.endDateTime output=end_raw\r\n| eval z = mvzip(key_id, end_raw, \"|~|\")\r\n| mvexpand z\r\n| eval p = split(z, \"|~|\"), key_id = mvindex(p,0), end_raw = mvindex(p,1)\r\n| eval ts = replace(end_raw, \"[.][0-9]+\", \"\")\r\n| eval exp = coalesce(\r\n    strptime(ts,\"%Y-%m-%dT%H:%M:%S%z\"),\r\n    strptime(ts,\"%Y-%m-%dT%H:%M:%SZ\")\r\n  )\r\n| where exp >= now() AND exp <= now() + (10 * 86400)\r\n| stats dc(key_id) AS expiring_secrets"
+            },
+            "type": "ds.search"
+        },
+        "ds_THbEw6HW": {
+            "name": "SecretExpiryTrend",
+            "options": {
+                "query": "index=ms_entra_id (sourcetype=\"microsoft:applications\")\r\n| spath input=_raw path=id output=obj_id\r\n| eval k = sourcetype . \"::\" . obj_id\r\n| stats latest(_raw) AS raw BY k\r\n| spath input=raw path=passwordCredentials{}.keyId output=key_id\r\n| spath input=raw path=passwordCredentials{}.endDateTime output=end_raw\r\n| eval z = mvzip(key_id, end_raw, \"|~|\")\r\n| mvexpand z\r\n| eval p = split(z, \"|~|\")\r\n| eval key_id = mvindex(p,0), end_raw = mvindex(p,1)\r\n| eval ts = replace(end_raw, \"[.][0-9]+\", \"\")\r\n| eval exp = coalesce(\r\n    strptime(ts,\"%Y-%m-%dT%H:%M:%S%z\"),\r\n    strptime(ts,\"%Y-%m-%dT%H:%M:%SZ\")\r\n  )\r\n| where isnotnull(exp)\r\n| eval bucket = case(\r\n    exp >= now()-(60*86400) AND exp < now()-(30*86400), \"Past 30-60 Days\",\r\n    exp >= now()-(30*86400) AND exp < now(), \"Past 30 Days\",\r\n    exp >= now() AND exp < now()+(30*86400), \"Next 30 Days\",\r\n    exp >= now()+(30*86400) AND exp < now()+(60*86400), \"Next 30-60 Days\",\r\n    exp >= now()+(60*86400) AND exp < now()+(90*86400), \"Next 60-90 Days\"\r\n  )\r\n| where isnotnull(bucket)\r\n| stats dc(key_id) AS total_secrets BY bucket\r\n| append [\r\n    | makeresults\r\n    | eval bucket=\"Past 30-60 Days\", bucket_order=1\r\n    | append [ | makeresults | eval bucket=\"Past 30 Days\", bucket_order=2 ]\r\n    | append [ | makeresults | eval bucket=\"Next 30 Days\", bucket_order=3 ]\r\n    | append [ | makeresults | eval bucket=\"Next 30-60 Days\", bucket_order=4 ]\r\n    | append [ | makeresults | eval bucket=\"Next 60-90 Days\", bucket_order=5 ]\r\n    | eval total_secrets=0\r\n    | table bucket bucket_order total_secrets\r\n]\r\n| stats max(total_secrets) AS total_secrets BY bucket\r\n| eval bucket_order=case(\r\n    bucket=\"Past 30-60 Days\",1,\r\n    bucket=\"Past 30 Days\",2,\r\n    bucket=\"Next 30 Days\",3,\r\n    bucket=\"Next 30-60 Days\",4,\r\n    bucket=\"Next 60-90 Days\",5\r\n  )\r\n| sort bucket_order\r\n| table bucket total_secrets"
+            },
+            "type": "ds.search"
+        },
+        "ds_VbSD0dGP": {
+            "name": "CertificateExpiryTrend",
+            "options": {
+                "query": "index=ms_entra_id (sourcetype=\"microsoft:applications\")\r\n| spath input=_raw path=id output=obj_id\r\n| eval k = sourcetype . \"::\" . obj_id\r\n| stats latest(_raw) AS raw BY k\r\n| spath input=raw path=keyCredentials{}.keyId output=key_id\r\n| spath input=raw path=keyCredentials{}.endDateTime output=end_raw\r\n| eval z = mvzip(key_id, end_raw, \"|~|\")\r\n| mvexpand z\r\n| eval p = split(z, \"|~|\")\r\n| eval key_id = mvindex(p,0), end_raw = mvindex(p,1)\r\n| eval ts = replace(end_raw, \"[.][0-9]+\", \"\")\r\n| eval exp = coalesce(\r\n    strptime(ts,\"%Y-%m-%dT%H:%M:%S%z\"),\r\n    strptime(ts,\"%Y-%m-%dT%H:%M:%SZ\")\r\n  )\r\n| where isnotnull(exp)\r\n| eval bucket = case(\r\n    exp >= now()-(60*86400) AND exp < now()-(30*86400), \"Past 30-60 Days\",\r\n    exp >= now()-(30*86400) AND exp < now(), \"Past 30 Days\",\r\n    exp >= now() AND exp < now()+(30*86400), \"Next 30 Days\",\r\n    exp >= now()+(30*86400) AND exp < now()+(60*86400), \"Next 30-60 Days\",\r\n    exp >= now()+(60*86400) AND exp < now()+(90*86400), \"Next 60-90 Days\"\r\n  )\r\n| where isnotnull(bucket)\r\n| stats dc(key_id) AS total_certificates BY bucket\r\n| append [\r\n    | makeresults\r\n    | eval bucket=\"Past 30-60 Days\", bucket_order=1\r\n    | append [ | makeresults | eval bucket=\"Past 30 Days\", bucket_order=2 ]\r\n    | append [ | makeresults | eval bucket=\"Next 30 Days\", bucket_order=3 ]\r\n    | append [ | makeresults | eval bucket=\"Next 30-60 Days\", bucket_order=4 ]\r\n    | append [ | makeresults | eval bucket=\"Next 60-90 Days\", bucket_order=5 ]\r\n    | eval total_certificates=0\r\n    | table bucket bucket_order total_certificates\r\n]\r\n| stats max(total_certificates) AS total_certificates BY bucket\r\n| eval bucket_order=case(\r\n    bucket=\"Past 30-60 Days\",1,\r\n    bucket=\"Past 30 Days\",2,\r\n    bucket=\"Next 30 Days\",3,\r\n    bucket=\"Next 30-60 Days\",4,\r\n    bucket=\"Next 60-90 Days\",5\r\n  )\r\n| sort bucket_order\r\n| table bucket total_certificates"
+            },
+            "type": "ds.search"
+        },
+        "ds_YC97HOhn": {
+            "name": "SPN Deleted - Last 6 Months search",
+            "options": {
+                "query": "index=ms_azure_prod sourcetype=\"azure:aad:audit\"\r\ncategory=ApplicationManagement\r\nactivityDisplayName=\"Delete application\"\r\n| spath input=_raw path=activityDateTime output=activityDateTime\r\n| eval ts=replace(activityDateTime,\"[.][0-9]+Z$$\",\"Z\")\r\n| eval _time=strptime(ts,\"%Y-%m-%dT%H:%M:%SZ\")\r\n| where _time >= relative_time(now(), \"-6mon@d\")\r\n| timechart span=1d count as \"Applications Deleted\"",
+                "queryParameters": {
+                    "earliest": "-6mon@mon",
+                    "latest": "now",
+                    "sampleRatio": 1
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_b7mefxRZ": {
+            "name": "Ent. Apps Hard Delete - Next 30 Days search",
+            "options": {
+                "query": "index=ms_azure_prod sourcetype=\"azure:aad:audit\"\r\ncategory=ApplicationManagement\r\nactivityDisplayName=\"remove service principal\"\r\n| spath input=_raw path=activityDateTime output=activityDateTime\r\n| eval ts=replace(activityDateTime,\"[.][0-9]+Z$$\",\"Z\")\r\n| eval activity_epoch=strptime(ts,\"%Y-%m-%dT%H:%M:%SZ\")\r\n| where activity_epoch >= relative_time(now(), \"-30d\")\r\n    AND activity_epoch <= now()\r\n| stats count as \"Service Principals Removed - Last 30 Days\"",
+                "queryParameters": {
+                    "earliest": "-6mon@mon",
+                    "latest": "now",
+                    "sampleRatio": 1
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_cNQ6ceLp": {
+            "name": "SecretExpiry_30Days",
+            "options": {
+                "query": "index=ms_entra_id (sourcetype=\"microsoft:applications\")\r\n| spath input=_raw path=id output=obj_id\r\n| eval k = sourcetype . \"::\" . obj_id\r\n| stats latest(_raw) AS raw BY k\r\n| spath input=raw path=passwordCredentials{}.keyId       output=key_id\r\n| spath input=raw path=passwordCredentials{}.endDateTime output=end_raw\r\n| eval z = mvzip(key_id, end_raw, \"|~|\")\r\n| mvexpand z\r\n| eval p = split(z, \"|~|\"), key_id = mvindex(p,0), end_raw = mvindex(p,1)\r\n| eval ts = replace(end_raw, \"[.][0-9]+\", \"\")\r\n| eval exp = coalesce(\r\n    strptime(ts,\"%Y-%m-%dT%H:%M:%S%z\"),\r\n    strptime(ts,\"%Y-%m-%dT%H:%M:%SZ\")\r\n  )\r\n| where exp >= now() AND exp <= now() + (30 * 86400)\r\n| stats dc(key_id) AS expiring_secrets"
+            },
+            "type": "ds.search"
+        },
+        "ds_dIXLczBk": {
+            "name": "Table search 2",
+            "options": {
+                "query": "index=ms_entra_id (sourcetype=\"microsoft:applications\" OR sourcetype=\"microsoft:servicePrincipals\")\r\n| spath input=_raw path=id output=obj_id\r\n| eval k = sourcetype . \"::\" . obj_id\r\n| stats latest(_raw) AS raw BY k\r\n| spath input=raw path=keyCredentials{}.keyId       output=key_id\r\n| spath input=raw path=keyCredentials{}.endDateTime output=end_raw\r\n| eval z = mvzip(key_id, end_raw, \"|~|\")\r\n| mvexpand z\r\n| eval p = split(z, \"|~|\"), key_id = mvindex(p,0), end_raw = mvindex(p,1)\r\n| eval ts = replace(end_raw, \"[.][0-9]+\", \"\")\r\n| eval exp = coalesce(strptime(ts,\"%Y-%m-%dT%H:%M:%S%z\"), strptime(ts,\"%Y-%m-%dT%H:%M:%SZ\"))\r\n| where exp < now()\r\n| stats dc(key_id) AS expired_certificates",
+                "queryParameters": {
+                    "earliest": "0",
+                    "sampleRatio": 1
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_iT2H7YWs": {
+            "name": "Certs expiring in 10 Days search",
+            "options": {
+                "query": "index=ms_entra_id sourcetype=\"microsoft:servicePrincipals\" \r\n| spath input=_raw path=tags{} output=tags \r\n| spath input=_raw path=appId output=appId \r\n| spath input=_raw path=id output=obj_id \r\n| spath input=_raw path=displayName output=displayName \r\n| where mvfind(tags, \"^WindowsAzureActiveDirectoryIntegratedApp$$\") >= 0 \r\n| search NOT \r\n    [| search index=ms_entra_id sourcetype=\"microsoft:directoryAudits\"\r\n        operationType=Delete\r\n        category=ApplicationManagement\r\n        activityDisplayName=\"Delete application\" \r\n    | rename additionalDetails{}.value as appId \r\n    | dedup appId \r\n    | table appId \r\n    | format\r\n        ] \r\n| spath input=_raw path=keyCredentials{}.keyId output=key_id \r\n| spath input=_raw path=keyCredentials{}.endDateTime output=end_raw \r\n| spath input=_raw path=keyCredentials{}.customKeyIdentifier output=customkeyidentifier \r\n| where isnotnull(key_id) AND isnotnull(end_raw) \r\n| eval z=mvzip(\r\n    mvzip(key_id,end_raw,\"|~|\"),\r\n    customkeyidentifier,\r\n    \"|~|\"\r\n    ) \r\n| mvexpand z \r\n| eval p=split(z,\"|~|\") \r\n| eval key_id=mvindex(p,0) \r\n| eval end_raw=mvindex(p,1) \r\n| eval customkeyidentifier=mvindex(p,2) \r\n| eval ts=replace(end_raw,\"[.][0-9]+\",\"\") \r\n| eval exp=coalesce(\r\n    strptime(ts,\"%Y-%m-%dT%H:%M:%S%z\"),\r\n    strptime(ts,\"%Y-%m-%dT%H:%M:%SZ\")\r\n    ) \r\n| where exp>=now() AND exp<=now()+(10*86400) \r\n| eval expires_at=strftime(exp,\"%Y-%m-%d %H:%M:%S\") \r\n| eval days_remaining=round((exp-now())/86400,1) \r\n| dedup customkeyidentifier \r\n| table displayName appId obj_id key_id customkeyidentifier expires_at days_remaining \r\n| sort days_remaining\r\n| stats count",
+                "queryParameters": {
+                    "earliest": "0",
+                    "sampleRatio": 1
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_ioSDfZN7": {
+            "name": "SPN Hard Delete - Next 30 Days search",
+            "options": {
+                "query": "index=ms_azure_prod sourcetype=\"azure:aad:audit\"\r\ncategory=ApplicationManagement\r\nactivityDisplayName=\"Delete application\"\r\n| spath input=_raw path=activityDateTime output=activityDateTime\r\n| eval ts=replace(activityDateTime,\"[.][0-9]+Z$$\",\"Z\")\r\n| eval activity_epoch=strptime(ts,\"%Y-%m-%dT%H:%M:%SZ\")\r\n| where activity_epoch >= relative_time(now(), \"-30d\")\r\n    AND activity_epoch <= now()\r\n| stats count as \"Applications Deleted - Last 30 Days\"",
+                "queryParameters": {
+                    "earliest": "-6mon@mon",
+                    "latest": "now",
+                    "sampleRatio": 1
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_oLgU4yuh": {
+            "name": "Certificates Expiring in 30 Days search",
+            "options": {
+                "query": "index=ms_entra_id sourcetype=\"microsoft:servicePrincipals\" \r\n| spath input=_raw path=tags{} output=tags \r\n| spath input=_raw path=appId output=appId \r\n| spath input=_raw path=id output=obj_id \r\n| spath input=_raw path=displayName output=displayName \r\n| where mvfind(tags, \"^WindowsAzureActiveDirectoryIntegratedApp$$\") >= 0 \r\n| search NOT \r\n    [| search index=ms_entra_id sourcetype=\"microsoft:directoryAudits\"\r\n        operationType=Delete\r\n        category=ApplicationManagement\r\n        activityDisplayName=\"Delete application\" \r\n    | rename additionalDetails{}.value as appId \r\n    | dedup appId \r\n    | table appId \r\n    | format\r\n        ] \r\n| spath input=_raw path=keyCredentials{}.keyId output=key_id \r\n| spath input=_raw path=keyCredentials{}.endDateTime output=end_raw \r\n| spath input=_raw path=keyCredentials{}.customKeyIdentifier output=customkeyidentifier \r\n| where isnotnull(key_id) AND isnotnull(end_raw) \r\n| eval z=mvzip(\r\n    mvzip(key_id,end_raw,\"|~|\"),\r\n    customkeyidentifier,\r\n    \"|~|\"\r\n    ) \r\n| mvexpand z \r\n| eval p=split(z,\"|~|\") \r\n| eval key_id=mvindex(p,0) \r\n| eval end_raw=mvindex(p,1) \r\n| eval customkeyidentifier=mvindex(p,2) \r\n| eval ts=replace(end_raw,\"[.][0-9]+\",\"\") \r\n| eval exp=coalesce(\r\n    strptime(ts,\"%Y-%m-%dT%H:%M:%S%z\"),\r\n    strptime(ts,\"%Y-%m-%dT%H:%M:%SZ\")\r\n    ) \r\n| where exp>=now() AND exp<=now()+(30*86400) \r\n| eval expires_at=strftime(exp,\"%Y-%m-%d %H:%M:%S\") \r\n| eval days_remaining=round((exp-now())/86400,1) \r\n| dedup customkeyidentifier \r\n| table displayName appId obj_id key_id customkeyidentifier expires_at days_remaining \r\n| sort days_remaining\r\n| stats count",
+                "queryParameters": {
+                    "earliest": "0",
+                    "sampleRatio": 1
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_ryMNrdZr": {
+            "name": "SSO Mode search",
+            "options": {
+                "query": "index=ms_entra_id sourcetype=\"microsoft:servicePrincipals\" \r\n| spath input=_raw path=tags{} output=tags \r\n| spath input=_raw path=appId output=appId \r\n| spath input=_raw path=id output=obj_id \r\n| spath input=_raw path=displayName output=displayName \r\n| eval tags=if(isnull(tags), \"\", tags) \r\n| eval exclude_pva=if(mvfind(tags, \"^power-virtual-agents-\") >= 0, 1, 0) \r\n| eval exclude_agent_instance=if(mvfind(tags, \"^AgenticInstance$$\") >= 0, 1, 0) \r\n| eval exclude_agent_app=if(mvfind(tags, \"^AgenticApp$$\") >= 0, 1, 0) \r\n| where mvfind(tags, \"^WindowsAzureActiveDirectoryIntegratedApp$$\") >= 0 \r\n| where exclude_pva=0 AND exclude_agent_instance=0 AND exclude_agent_app=0 \r\n| dedup appId \r\n| table displayName appId obj_id tags preferredSingleSignOnMode\r\n| sort displayName \r\n| search NOT \r\n    [| search index=ms_entra_id sourcetype=\"microsoft:directoryAudits\" operationType=Delete category=ApplicationManagement activityDisplayName=\"Delete application\" \r\n    | rename additionalDetails{}.value as \"appId\" \r\n    | table appId \r\n    | format ]\r\n    | search preferredSingleSignOnMode!=\"notSupported\"\r\n | stats count by preferredSingleSignOnMode",
+                "queryParameters": {
+                    "earliest": "0",
+                    "latest": "now",
+                    "sampleRatio": 1
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_ukjZiFn2": {
+            "name": "Ent Apps Deleted search",
+            "options": {
+                "query": "index=ms_azure_prod sourcetype=\"azure:aad:audit\"\r\ncategory=ApplicationManagement\r\nactivityDisplayName=\"remove service principal\"\r\n| spath input=_raw path=activityDateTime output=activityDateTime\r\n| eval ts=replace(activityDateTime,\"[.][0-9]+Z$$\",\"Z\")\r\n| eval _time=strptime(ts,\"%Y-%m-%dT%H:%M:%SZ\")\r\n| where _time >= relative_time(now(), \"-6mon@d\")\r\n| timechart span=1d count as \"Service Principals Removed\"",
+                "queryParameters": {
+                    "earliest": "-6mon@mon",
+                    "latest": "now",
+                    "sampleRatio": 1
+                }
+            },
+            "type": "ds.search"
+        },
+        "ds_zMFXmxwv": {
+            "name": "Table search",
+            "options": {
+                "query": "index=ms_entra_id sourcetype=\"microsoft:applications\"\n| dedup appId\n| stats count",
+                "queryParameters": {
+                    "earliest": "0",
+                    "sampleRatio": 1
+                }
+            },
+            "type": "ds.search"
+        }
+    },
+    "layout": {
+        "globalInputs": [
+            "input_global_trp"
+        ],
+        "layoutDefinitions": {
+            "layout_1": {
+                "options": {
+                    "display": "auto",
+                    "height": 1865,
+                    "width": 1900
+                },
+                "structure": [
+                    {
+                        "item": "viz_68g5fro4",
+                        "position": {
+                            "h": 250,
+                            "w": 360,
+                            "x": 0,
+                            "y": 0
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_rdj3QACp",
+                        "position": {
+                            "h": 250,
+                            "w": 350,
+                            "x": 1210,
+                            "y": 0
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_GdSNpfGc",
+                        "position": {
+                            "h": 250,
+                            "w": 350,
+                            "x": 860,
+                            "y": 0
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_xCnWqcCu",
+                        "position": {
+                            "h": 250,
+                            "w": 250,
+                            "x": 0,
+                            "y": 250
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_SfDHuFbJ",
+                        "position": {
+                            "h": 250,
+                            "w": 250,
+                            "x": 240,
+                            "y": 250
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_BsNG9unq",
+                        "position": {
+                            "h": 250,
+                            "w": 250,
+                            "x": 490,
+                            "y": 250
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_gZ2pQo4b",
+                        "position": {
+                            "h": 250,
+                            "w": 250,
+                            "x": 740,
+                            "y": 250
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_07yncQlL",
+                        "position": {
+                            "h": 250,
+                            "w": 250,
+                            "x": 610,
+                            "y": 0
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_xpiZPC6h",
+                        "position": {
+                            "h": 250,
+                            "w": 250,
+                            "x": 360,
+                            "y": 0
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_ICLWFFq3",
+                        "position": {
+                            "h": 460,
+                            "w": 820,
+                            "x": 0,
+                            "y": 500
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_gqAPGVxv",
+                        "position": {
+                            "h": 460,
+                            "w": 820,
+                            "x": 820,
+                            "y": 490
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_BCgWiWkb",
+                        "position": {
+                            "h": 300,
+                            "w": 1900,
+                            "x": 0,
+                            "y": 960
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_gdEN9QmX",
+                        "position": {
+                            "h": 300,
+                            "w": 1900,
+                            "x": 0,
+                            "y": 1260
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_QSvJFbe5",
+                        "position": {
+                            "h": 300,
+                            "w": 800,
+                            "x": 10,
+                            "y": 1560
+                        },
+                        "type": "block"
+                    }
+                ],
+                "type": "absolute"
+            },
+            "layout_sihdCCk0": {
+                "options": {
+                    "width": 1440
+                },
+                "structure": [
+                    {
+                        "item": "viz_TK4dcITL",
+                        "position": {
+                            "h": 700,
+                            "w": 1440,
+                            "x": 0,
+                            "y": 183
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_Tw9bgQin",
+                        "position": {
+                            "h": 300,
+                            "w": 1440,
+                            "x": 0,
+                            "y": 1783
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_kMOVgmnv",
+                        "position": {
+                            "h": 183,
+                            "w": 264,
+                            "x": 0,
+                            "y": 0
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_TBF96Beh",
+                        "position": {
+                            "h": 183,
+                            "w": 282,
+                            "x": 1158,
+                            "y": 0
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_XWonNbA3",
+                        "position": {
+                            "h": 183,
+                            "w": 249,
+                            "x": 909,
+                            "y": 0
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_rO56kdbY",
+                        "position": {
+                            "h": 183,
+                            "w": 361,
+                            "x": 264,
+                            "y": 0
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_Eu5XcvoO",
+                        "position": {
+                            "h": 183,
+                            "w": 284,
+                            "x": 625,
+                            "y": 0
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_GrM3T83j",
+                        "position": {
+                            "h": 655,
+                            "w": 1440,
+                            "x": 0,
+                            "y": 883
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_YP0t98aO",
+                        "position": {
+                            "h": 245,
+                            "w": 311,
+                            "x": 1129,
+                            "y": 1538
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_qhfv7zty",
+                        "position": {
+                            "h": 245,
+                            "w": 1129,
+                            "x": 0,
+                            "y": 1538
+                        },
+                        "type": "block"
+                    }
+                ],
+                "type": "grid"
+            }
+        },
+        "options": {},
+        "tabs": {
+            "items": [
+                {
+                    "label": "App Registrations",
+                    "layoutId": "layout_1"
+                },
+                {
+                    "label": "Enterprise Applications",
+                    "layoutId": "layout_sihdCCk0"
+                }
+            ]
+        }
+    },
+    "applicationProperties": {
+        "hideEdit": false,
+        "hideExport": false
+    }
+}
